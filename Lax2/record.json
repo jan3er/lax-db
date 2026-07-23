@@ -1,12 +1,17 @@
 {
   "specVersion": "1",
   "id": "Lax2",
-  "state": "init",
+  "state": "draft",
   "createdAt": "2026-07-23T18:50:57Z",
   "owners": [
     {
       "githubId": 2657497,
       "handle": "jan3er"
     }
-  ]
+  ],
+  "source": {
+    "repository": "https://github.com/jan3er/lax-submissions",
+    "commit": "0e07ba050f53845a851dc873b67b111951133879",
+    "folder": "twin-width-mixed-minor-number"
+  }
 }
