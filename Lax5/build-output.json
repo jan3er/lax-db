@@ -17,7 +17,7 @@
       "@article{AdlerAdler2014,\n  author  = {Adler, Hans and Adler, Isolde},\n  title   = {Interpreting nowhere dense graph classes as a classical\n             notion of model theory},\n  journal = {European Journal of Combinatorics},\n  volume  = {36},\n  pages   = {322--330},\n  year    = {2014},\n  doi     = {10.1016/j.ejc.2013.06.048}\n}\n"
     ]
   },
-  "abstract": "This submission states Theorem 2 of Dreier, Mählmann, McCarty, Pilipczuk,\nToruńczyk, *Neighborhood Complexity and Radius-1 Merge-Width in Monadically\nDependent Graph Classes* (2026): every monadically dependent class of finite\ngraphs has almost linear neighborhood complexity — for every $\\varepsilon >\n0$ there is a $c$ such that every member $G$ and every nonempty vertex\nsubset $A$ satisfy $|\\{N(v) \\cap A : v \\in V(G)\\}| \\le c\\,|A|^{1+\\varepsilon}$.\n\nThe concept surface has ten review units. Six definitions: graph classes on\nthe canonical vertex types; non-copying first-order transductions between\nclasses of arbitrary relational structures (a domain formula and one\nformula per target relation symbol, over a monadic color expansion); graph\ntransductions as the special case over the language of graphs; monadic\ndependence (the class does not transduce all graphs); neighborhood\ncomplexity, with the shared bound predicate $|A|^{1+o(1)}$; and nowhere\ndenseness via shallow-minor models. Four theorems: weakly sparse\nmonadically dependent classes are nowhere dense; nowhere dense classes have\nalmost linear neighborhood complexity; the headline theorem; and nowhere\ndense classes are monadically dependent (Adler–Adler).\n\nThe proof package discharges the headline theorem via the paper's\nVC-dimension sparsification argument, and the nowhere dense counting\nstatement via the radius-1 specialization of the generalized coloring\nnumber machinery. The two remaining obligations — weakly sparse dependent\nclasses are nowhere dense, and the Adler–Adler direction — are deliberately\nleft open as well-defined targets for follow-up submissions; together they\ncarry the classical equivalence that on weakly sparse classes, monadic\ndependence and nowhere denseness coincide.\n",
+  "abstract": "This submission states Theorem 2 of Dreier, Mählmann, McCarty, Pilipczuk,\nToruńczyk, *Neighborhood Complexity and Radius-1 Merge-Width in Monadically\nDependent Graph Classes* (2026): every monadically dependent class of finite\ngraphs has almost linear neighborhood complexity — for every $\\varepsilon >\n0$ there is a $c$ such that every member $G$ and every nonempty vertex\nsubset $A$ satisfy $|\\{N(v) \\cap A : v \\in V(G)\\}| \\le c\\,|A|^{1+\\varepsilon}$.\n\nThe concept surface has eleven review units. Six definitions: graph classes on\nthe canonical vertex types; non-copying first-order transductions between\nclasses of arbitrary relational structures (a domain formula and one\nformula per target relation symbol, over a monadic color expansion); graph\ntransductions as the special case over the language of graphs; monadic\ndependence (the class does not transduce all graphs); neighborhood\ncomplexity, with the shared bound predicate $|A|^{1+o(1)}$; and nowhere\ndenseness via shallow-minor models. Five theorems: weakly sparse\nmonadically dependent classes are nowhere dense; nowhere dense classes have\nsubpolynomial weak coloring numbers, uniformly over subgraphs of members;\nnowhere dense classes have almost linear neighborhood complexity; the\nheadline theorem; and nowhere dense classes are monadically dependent\n(Adler–Adler).\n\nThe proof package discharges the headline theorem via the paper's\nVC-dimension sparsification argument, and the nowhere dense counting\nstatement from the coloring-number theorem, via radius-1 trace counting\nalong a weak coloring order and localization. The two remaining\nobligations — weakly sparse dependent classes are nowhere dense, and the\nAdler–Adler direction — are deliberately\nleft open as well-defined targets for follow-up submissions; together they\ncarry the classical equivalence that on weakly sparse classes, monadic\ndependence and nowhere denseness coincide.\n",
   "requiredByConcepts": [],
   "requiredByProofs": [],
   "concepts": [
@@ -210,6 +210,38 @@
       ]
     },
     {
+      "id": "Lax5.NowhereDenseWcol",
+      "path": "concepts/Lax5/NowhereDenseWcol.lean",
+      "title": "Nowhere dense classes have subpolynomial weak coloring numbers",
+      "type": "theorem",
+      "description": "Fix a linear ordering of the vertices of a graph *G*. A vertex *u* is\nweakly *r*-reachable from *v* if some path from *v* to *u* of length\nat most *r* has *u* as its smallest vertex. The weak *r*-coloring\nnumber wcol_r(*G*) is the minimum over all orderings of the maximum\nnumber of vertices weakly *r*-reachable from a single vertex. Every\nnowhere dense graph class has subpolynomial weak coloring numbers: for\nevery radius *r* and every ε > 0 there is a constant *c* such that\nevery subgraph *H* of a member, on *m* vertices, satisfies\nwcol_r(*H*) ≤ *c* · *m*^ε.",
+      "sections": [
+        {
+          "title": "Formalization notes",
+          "markdown": "An ordering of the vertices is a permutation `π` of `Fin m` assigning\neach vertex its position. Weak reachability is stated with walks, as\nin the nowhere dense concept: shortcutting a walk to a path only\nshrinks its support, so walks of length at most `r` with `π`-minimal\nendpoint reach exactly the vertices that such paths do. `wcol` is the\nleast achievable bound `k`, a `Nat.sInf` (attained: `k = m` works for\nany ordering); the count is `Set.ncard` as in the neighborhood\ncomplexity concept.\n\nThe bound is uniform over subgraph copies (`⊑`, as in the weakly\nsparse concept) of members, each measured by its own vertex count `m`.\nSince nowhere denseness survives taking subgraphs, this is the\nliterature statement for subgraph-closed classes, and the uniformity\nis what localization arguments downstream consume. At `m = 0` both\nsides vanish, so no nonemptiness hypothesis is needed. The theorem\ncombines Zhu's bounds relating weak coloring numbers to densities of\nshallow minors with the subpolynomial density bounds for nowhere dense\nclasses (Nešetřil, Ossona de Mendez); see chapters 2 and 5 of the\nsparsity lecture notes of Pilipczuk, Pilipczuk, Siebertz."
+        }
+      ],
+      "imports": [
+        "Lax5.NowhereDenseClasses"
+      ],
+      "mathlibImports": [
+        "Mathlib.Analysis.SpecialFunctions.Pow.Real",
+        "Mathlib.Combinatorics.SimpleGraph.Copy",
+        "Mathlib.Data.Nat.Lattice",
+        "Mathlib.Data.Set.Card"
+      ],
+      "sourceText": "import Lax5.NowhereDenseClasses\nimport Mathlib.Combinatorics.SimpleGraph.Copy\nimport Mathlib.Data.Set.Card\nimport Mathlib.Data.Nat.Lattice\nimport Mathlib.Analysis.SpecialFunctions.Pow.Real\n\n/-!\n---\ntitle: Nowhere dense classes have subpolynomial weak coloring numbers\ntype: theorem\n---\nFix a linear ordering of the vertices of a graph *G*. A vertex *u* is\nweakly *r*-reachable from *v* if some path from *v* to *u* of length\nat most *r* has *u* as its smallest vertex. The weak *r*-coloring\nnumber wcol_r(*G*) is the minimum over all orderings of the maximum\nnumber of vertices weakly *r*-reachable from a single vertex. Every\nnowhere dense graph class has subpolynomial weak coloring numbers: for\nevery radius *r* and every ε > 0 there is a constant *c* such that\nevery subgraph *H* of a member, on *m* vertices, satisfies\nwcol_r(*H*) ≤ *c* · *m*^ε.\n\n# Formalization notes\n\nAn ordering of the vertices is a permutation `π` of `Fin m` assigning\neach vertex its position. Weak reachability is stated with walks, as\nin the nowhere dense concept: shortcutting a walk to a path only\nshrinks its support, so walks of length at most `r` with `π`-minimal\nendpoint reach exactly the vertices that such paths do. `wcol` is the\nleast achievable bound `k`, a `Nat.sInf` (attained: `k = m` works for\nany ordering); the count is `Set.ncard` as in the neighborhood\ncomplexity concept.\n\nThe bound is uniform over subgraph copies (`⊑`, as in the weakly\nsparse concept) of members, each measured by its own vertex count `m`.\nSince nowhere denseness survives taking subgraphs, this is the\nliterature statement for subgraph-closed classes, and the uniformity\nis what localization arguments downstream consume. At `m = 0` both\nsides vanish, so no nonemptiness hypothesis is needed. The theorem\ncombines Zhu's bounds relating weak coloring numbers to densities of\nshallow minors with the subpolynomial density bounds for nowhere dense\nclasses (Nešetřil, Ossona de Mendez); see chapters 2 and 5 of the\nsparsity lecture notes of Pilipczuk, Pilipczuk, Siebertz.\n-/\n\nnamespace Lax5.NowhereDenseWcol\n\nopen scoped SimpleGraph\nopen Lax5.GraphClasses Lax5.NowhereDenseClasses\n\n/-- The set of vertices weakly `r`-reachable from `v` in `G` under the\nvertex ordering `π` (vertex `u` sits at position `π u`): the endpoints\n`u` of walks from `v` of length at most `r` on whose support `u` is\n`π`-minimal. Contains `v` itself. -/\ndef wreach {n : ℕ} (G : SimpleGraph (Fin n)) (π : Equiv.Perm (Fin n))\n    (r : ℕ) (v : Fin n) : Set (Fin n) :=\n  {u | ∃ w : G.Walk v u, w.length ≤ r ∧ ∀ y ∈ w.support, π u ≤ π y}\n\n/-- The weak `r`-coloring number of `G`: the least `k` such that under\nsome vertex ordering every vertex weakly `r`-reaches at most `k`\nvertices. -/\nnoncomputable def wcol {n : ℕ} (G : SimpleGraph (Fin n)) (r : ℕ) : ℕ :=\n  sInf {k | ∃ π : Equiv.Perm (Fin n), ∀ v, (wreach G π r v).ncard ≤ k}\n\n/-- Every subgraph of every member of the class, on `m` vertices, has\nweak `r`-coloring number at most `c · m^ε`, where `c` depends only on\nthe radius `r` and on `ε > 0`: weak coloring numbers `m^{o(1)}`. -/\ndef HasSubpolynomialWcol (C : GraphClass) : Prop :=\n  ∀ (r : ℕ) (ε : ℝ), 0 < ε → ∃ c : ℝ,\n    ∀ (n : ℕ) (G : SimpleGraph (Fin n)), C n G →\n      ∀ (m : ℕ) (H : SimpleGraph (Fin m)), H ⊑ G →\n        (wcol H r : ℝ) ≤ c * (m : ℝ) ^ ε\n\n/-- Nowhere dense graph classes have subpolynomial weak coloring\nnumbers. -/\naxiom hasSubpolynomialWcol_of_nowhereDense\n    (C : GraphClass) (h : NowhereDense C) :\n    HasSubpolynomialWcol C\n\nend Lax5.NowhereDenseWcol\n",
+      "statements": [
+        {
+          "id": "Lax5.NowhereDenseWcol.hasSubpolynomialWcol_of_nowhereDense",
+          "signature": "hasSubpolynomialWcol_of_nowhereDense : ∀ (C : Lax5.GraphClasses.GraphClass),\n  Lax5.NowhereDenseClasses.NowhereDense C → Lax5.NowhereDenseWcol.HasSubpolynomialWcol C",
+          "doc": "Nowhere dense graph classes have subpolynomial weak coloring\nnumbers.",
+          "startLine": 73,
+          "endLine": 77
+        }
+      ]
+    },
+    {
       "id": "Lax5.Transductions",
       "path": "concepts/Lax5/Transductions.lean",
       "title": "First-order transductions",
@@ -260,5 +292,59 @@
       ]
     }
   ],
-  "proofs": []
+  "proofs": [
+    {
+      "id": "Lax5Proofs.Corollary6b.hasAlmostLinearNC_of_nowhereDense",
+      "path": "proofs/Lax5Proofs/Corollary6b.lean",
+      "conclusion": "Lax5.NowhereDenseNC.hasAlmostLinearNC_of_nowhereDense",
+      "assumptions": [],
+      "description": "Nowhere dense graph classes have almost linear neighborhood complexity:\nthe radius-1 case of the theorem of Eickmeyer, Giannopoulou, Kreutzer,\nKwon, Pilipczuk, Rabinovich, Siebertz.",
+      "sections": [
+        {
+          "title": "Proof strategy",
+          "markdown": "Radius-1 specialization of the generalized-coloring-number route: a\nnowhere dense class is K_{t,t}-free, so its neighborhood set systems\nhave VC dimension O(t + log t); Dvořák's densification bounds the\ndepth-1 grad by f(ε)·n^ε, which bounds the weak 2-coloring number;\ncounting neighborhood traces along a weak coloring order then yields\n|A| · n^ε traces, and localization to a polynomially small witness set\nrescales this to c · |A|^(1+ε)."
+        },
+        {
+          "title": "Attribution",
+          "markdown": "Sparsity lecture notes of Pilipczuk, Pilipczuk, Siebertz (chapters 1,\n2, 5), specialized to radius 1; densification following Dvořák."
+        }
+      ]
+    },
+    {
+      "id": "Lax5Proofs.NowhereDenseWcol.hasSubpolynomialWcol_of_nowhereDense",
+      "path": "proofs/Lax5Proofs/NowhereDenseWcol.lean",
+      "conclusion": "Lax5.NowhereDenseWcol.hasSubpolynomialWcol_of_nowhereDense",
+      "assumptions": [],
+      "description": "Nowhere dense classes have subpolynomial weak coloring numbers, uniformly\nover graph copies contained in their members.",
+      "sections": [
+        {
+          "title": "Proof strategy",
+          "markdown": "Close the submitted class under graph copies and transport its shallow-minor\nexclusion to the catalog definition.  Apply the catalog proof, which combines\nsubpolynomial shallow-minor density with admissibility and weak-coloring-number\nbounds.  Finally translate its linear order to the corresponding rank\npermutation and use the submitted minimum over all permutations."
+        },
+        {
+          "title": "Attribution",
+          "markdown": "The source proof formalizes Theorem 3.4 of the sparsity lecture notes of\nPilipczuk, Pilipczuk, and Siebertz."
+        }
+      ]
+    },
+    {
+      "id": "Lax5Proofs.Theorem2.hasAlmostLinearNC_of_monadicallyDependent",
+      "path": "proofs/Lax5Proofs/Theorem2.lean",
+      "conclusion": "Lax5.AlmostLinearNC.hasAlmostLinearNC_of_monadicallyDependent",
+      "assumptions": [
+        "Lax5.WeaklySparseDependent.nowhereDense_of_weaklySparse_of_monadicallyDependent"
+      ],
+      "description": "Monadically dependent graph classes have almost linear neighborhood\ncomplexity: Theorem 2 of DMMPT26.",
+      "sections": [
+        {
+          "title": "Proof strategy",
+          "markdown": "Choose one representative vertex per realized neighborhood trace on\n`A`; the representatives leave pairwise distinct traces, so the\nsemi-induced form of Lemma 21 bounds their number — which is exactly\n`traceCount G A` — by c · |A|^(1+ε). The paper's reduction to a\nmonadically dependent class of twin-free bipartite graphs lives inside\nthe proof of Lemma 21."
+        },
+        {
+          "title": "Attribution",
+          "markdown": "Theorem 2 of DMMPT26 (Appendix A)."
+        }
+      ]
+    }
+  ]
 }
