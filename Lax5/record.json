@@ -1,12 +1,17 @@
 {
   "specVersion": "1",
   "id": "Lax5",
-  "state": "init",
+  "state": "draft",
   "createdAt": "2026-07-24T09:33:49Z",
   "owners": [
     {
       "githubId": 2657497,
       "handle": "jan3er"
     }
-  ]
+  ],
+  "source": {
+    "repository": "https://github.com/jan3er/lax-submissions",
+    "commit": "ab3d742be02d96a4ba5ebb33f38eb51a5192585d",
+    "folder": "monadic-dependence-neighborhood-complexity"
+  }
 }
