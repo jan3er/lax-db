@@ -1,0 +1,123 @@
+{
+  "specVersion": "1",
+  "id": "Lax9",
+  "manifest": {
+    "specVersion": "1",
+    "id": "Lax9",
+    "leanVersion": "v4.30.0",
+    "mathlibVersion": "c5ea00351c28e24afc9f0f84379aa41082b1188f",
+    "title": "χ-Boundedness and Neighbourhood Complexity of Bounded Merge-Width Graphs",
+    "authors": [
+      {
+        "name": "Édouard Bonnet"
+      }
+    ],
+    "bibEntries": [
+      "@misc{bonamy2025chiboundedness,\n  title = {χ-Boundedness and Neighbourhood Complexity of Bounded Merge-Width Graphs},\n  author = {Marthe Bonamy and Colin Geniet},\n  year = {2025},\n  eprint = {2504.08266},\n  archivePrefix = {arXiv},\n  primaryClass = {math.CO},\n  doi = {10.48550/arXiv.2504.08266}\n}\n"
+    ]
+  },
+  "abstract": "This submission formalizes two results of Marthe Bonamy and Colin Geniet:\nevery graph class of bounded merge-width is χ-bounded, and every such class\nhas linear neighbourhood complexity, Theorems 1.2 and\n1.5 of *χ-Boundedness and Neighbourhood Complexity of Bounded Merge-Width\nGraphs* (https://arxiv.org/abs/2504.08266). In particular, merge sequences, radius-$r$ merge-width,\nχ-boundedness, and neighbourhood complexity are defined in Lean.\n",
+  "requiredByConcepts": [],
+  "requiredByProofs": [],
+  "concepts": [
+    {
+      "id": "Lax9.BoundedMergeWidthChiBounded",
+      "path": "concepts/Lax9/BoundedMergeWidthChiBounded.lean",
+      "title": "χ-Boundedness of Bounded Merge-Width Classes",
+      "type": "theorem",
+      "description": "Every class of finite simple graphs with bounded merge-width is χ-bounded.",
+      "imports": [
+        "Lax9.ChiBoundedness",
+        "Lax9.MergeWidth"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax9.ChiBoundedness\nimport Lax9.MergeWidth\n\n/-!\n---\ntitle: χ-Boundedness of Bounded Merge-Width Classes\ntype: theorem\n---\nEvery class of finite simple graphs with bounded merge-width is χ-bounded.\n-/\n\nnamespace Lax9.BoundedMergeWidthChiBounded\n\nopen Lax9.ChiBoundedness\nopen Lax9.MergeWidth\n\n/-- Every graph class of bounded merge-width is χ-bounded. -/\naxiom bounded_mergeWidth_chiBounded\n    (C : GraphClass) (h : BoundedMergeWidth C) : ChiBounded C\n\nend Lax9.BoundedMergeWidthChiBounded\n",
+      "statements": [
+        {
+          "id": "Lax9.BoundedMergeWidthChiBounded.bounded_mergeWidth_chiBounded",
+          "signature": "bounded_mergeWidth_chiBounded : ∀ (C : Lax9.MergeWidth.GraphClass), Lax9.MergeWidth.BoundedMergeWidth C → Lax9.ChiBoundedness.ChiBounded C",
+          "doc": "Every graph class of bounded merge-width is χ-bounded.",
+          "startLine": 17,
+          "endLine": 19
+        }
+      ]
+    },
+    {
+      "id": "Lax9.BoundedMergeWidthLinearNeighborhoodComplexity",
+      "path": "concepts/Lax9/BoundedMergeWidthLinearNeighborhoodComplexity.lean",
+      "title": "Linear Neighbourhood Complexity of Bounded Merge-Width Classes",
+      "type": "theorem",
+      "description": "Every class of finite simple graphs with bounded merge-width has linear\nneighbourhood complexity.",
+      "imports": [
+        "Lax9.MergeWidth",
+        "Lax9.NeighborhoodComplexity"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax9.MergeWidth\nimport Lax9.NeighborhoodComplexity\n\n/-!\n---\ntitle: Linear Neighbourhood Complexity of Bounded Merge-Width Classes\ntype: theorem\n---\nEvery class of finite simple graphs with bounded merge-width has linear\nneighbourhood complexity.\n-/\n\nnamespace Lax9.BoundedMergeWidthLinearNeighborhoodComplexity\n\nopen Lax9.MergeWidth\nopen Lax9.NeighborhoodComplexity\n\n/-- Every graph class of bounded merge-width has linear neighbourhood\ncomplexity. -/\naxiom bounded_mergeWidth_linearNeighborhoodComplexity\n    (C : GraphClass) (h : BoundedMergeWidth C) : LinearNeighborhoodComplexity C\n\nend Lax9.BoundedMergeWidthLinearNeighborhoodComplexity\n",
+      "statements": [
+        {
+          "id": "Lax9.BoundedMergeWidthLinearNeighborhoodComplexity.bounded_mergeWidth_linearNeighborhoodComplexity",
+          "signature": "bounded_mergeWidth_linearNeighborhoodComplexity : ∀ (C : Lax9.MergeWidth.GraphClass),\n  Lax9.MergeWidth.BoundedMergeWidth C → Lax9.NeighborhoodComplexity.LinearNeighborhoodComplexity C",
+          "doc": "Every graph class of bounded merge-width has linear neighbourhood\ncomplexity.",
+          "startLine": 18,
+          "endLine": 21
+        }
+      ]
+    },
+    {
+      "id": "Lax9.ChiBoundedness",
+      "path": "concepts/Lax9/ChiBoundedness.lean",
+      "title": "χ-Boundedness",
+      "type": "definition",
+      "description": "A class of finite simple graphs is χ-bounded if the chromatic number of each\ngraph in the class is bounded by a function of its clique number.",
+      "imports": [
+        "Lax9.MergeWidth"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax9.MergeWidth\n\n/-!\n---\ntitle: χ-Boundedness\ntype: definition\n---\nA class of finite simple graphs is χ-bounded if the chromatic number of each\ngraph in the class is bounded by a function of its clique number.\n-/\n\nnamespace Lax9.ChiBoundedness\n\nopen Lax9.MergeWidth\n\n/-- A graph class $C$ is χ-bounded if there is a function $f$ such that every\n$G ∈ C$ is $f(ω(G))$-colourable. -/\ndef ChiBounded (C : GraphClass) : Prop :=\n  ∃ f : ℕ → ℕ, ∀ ⦃V : Type⦄ [Fintype V] (G : SimpleGraph V), C G →\n    G.Colorable (f G.cliqueNum)\n\nend Lax9.ChiBoundedness\n",
+      "statements": []
+    },
+    {
+      "id": "Lax9.MergeWidth",
+      "path": "concepts/Lax9/MergeWidth.lean",
+      "title": "Merge-Width",
+      "type": "definition",
+      "description": "A merge sequence of a finite simple graph consists of a coarsening sequence of\npartitions and a monotone sequence of graphs of resolved pairs. At each step,\nadjacency is uniform on the unresolved pairs between any two parts. The\nradius-$r$ width of a merge sequence is the maximum number of parts of the\npreceding partition met by a radius-$r$ ball in the graph of resolved pairs.\nThe radius-$r$ merge-width of a graph is the minimum width of a merge sequence\nof that graph. A graph class has bounded merge-width if these parameters are\nbounded by a function of $r$ throughout the class.",
+      "imports": [],
+      "mathlibImports": [
+        "Mathlib"
+      ],
+      "sourceText": "import Mathlib\n\n/-!\n---\ntitle: Merge-Width\ntype: definition\n---\nA merge sequence of a finite simple graph consists of a coarsening sequence of\npartitions and a monotone sequence of graphs of resolved pairs. At each step,\nadjacency is uniform on the unresolved pairs between any two parts. The\nradius-$r$ width of a merge sequence is the maximum number of parts of the\npreceding partition met by a radius-$r$ ball in the graph of resolved pairs.\nThe radius-$r$ merge-width of a graph is the minimum width of a merge sequence\nof that graph. A graph class has bounded merge-width if these parameters are\nbounded by a function of $r$ throughout the class.\n-/\n\nnamespace Lax9.MergeWidth\n\nopen scoped Classical\n\nuniverse u\n\nvariable {V : Type u} [Fintype V]\n\n/-- The **resolved ball** of radius $r$ around $v$ in a graph $H$:\nthe set of vertices reachable from $v$ by a walk of length at most $r$.\nIn the paper this is applied to the graph $(V, Rᵢ)$ of resolved pairs. -/\ndef resolvedBall (H : SimpleGraph V) (r : ℕ) (v : V) : Set V :=\n  {u | ∃ w : H.Walk v u, w.length ≤ r}\n\n/--\nA **merge sequence** for a finite simple graph $G$ is a sequence\n$(P₁, R₁), …, (P_length, R_length)$ where:\n\n* each $part i$ is a partition of $V(G)$ (encoded as a $Setoid$), with $part 1$\n  the partition into singletons ($⊥$) and $part length$ the trivial partition\n  with one part ($⊤$);\n* the partitions are **coarsening**: $part i ≤ part j$ for $i ≤ j$\n  (recall that for setoids a *coarser* partition is a *larger* relation);\n* each $resolved i$ is the graph $(V, Rᵢ)$ of **resolved pairs**, and these are\n  **monotone**: $resolved i ≤ resolved j$ for $i ≤ j$;\n* (**uniformity**) for any two parts $A, B$ of $part i$, the *unresolved* pairs\n  between $A$ and $B$ (pairs $xy ∉ Rᵢ$) are either all edges or all non-edges of\n  $G$.\n-/\nstructure MergeSeq (G : SimpleGraph V) where\n  /-- The number $m$ of steps of the sequence. -/\n  length : ℕ\n  /-- The sequence is nonempty. -/\n  one_le_length : 1 ≤ length\n  /-- The partition $Pᵢ$ at step $i$ (as a setoid on the vertices). -/\n  part : ℕ → Setoid V\n  /-- The graph $(V, Rᵢ)$ of resolved pairs at step $i$. -/\n  resolved : ℕ → SimpleGraph V\n  /-- $P₁$ is the partition into singletons. -/\n  part_one : part 1 = ⊥\n  /-- $P_m$ is the trivial partition with a single part. -/\n  part_length : part length = ⊤\n  /-- The partitions get coarser. -/\n  part_mono : ∀ ⦃i j⦄, 1 ≤ i → i ≤ j → j ≤ length → part i ≤ part j\n  /-- The sets of resolved pairs are monotone. -/\n  resolved_mono : ∀ ⦃i j⦄, 1 ≤ i → i ≤ j → j ≤ length → resolved i ≤ resolved j\n  /-- Uniformity: unresolved pairs between two parts are all edges or all\n  non-edges. -/\n  uniform : ∀ ⦃i⦄, 1 ≤ i → i ≤ length → ∀ ⦃x x' y y' : V⦄,\n      (part i).r x x' → (part i).r y y' → x ≠ y → x' ≠ y' →\n      ¬ (resolved i).Adj x y → ¬ (resolved i).Adj x' y' →\n      (G.Adj x y ↔ G.Adj x' y')\n\nnamespace MergeSeq\n\nvariable {G : SimpleGraph V}\n\n/-- The number of parts of $part (i-1)$ that are **accessible** from $v$ by a\nwalk of length at most $r$ in the resolved graph $resolved i$.  (Note the\nintentional mismatch of indices $Pᵢ₋₁$ versus $Rᵢ$.) -/\nnoncomputable def numAccessible (S : MergeSeq G) (r i : ℕ) (v : V) : ℕ :=\n  Set.ncard ((fun u => Quotient.mk (S.part (i - 1)) u) '' resolvedBall (S.resolved i) r v)\n\n/-- The **radius-$r$ width** of a merge sequence: the maximum over all steps\n$i ≥ 2$ and vertices $v$ of the number of parts of $Pᵢ₋₁$ accessible from $v$\nwithin distance $r$ in $(V, Rᵢ)$. -/\nnoncomputable def width (S : MergeSeq G) (r : ℕ) : ℕ :=\n  (Finset.Icc 2 S.length).sup fun i => Finset.univ.sup fun v => S.numAccessible r i v\n\nend MergeSeq\n\n/-- The **radius-$r$ merge-width** $mwᵣ(G)$ of a graph $G$: the minimum\nradius-$r$ width over all merge sequences of $G$. -/\nnoncomputable def mergeWidth (r : ℕ) (G : SimpleGraph V) : ℕ :=\n  sInf {w | ∃ S : MergeSeq G, S.width r = w}\n\n/-- A **graph class**: a property of finite simple graphs. -/\ndef GraphClass : Type 1 := ∀ ⦃V : Type⦄ [Fintype V], SimpleGraph V → Prop\n\n/-- A class $C$ has **bounded merge-width** if there is a function $f$ such that\nevery $G ∈ C$ satisfies $mwᵣ(G) ≤ f(r)$ for all radii $r$. -/\ndef BoundedMergeWidth (C : GraphClass) : Prop :=\n  ∃ f : ℕ → ℕ, ∀ ⦃V : Type⦄ [Fintype V] (G : SimpleGraph V), C G → ∀ r, mergeWidth r G ≤ f r\n\nend Lax9.MergeWidth\n",
+      "statements": []
+    },
+    {
+      "id": "Lax9.NeighborhoodComplexity",
+      "path": "concepts/Lax9/NeighborhoodComplexity.lean",
+      "title": "Linear Neighbourhood Complexity",
+      "type": "definition",
+      "description": "For a finite simple graph $G$ and a natural number $p$, the neighbourhood\ncomplexity $π_G(p)$ is the maximum, over sets $X$ of $p$ vertices, of the number\nof distinct traces on $X$ of the neighbourhoods of vertices outside $X$. A\ngraph class has linear neighbourhood complexity if $π_G(p)$ is bounded by a\nconstant multiple of $p$ for every positive $p$.",
+      "imports": [
+        "Lax9.MergeWidth"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax9.MergeWidth\n\n/-!\n---\ntitle: Linear Neighbourhood Complexity\ntype: definition\n---\nFor a finite simple graph $G$ and a natural number $p$, the neighbourhood\ncomplexity $π_G(p)$ is the maximum, over sets $X$ of $p$ vertices, of the number\nof distinct traces on $X$ of the neighbourhoods of vertices outside $X$. A\ngraph class has linear neighbourhood complexity if $π_G(p)$ is bounded by a\nconstant multiple of $p$ for every positive $p$.\n-/\n\nnamespace Lax9.NeighborhoodComplexity\n\nopen Lax9.MergeWidth\nopen scoped Classical\n\nuniverse u\n\nvariable {V : Type u} [Fintype V]\n\n/-- The neighbourhood complexity $π_G(p)$ of a finite simple graph $G$. -/\nnoncomputable def neighborhoodComplexity (G : SimpleGraph V) (p : ℕ) : ℕ :=\n  (Finset.univ.powersetCard p).sup fun X =>\n    ((Finset.univ \\ X).image fun v => X.filter fun u => G.Adj v u).card\n\n/-- A graph class has linear neighbourhood complexity if $π_G(p) ≤ c p$ for\nsome constant $c$ and every positive $p$. -/\ndef LinearNeighborhoodComplexity (C : GraphClass) : Prop :=\n  ∃ c : ℕ, ∀ ⦃V : Type⦄ [Fintype V] (G : SimpleGraph V), C G → ∀ p, 1 ≤ p →\n    neighborhoodComplexity G p ≤ c * p\n\nend Lax9.NeighborhoodComplexity\n",
+      "statements": []
+    }
+  ],
+  "proofs": [
+    {
+      "id": "Lax9Proofs.chiBounded_of_boundedMergeWidth",
+      "path": "proofs/Lax9Proofs/ChiBounded.lean",
+      "conclusion": "Lax9.BoundedMergeWidthChiBounded.bounded_mergeWidth_chiBounded",
+      "assumptions": [],
+      "description": "Theorem 1.2 of Bonamy–Geniet: every graph class of bounded merge-width is\nχ-bounded."
+    },
+    {
+      "id": "Lax9Proofs.linearNeighborhoodComplexity_of_boundedMergeWidth",
+      "path": "proofs/Lax9Proofs/Neighborhood.lean",
+      "conclusion": "Lax9.BoundedMergeWidthLinearNeighborhoodComplexity.bounded_mergeWidth_linearNeighborhoodComplexity",
+      "assumptions": [],
+      "description": "Theorem 1.5 of Bonamy–Geniet: every graph class of bounded merge-width has\nlinear neighbourhood complexity."
+    }
+  ]
+}
