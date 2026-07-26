@@ -10,8 +10,8 @@
     }
   ],
   "source": {
-    "repository": "https://github.com/jan3er/lax-submissions",
-    "commit": "e329e643d8665b231b2d6427ad39098c6bc5faa1",
+    "repository": "https://github.com/lax-archive/lax-submissions",
+    "commit": "974f44b5f10dd9929a32071da1f8aee442880442",
     "folder": "monadic-dependence-neighborhood-complexity"
   }
 }
