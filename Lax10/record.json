@@ -1,7 +1,7 @@
 {
   "specVersion": "1",
   "id": "Lax10",
-  "state": "draft",
+  "state": "registered",
   "createdAt": "2026-07-26T12:01:48Z",
   "owners": [
     {
@@ -13,5 +13,6 @@
     "repository": "https://github.com/EdouardBonnet/fragile-graphs-are-4-colorable",
     "commit": "7b348ba968573cc7ca130483f319c24003509200",
     "folder": "."
-  }
+  },
+  "registeredAt": "2026-07-26T15:43:10Z"
 }
