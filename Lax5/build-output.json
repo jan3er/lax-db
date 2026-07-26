@@ -296,6 +296,20 @@
   ],
   "proofs": [
     {
+      "id": "Lax5Proofs.AdlerAdler.monadicallyDependent_of_nowhereDense",
+      "path": "proofs/Lax5Proofs/AdlerAdler.lean",
+      "conclusion": "Lax5.AdlerAdler.monadicallyDependent_of_nowhereDense",
+      "assumptions": [],
+      "description": "Nowhere dense graph classes are monadically dependent (Adler–Adler)."
+    },
+    {
+      "id": "Lax5Proofs.Corollary6a.nowhereDense_of_weaklySparse_of_monadicallyDependent",
+      "path": "proofs/Lax5Proofs/Corollary6a.lean",
+      "conclusion": "Lax5.WeaklySparseDependent.nowhereDense_of_weaklySparse_of_monadicallyDependent",
+      "assumptions": [],
+      "description": "Corollary 6a of DMMPT26 (Mählmann Lemma 13.7): every weakly sparse\nmonadically dependent graph class is nowhere dense.  This proves the\nstatement of the concept axiom\n`Lax5.WeaklySparseDependent.nowhereDense_of_weaklySparse_of_monadicallyDependent`."
+    },
+    {
       "id": "Lax5Proofs.Corollary6b.hasAlmostLinearNC_of_nowhereDense",
       "path": "proofs/Lax5Proofs/Corollary6b.lean",
       "conclusion": "Lax5.NowhereDenseNC.hasAlmostLinearNC_of_nowhereDense",
