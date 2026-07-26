@@ -10,8 +10,8 @@
     }
   ],
   "source": {
-    "repository": "https://github.com/jan3er/lax-submissions",
-    "commit": "a2073e3c2969e191606f7cb2aea55cb50bf08925",
+    "repository": "https://github.com/lax-archive/lax-submissions",
+    "commit": "974f44b5f10dd9929a32071da1f8aee442880442",
     "folder": "twin-width-mixed-minor-number"
   }
 }
