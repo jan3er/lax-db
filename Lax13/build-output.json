@@ -10,6 +10,9 @@
     "authors": [
       {
         "name": "Jan Dreier"
+      },
+      {
+        "name": "Claude Fable 5 (Anthropic)"
       }
     ],
     "bibEntries": [
@@ -65,5 +68,5 @@
     }
   ],
   "proofs": [],
-  "captureId": "3a0affa3fa3f5ddd9b84b4f922cad86f"
+  "captureId": "a9f53c0a5946ee2545648fe437830bf2"
 }
