@@ -11,7 +11,7 @@
   ],
   "source": {
     "repository": "https://github.com/lax-archive/lax-submissions",
-    "commit": "974f44b5f10dd9929a32071da1f8aee442880442",
+    "commit": "eb9925a775cd3d14e4a97663a7b43b24cc3f8853",
     "folder": "monadic-dependence-neighborhood-complexity"
   }
 }
