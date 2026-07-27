@@ -10,8 +10,8 @@
     }
   ],
   "source": {
-    "repository": "https://github.com/jan3er/lax-submissions",
-    "commit": "c30630a91495715bbbca6fae669590b361cfc101",
+    "repository": "https://github.com/lax-archive/lax-submissions",
+    "commit": "fa2616054476aa19f0034f972ff28e6e3e27d99e",
     "folder": "twin-width-treewidth-separation"
   }
 }
