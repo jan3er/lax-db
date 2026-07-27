@@ -1,7 +1,7 @@
 {
   "specVersion": "1",
   "id": "Lax14",
-  "state": "draft",
+  "state": "registered",
   "createdAt": "2026-07-27T16:00:24Z",
   "owners": [
     {
@@ -13,5 +13,6 @@
     "repository": "https://github.com/lax-archive/lax-submissions",
     "commit": "4973144e692e941c0da137f33c05fa3e6eeea827",
     "folder": "finite-ramsey"
-  }
+  },
+  "registeredAt": "2026-07-27T18:26:55Z"
 }
