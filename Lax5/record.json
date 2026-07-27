@@ -1,7 +1,7 @@
 {
   "specVersion": "1",
   "id": "Lax5",
-  "state": "draft",
+  "state": "registered",
   "createdAt": "2026-07-24T09:33:49Z",
   "owners": [
     {
@@ -13,5 +13,6 @@
     "repository": "https://github.com/lax-archive/lax-submissions",
     "commit": "5938d8ee685955eace977d7d3d22d41c7d8bff29",
     "folder": "monadic-dependence-neighborhood-complexity"
-  }
+  },
+  "registeredAt": "2026-07-27T18:31:57Z"
 }
