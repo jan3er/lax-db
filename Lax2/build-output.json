@@ -18,7 +18,7 @@
       "@article{MarcusTardos2004,\n  author  = {Marcus, Adam and Tardos, G{\\'a}bor},\n  title   = {Excluded permutation matrices and the {S}tanley-{W}ilf conjecture},\n  journal = {Journal of Combinatorial Theory, Series A},\n  volume  = {107},\n  number  = {1},\n  pages   = {153--160},\n  year    = {2004},\n  doi     = {10.1016/j.jcta.2004.04.002}\n}\n"
     ]
   },
-  "abstract": "This submission gives a full Lean proof that finite-graph twin-width and\nmixed minor number are functionally equivalent: each parameter is bounded by\na numerical function of the other.\n\nThe concept surface has two review units. The first gives the complete\ndefinition of mixed minor number — interval divisions, mixed matrix cells,\nmixed minors, and vertex-ordered adjacency matrices — phrased with plain\nstructures and Prop-valued predicates, and with the parameter an infimum of\nan explicit set of naturals. The second states the functional equivalence\nwith the twin-width parameter of submission Lax1, applied directly to the\ntwo parameters through a shared uniform signature. The proof runs through\nthe Marcus–Tardos theorem, the matrix grid-minor theorem, and the graph\ntwin-decomposition bridge; both submitted parameters are proved pointwise\nequal to their source counterparts, via the black-is-complete /\nred-is-non-homogeneous invariant for contraction sequences and a pointwise\ndivision-and-cell translation for mixed minors.\n\nPorted from [Édouard Bonnet's original formalization][leaning] of twin-width,\nwhich is MIT-licensed.\n\n[leaning]: https://github.com/EdouardBonnet/leaning\n",
+  "abstract": "This submission gives a full Lean proof that finite-graph twin-width and\nmixed minor number are functionally equivalent: each parameter is bounded by\na numerical function of the other.\n\nThe concept surface has five review units. Two are definitions: the complete\ndefinition of mixed minor number — interval divisions, mixed matrix cells,\nmixed minors, and vertex-ordered adjacency matrices — phrased with plain\nstructures and Prop-valued predicates and with the parameter an infimum of\nan explicit set of naturals; and the uniform signature of a graph parameter\ntogether with the functional equivalence relation over it. Three are claims:\nthe two directional bounds, each stated on its own over the twin-width\nparameter of submission Lax1 and the mixed minor number, and the headline\nequivalence, which applies the equivalence relation to the two parameters\ndirectly. Each direction has its own literature proof and is independently\nusable; the equivalence follows from the two by definition.\n\nThe proof runs through the Marcus–Tardos theorem, the matrix grid-minor\ntheorem, and the graph twin-decomposition bridge; both submitted parameters\nare proved pointwise equal to their source counterparts, via the\nblack-is-complete / red-is-non-homogeneous invariant for contraction\nsequences and a pointwise division-and-cell translation for mixed minors.\nThe mixed-minor-to-twin-width direction is transported from the mirrored\nTheorem 14 construction, the twin-width-to-mixed direction from the\nleaf-order twin-decomposition, and the headline equivalence is assembled\nfrom the two directional statements alone.\n\nPorted from [Édouard Bonnet's original formalization][leaning] of twin-width,\nwhich is MIT-licensed.\n\n[leaning]: https://github.com/EdouardBonnet/leaning\n",
   "requiredByConcepts": [
     "Lax1"
   ],
@@ -35,24 +35,44 @@
       "sections": [
         {
           "title": "Formalization notes",
-          "markdown": "`GraphParam` is the uniform signature shared by all graph parameters in this\narchive: a natural-valued function of finite simple graphs over `Fintype`\nand `DecidableEq` instances. It is an abbreviation, so the statement applies\nto `Lax1.TwinWidth.twinWidth` and `Lax2.MixedMinorNumber.mixedMinorNumber`\ndirectly, without wrapper lambdas."
+          "markdown": "`FunctionallyEquivalent` and the uniform parameter signature it is stated\nover come from the graph parameters concept; the equivalence applies the\nrelation to `Lax1.TwinWidth.twinWidth` and\n`Lax2.MixedMinorNumber.mixedMinorNumber` directly, without wrapper lambdas.\n\nThe two directions are also stated on their own, as the sibling concepts\n`TwinWidthFromMixedMinorNumber` and `MixedMinorNumberFromTwinWidth`: each has\nits own literature proof and is usable on its own. This concept is the\nheadline claim that both hold at once."
         }
       ],
       "imports": [
         "Lax1.TwinWidth",
+        "Lax2.GraphParameters",
         "Lax2.MixedMinorNumber"
       ],
       "mathlibImports": [],
-      "sourceText": "import Lax1.TwinWidth\nimport Lax2.MixedMinorNumber\n\n/-!\n---\ntitle: Twin-width and mixed minor number are functionally equivalent\ntype: theorem\n---\nTwo finite-graph parameters are *functionally equivalent* when each is\nbounded by a numerical function of the other. Twin-width and mixed minor\nnumber are functionally equivalent: there are functions *f*, *g* : ℕ → ℕ\nsuch that every finite simple graph *G* satisfies both:\n\n- tww(*G*) ≤ *f*(mmn(*G*)); and\n- mmn(*G*) ≤ *g*(tww(*G*)).\n\n# Formalization notes\n\n`GraphParam` is the uniform signature shared by all graph parameters in this\narchive: a natural-valued function of finite simple graphs over `Fintype`\nand `DecidableEq` instances. It is an abbreviation, so the statement applies\nto `Lax1.TwinWidth.twinWidth` and `Lax2.MixedMinorNumber.mixedMinorNumber`\ndirectly, without wrapper lambdas.\n-/\n\nnamespace Lax2.FunctionalEquivalence\n\n/-- A natural-valued parameter of finite simple graphs, in the uniform\nsignature shared by all graph parameters in this archive. -/\nabbrev GraphParam :=\n  ∀ {V : Type} [Fintype V] [DecidableEq V], SimpleGraph V → ℕ\n\n/-- Each of two graph parameters is bounded by a numerical function of the\nother. -/\ndef FunctionallyEquivalent (p q : GraphParam) : Prop :=\n  (∃ f : ℕ → ℕ, ∀ {V : Type} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V), p G ≤ f (q G)) ∧\n  (∃ g : ℕ → ℕ, ∀ {V : Type} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V), q G ≤ g (p G))\n\n/-- Twin-width and mixed minor number are functionally equivalent graph\nparameters. -/\naxiom twin_width_functionally_equivalent_mixed_minor_number :\n    FunctionallyEquivalent\n      Lax1.TwinWidth.twinWidth\n      Lax2.MixedMinorNumber.mixedMinorNumber\n\nend Lax2.FunctionalEquivalence\n",
+      "sourceText": "import Lax1.TwinWidth\nimport Lax2.GraphParameters\nimport Lax2.MixedMinorNumber\n\n/-!\n---\ntitle: Twin-width and mixed minor number are functionally equivalent\ntype: theorem\n---\nTwo finite-graph parameters are *functionally equivalent* when each is\nbounded by a numerical function of the other. Twin-width and mixed minor\nnumber are functionally equivalent: there are functions *f*, *g* : ℕ → ℕ\nsuch that every finite simple graph *G* satisfies both:\n\n- tww(*G*) ≤ *f*(mmn(*G*)); and\n- mmn(*G*) ≤ *g*(tww(*G*)).\n\n# Formalization notes\n\n`FunctionallyEquivalent` and the uniform parameter signature it is stated\nover come from the graph parameters concept; the equivalence applies the\nrelation to `Lax1.TwinWidth.twinWidth` and\n`Lax2.MixedMinorNumber.mixedMinorNumber` directly, without wrapper lambdas.\n\nThe two directions are also stated on their own, as the sibling concepts\n`TwinWidthFromMixedMinorNumber` and `MixedMinorNumberFromTwinWidth`: each has\nits own literature proof and is usable on its own. This concept is the\nheadline claim that both hold at once.\n-/\n\nnamespace Lax2.FunctionalEquivalence\n\nopen Lax2.GraphParameters\n\n/-- Twin-width and mixed minor number are functionally equivalent graph\nparameters. -/\naxiom twin_width_functionally_equivalent_mixed_minor_number :\n    FunctionallyEquivalent\n      Lax1.TwinWidth.twinWidth\n      Lax2.MixedMinorNumber.mixedMinorNumber\n\nend Lax2.FunctionalEquivalence\n",
       "statements": [
         {
           "id": "Lax2.FunctionalEquivalence.twin_width_functionally_equivalent_mixed_minor_number",
-          "signature": "twin_width_functionally_equivalent_mixed_minor_number : Lax2.FunctionalEquivalence.FunctionallyEquivalent (fun {V} [Fintype V] [DecidableEq V] => Lax1.TwinWidth.twinWidth)\n  fun {V} [Fintype V] [DecidableEq V] => Lax2.MixedMinorNumber.mixedMinorNumber",
+          "signature": "twin_width_functionally_equivalent_mixed_minor_number : Lax2.GraphParameters.FunctionallyEquivalent (fun {V} [Fintype V] [DecidableEq V] => Lax1.TwinWidth.twinWidth)\n  fun {V} [Fintype V] [DecidableEq V] => Lax2.MixedMinorNumber.mixedMinorNumber",
           "doc": "Twin-width and mixed minor number are functionally equivalent graph\nparameters.",
-          "startLine": 41,
-          "endLine": 46
+          "startLine": 35,
+          "endLine": 40
         }
       ]
+    },
+    {
+      "id": "Lax2.GraphParameters",
+      "path": "concepts/Lax2/GraphParameters.lean",
+      "title": "Graph parameters and functional equivalence",
+      "type": "definition",
+      "description": "A *graph parameter* assigns a natural number to every finite simple graph.\nTwo graph parameters *p* and *q* are *functionally equivalent* when each is\nbounded by a numerical function of the other: there are functions\n*f*, *g* : ℕ → ℕ such that every finite simple graph *G* satisfies both\n*p*(*G*) ≤ *f*(*q*(*G*)) and *q*(*G*) ≤ *g*(*p*(*G*)). Functionally\nequivalent parameters are bounded on exactly the same classes of graphs.",
+      "sections": [
+        {
+          "title": "Formalization notes",
+          "markdown": "`GraphParam` is the uniform signature shared by all graph parameters in this\narchive: a natural-valued function of finite simple graphs over `Fintype` and\n`DecidableEq` instances. It is an abbreviation, so a statement about concrete\nparameters mentions them by name — `Lax1.TwinWidth.twinWidth`,\n`Lax2.MixedMinorNumber.mixedMinorNumber` — with no eta-expanded wrapper\nlambdas a reader would have to unfold.\n\nThe two directions of `FunctionallyEquivalent` are separate existential\nclaims rather than one function pair, so each can be established on its own."
+        }
+      ],
+      "imports": [],
+      "mathlibImports": [
+        "Mathlib.Combinatorics.SimpleGraph.Basic"
+      ],
+      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Basic\n\n/-!\n---\ntitle: Graph parameters and functional equivalence\ntype: definition\n---\nA *graph parameter* assigns a natural number to every finite simple graph.\nTwo graph parameters *p* and *q* are *functionally equivalent* when each is\nbounded by a numerical function of the other: there are functions\n*f*, *g* : ℕ → ℕ such that every finite simple graph *G* satisfies both\n*p*(*G*) ≤ *f*(*q*(*G*)) and *q*(*G*) ≤ *g*(*p*(*G*)). Functionally\nequivalent parameters are bounded on exactly the same classes of graphs.\n\n# Formalization notes\n\n`GraphParam` is the uniform signature shared by all graph parameters in this\narchive: a natural-valued function of finite simple graphs over `Fintype` and\n`DecidableEq` instances. It is an abbreviation, so a statement about concrete\nparameters mentions them by name — `Lax1.TwinWidth.twinWidth`,\n`Lax2.MixedMinorNumber.mixedMinorNumber` — with no eta-expanded wrapper\nlambdas a reader would have to unfold.\n\nThe two directions of `FunctionallyEquivalent` are separate existential\nclaims rather than one function pair, so each can be established on its own.\n-/\n\nnamespace Lax2.GraphParameters\n\n/-- A natural-valued parameter of finite simple graphs, in the uniform\nsignature shared by all graph parameters in this archive. -/\nabbrev GraphParam :=\n  ∀ {V : Type} [Fintype V] [DecidableEq V], SimpleGraph V → ℕ\n\n/-- Each of two graph parameters is bounded by a numerical function of the\nother. -/\ndef FunctionallyEquivalent (p q : GraphParam) : Prop :=\n  (∃ f : ℕ → ℕ, ∀ {V : Type} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V), p G ≤ f (q G)) ∧\n  (∃ g : ℕ → ℕ, ∀ {V : Type} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V), q G ≤ g (p G))\n\nend Lax2.GraphParameters\n",
+      "statements": []
     },
     {
       "id": "Lax2.MixedMinorNumber",
@@ -73,6 +93,62 @@
       ],
       "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Basic\nimport Mathlib.Data.Nat.Lattice\n\n/-!\n---\ntitle: Mixed minor number\ntype: definition\n---\nA *k*-division of `Fin n` partitions it into *k* nonempty\nconsecutive intervals in increasing order. A row division and a column\ndivision split a matrix into a grid of *k*² cells. A cell is vertical if\neach of its columns is constant, horizontal if each of its rows is constant,\nand mixed if it is neither. The matrix has a *k*-mixed minor if some pair of\nrow and column *k*-divisions makes all *k*² cells mixed, and its mixed\nnumber is the largest such *k*.\n\nAn ordering of a finite simple graph's vertices turns its adjacency relation\ninto such a matrix. The mixed minor number of the graph is the least mixed\nnumber of this matrix over all vertex orderings.\n\n# Formalization notes\n\nDisjointness and convexity of the parts of a `Division` follow from the\nordering and covering fields, so the structure does not carry them. Matrix\nentries are truth values, so constancy of a cell's rows or columns is\npropositional equivalence. A *k*-division of `Fin n` forces *k* ≤ *n*, so the\nsupremum in `matrixMixedNumber` ranges over a bounded set; it takes the value\n0 if the matrix has no mixed minor at all. Vertex\norderings always exist, so the infimum in `mixedMinorNumber` ranges over a\nnonempty set.\n-/\n\nnamespace Lax2.MixedMinorNumber\n\n/-- A division of `Fin n` into `k` nonempty consecutive intervals in\nincreasing order. Disjointness and convexity of the parts follow from\n`part_ordered` and `part_cover`. -/\nstructure Division (n k : ℕ) where\n  /-- The `i`-th part of the division. -/\n  part : Fin k → Finset (Fin n)\n  /-- Every part is nonempty. -/\n  part_nonempty : ∀ i, (part i).Nonempty\n  /-- The parts cover the whole interval. -/\n  part_cover : ∀ x : Fin n, ∃ i, x ∈ part i\n  /-- Earlier-indexed parts lie strictly before later-indexed parts. -/\n  part_ordered :\n    ∀ ⦃i j : Fin k⦄, i < j →\n      ∀ ⦃a b : Fin n⦄, a ∈ part i → b ∈ part j → a < b\n\n/-- A matrix cell is vertical when each column is constant within the row\npart. -/\ndef cellVertical {n m k : ℕ} (M : Fin n → Fin m → Prop)\n    (R : Division n k) (C : Division m k) (i j : Fin k) : Prop :=\n  ∀ ⦃r₁ r₂ : Fin n⦄, r₁ ∈ R.part i → r₂ ∈ R.part i →\n    ∀ ⦃c : Fin m⦄, c ∈ C.part j → (M r₁ c ↔ M r₂ c)\n\n/-- A matrix cell is horizontal when each row is constant within the column\npart. -/\ndef cellHorizontal {n m k : ℕ} (M : Fin n → Fin m → Prop)\n    (R : Division n k) (C : Division m k) (i j : Fin k) : Prop :=\n  ∀ ⦃r : Fin n⦄, r ∈ R.part i →\n    ∀ ⦃c₁ c₂ : Fin m⦄, c₁ ∈ C.part j → c₂ ∈ C.part j →\n      (M r c₁ ↔ M r c₂)\n\n/-- A matrix cell is mixed when it is neither vertical nor horizontal. -/\ndef cellMixed {n m k : ℕ} (M : Fin n → Fin m → Prop)\n    (R : Division n k) (C : Division m k) (i j : Fin k) : Prop :=\n  ¬ cellVertical M R C i j ∧ ¬ cellHorizontal M R C i j\n\n/-- A matrix has a `k`-mixed minor if suitable row and column `k`-divisions\nmake every induced cell mixed. -/\ndef HasMixedMinor {n m : ℕ} (M : Fin n → Fin m → Prop) (k : ℕ) : Prop :=\n  ∃ R : Division n k, ∃ C : Division m k, ∀ i j : Fin k, cellMixed M R C i j\n\n/-- The largest order of a mixed minor of a matrix. -/\nnoncomputable def matrixMixedNumber {n m : ℕ}\n    (M : Fin n → Fin m → Prop) : ℕ :=\n  sSup {k | HasMixedMinor M k}\n\n/-- The adjacency matrix of a graph in a chosen vertex order. -/\ndef orderedAdjacency {V : Type} {n : ℕ}\n    (G : SimpleGraph V) (e : Fin n ≃ V) : Fin n → Fin n → Prop :=\n  fun i j => G.Adj (e i) (e j)\n\n/-- The mixed minor number of a finite simple graph: the least mixed number\nof its adjacency matrix over all vertex orderings. -/\nnoncomputable def mixedMinorNumber {V : Type} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V) : ℕ :=\n  sInf (Set.range fun e : Fin (Fintype.card V) ≃ V =>\n    matrixMixedNumber (orderedAdjacency G e))\n\nend Lax2.MixedMinorNumber\n",
       "statements": []
+    },
+    {
+      "id": "Lax2.MixedMinorNumberFromTwinWidth",
+      "path": "concepts/Lax2/MixedMinorNumberFromTwinWidth.lean",
+      "title": "Mixed minor number is bounded by a function of twin-width",
+      "type": "theorem",
+      "description": "There is a function *g* : ℕ → ℕ such that every finite simple graph *G*\nsatisfies mmn(*G*) ≤ *g*(tww(*G*)): a graph of bounded twin-width admits a\nvertex ordering whose adjacency matrix has no large mixed minor. Twin-width\nis the parameter of submission Lax1, mixed minor number the parameter of the\nprerequisite concept.",
+      "sections": [
+        {
+          "title": "Formalization notes",
+          "markdown": "The bound is stated over the two parameters themselves, on arbitrary finite\nvertex types carrying `Fintype` and `DecidableEq` instances — the signature\nboth parameters have. Only the existence of a bounding function is claimed;\nthe known witness for this direction is linear."
+        }
+      ],
+      "imports": [
+        "Lax1.TwinWidth",
+        "Lax2.MixedMinorNumber"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax1.TwinWidth\nimport Lax2.MixedMinorNumber\n\n/-!\n---\ntitle: Mixed minor number is bounded by a function of twin-width\ntype: theorem\n---\nThere is a function *g* : ℕ → ℕ such that every finite simple graph *G*\nsatisfies mmn(*G*) ≤ *g*(tww(*G*)): a graph of bounded twin-width admits a\nvertex ordering whose adjacency matrix has no large mixed minor. Twin-width\nis the parameter of submission Lax1, mixed minor number the parameter of the\nprerequisite concept.\n\n# Formalization notes\n\nThe bound is stated over the two parameters themselves, on arbitrary finite\nvertex types carrying `Fintype` and `DecidableEq` instances — the signature\nboth parameters have. Only the existence of a bounding function is claimed;\nthe known witness for this direction is linear.\n-/\n\nnamespace Lax2.MixedMinorNumberFromTwinWidth\n\n/-- Mixed minor number is bounded by a numerical function of twin-width. -/\naxiom exists_mixedMinorNumber_bound_of_twinWidth :\n    ∃ g : ℕ → ℕ, ∀ {V : Type} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V),\n      Lax2.MixedMinorNumber.mixedMinorNumber G ≤ g (Lax1.TwinWidth.twinWidth G)\n\nend Lax2.MixedMinorNumberFromTwinWidth\n",
+      "statements": [
+        {
+          "id": "Lax2.MixedMinorNumberFromTwinWidth.exists_mixedMinorNumber_bound_of_twinWidth",
+          "signature": "exists_mixedMinorNumber_bound_of_twinWidth : Exists fun g =>\n  ∀ {V : Type} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V),\n    instLENat.le (Lax2.MixedMinorNumber.mixedMinorNumber G) (g (Lax1.TwinWidth.twinWidth G))",
+          "doc": "Mixed minor number is bounded by a numerical function of twin-width.",
+          "startLine": 25,
+          "endLine": 29
+        }
+      ]
+    },
+    {
+      "id": "Lax2.TwinWidthFromMixedMinorNumber",
+      "path": "concepts/Lax2/TwinWidthFromMixedMinorNumber.lean",
+      "title": "Twin-width is bounded by a function of mixed minor number",
+      "type": "theorem",
+      "description": "There is a function *f* : ℕ → ℕ such that every finite simple graph *G*\nsatisfies tww(*G*) ≤ *f*(mmn(*G*)): a graph whose adjacency matrix admits no\nlarge mixed minor in any vertex ordering has bounded twin-width. Twin-width\nis the parameter of submission Lax1, mixed minor number the parameter of the\nprerequisite concept.",
+      "sections": [
+        {
+          "title": "Formalization notes",
+          "markdown": "The bound is stated over the two parameters themselves, on arbitrary finite\nvertex types carrying `Fintype` and `DecidableEq` instances — the signature\nboth parameters have. Only the existence of a bounding function is claimed:\nthe known witness is doubly exponential, and its shape is not part of the\nresult."
+        }
+      ],
+      "imports": [
+        "Lax1.TwinWidth",
+        "Lax2.MixedMinorNumber"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax1.TwinWidth\nimport Lax2.MixedMinorNumber\n\n/-!\n---\ntitle: Twin-width is bounded by a function of mixed minor number\ntype: theorem\n---\nThere is a function *f* : ℕ → ℕ such that every finite simple graph *G*\nsatisfies tww(*G*) ≤ *f*(mmn(*G*)): a graph whose adjacency matrix admits no\nlarge mixed minor in any vertex ordering has bounded twin-width. Twin-width\nis the parameter of submission Lax1, mixed minor number the parameter of the\nprerequisite concept.\n\n# Formalization notes\n\nThe bound is stated over the two parameters themselves, on arbitrary finite\nvertex types carrying `Fintype` and `DecidableEq` instances — the signature\nboth parameters have. Only the existence of a bounding function is claimed:\nthe known witness is doubly exponential, and its shape is not part of the\nresult.\n-/\n\nnamespace Lax2.TwinWidthFromMixedMinorNumber\n\n/-- Twin-width is bounded by a numerical function of mixed minor number. -/\naxiom exists_twinWidth_bound_of_mixedMinorNumber :\n    ∃ f : ℕ → ℕ, ∀ {V : Type} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V),\n      Lax1.TwinWidth.twinWidth G ≤ f (Lax2.MixedMinorNumber.mixedMinorNumber G)\n\nend Lax2.TwinWidthFromMixedMinorNumber\n",
+      "statements": [
+        {
+          "id": "Lax2.TwinWidthFromMixedMinorNumber.exists_twinWidth_bound_of_mixedMinorNumber",
+          "signature": "exists_twinWidth_bound_of_mixedMinorNumber : Exists fun f =>\n  ∀ {V : Type} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V),\n    instLENat.le (Lax1.TwinWidth.twinWidth G) (f (Lax2.MixedMinorNumber.mixedMinorNumber G))",
+          "doc": "Twin-width is bounded by a numerical function of mixed minor number.",
+          "startLine": 26,
+          "endLine": 30
+        }
+      ]
     }
   ],
   "proofs": [
@@ -80,12 +156,49 @@
       "id": "Lax2Proofs.Main.twin_width_functionally_equivalent_mixed_minor_number",
       "path": "proofs/Lax2Proofs/Main.lean",
       "conclusion": "Lax2.FunctionalEquivalence.twin_width_functionally_equivalent_mixed_minor_number",
-      "assumptions": [],
-      "description": "Self-contained proof that the submitted twin-width parameter (from submission\nLax1) and the submitted mixed minor number are functionally equivalent.",
+      "assumptions": [
+        "Lax2.MixedMinorNumberFromTwinWidth.exists_mixedMinorNumber_bound_of_twinWidth",
+        "Lax2.TwinWidthFromMixedMinorNumber.exists_twinWidth_bound_of_mixedMinorNumber"
+      ],
+      "description": "Twin-width and mixed minor number are functionally equivalent, from the two\nsibling statements bounding each parameter by a function of the other.",
       "sections": [
         {
           "title": "Proof strategy",
-          "markdown": "The submitted partition-based twin-width and the propositional mixed minor\nnumber are proved pointwise equal to their source counterparts — through the\nblack-is-complete / red-is-non-homogeneous invariant for contraction\nsequences and a pointwise division-and-cell translation for mixed minors —\nand the source equivalence theorem (Marcus–Tardos, the matrix grid-minor\ntheorem, and the twin-decomposition bridge) transports directly."
+          "markdown": "`FunctionallyEquivalent` unfolds to the conjunction of the two directional\nexistentials, so pairing the two assumed statements is the whole proof.  The\nmathematical content lives in the proofs of those two statements\n(`Lax2Proofs.TwinWidthFromMixedMinorNumber` and\n`Lax2Proofs.MixedMinorNumberFromTwinWidth`)."
+        },
+        {
+          "title": "Attribution",
+          "markdown": "Bonnet–Kim–Thomassé–Watrigant, *Twin-width I: Tractable FO Model Checking*\n(J. ACM 2022), state the equivalence as the conjunction of these two bounds."
+        }
+      ]
+    },
+    {
+      "id": "Lax2Proofs.MixedMinorNumberFromTwinWidth.exists_mixedMinorNumber_bound_of_twinWidth",
+      "path": "proofs/Lax2Proofs/MixedMinorNumberFromTwinWidth.lean",
+      "conclusion": "Lax2.MixedMinorNumberFromTwinWidth.exists_mixedMinorNumber_bound_of_twinWidth",
+      "assumptions": [],
+      "description": "The submitted mixed minor number is bounded by a numerical function of\ntwin-width (the parameter of submission Lax1); the witness is the linear\nfunction `d ↦ 2 * (d + 3) + 2`.",
+      "sections": [
+        {
+          "title": "Proof strategy",
+          "markdown": "The left-to-right leaf order of a twin-decomposition of width `twinWidth G`\nmakes the ordered adjacency matrix twin-ordered, and the first item of the\ngrid-minor theorem for twin-width bounds the mixed number of a twin-ordered\nmatrix linearly; the `+3` absorbs the diagonal convention and the two\none-sided child zones created by mirroring a graph contraction as a row and\na column fusion. Rewriting with the two parameter equalities of\n`Lax2Proofs.Bridge` moves the bound onto the submitted parameters."
+        },
+        {
+          "title": "Attribution",
+          "markdown": "Ported from Édouard Bonnet's formalization of Bonnet–Kim–Thomassé–Watrigant,\n*Twin-width I: Tractable FO Model Checking* (J. ACM 2022)."
+        }
+      ]
+    },
+    {
+      "id": "Lax2Proofs.TwinWidthFromMixedMinorNumber.exists_twinWidth_bound_of_mixedMinorNumber",
+      "path": "proofs/Lax2Proofs/TwinWidthFromMixedMinorNumber.lean",
+      "conclusion": "Lax2.TwinWidthFromMixedMinorNumber.exists_twinWidth_bound_of_mixedMinorNumber",
+      "assumptions": [],
+      "description": "Twin-width (the parameter of submission Lax1) is bounded by a numerical\nfunction of the submitted mixed minor number.",
+      "sections": [
+        {
+          "title": "Proof strategy",
+          "markdown": "The source direction `twinWidthBoundedByMixedMinorNumber` is the mirrored\nBoolean Theorem 14 construction: an ordered adjacency matrix of mixed number\n`k` is `(k+1)`-mixed-free, and the Marcus–Tardos-based Theorem 10 machinery\nturns a mixed-free matrix into a contraction sequence of bounded red degree.\nRewriting with the two parameter equalities of `Lax2Proofs.Bridge` moves the\nbound onto the submitted parameters, with the same witness function."
         },
         {
           "title": "Attribution",
@@ -94,5 +207,5 @@
       ]
     }
   ],
-  "captureId": "7cad33e7b45019e00a97c46f0e688eff"
+  "captureId": "9e06697bf196e8ccd4dec610b9441c74"
 }
