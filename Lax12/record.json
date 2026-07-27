@@ -1,7 +1,7 @@
 {
   "specVersion": "1",
   "id": "Lax12",
-  "state": "draft",
+  "state": "registered",
   "createdAt": "2026-07-27T15:35:19Z",
   "owners": [
     {
@@ -13,5 +13,6 @@
     "repository": "https://github.com/lax-archive/lax-submissions",
     "commit": "d4dd676639ed202c8dd966194bfe6588ca2e9b84",
     "folder": "sparsity-lectures"
-  }
+  },
+  "registeredAt": "2026-07-27T18:29:43Z"
 }
