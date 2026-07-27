@@ -20,8 +20,10 @@
       "@article{AdlerAdler2014,\n  author  = {Adler, Hans and Adler, Isolde},\n  title   = {Interpreting nowhere dense graph classes as a classical\n             notion of model theory},\n  journal = {European Journal of Combinatorics},\n  volume  = {36},\n  pages   = {322--330},\n  year    = {2014},\n  doi     = {10.1016/j.ejc.2013.06.048}\n}\n"
     ]
   },
-  "abstract": "This submission states Theorem 2 of Dreier, Mählmann, McCarty, Pilipczuk,\nToruńczyk, *Neighborhood Complexity and Radius-1 Merge-Width in Monadically\nDependent Graph Classes* (2026): every monadically dependent class of finite\ngraphs has almost linear neighborhood complexity — for every $\\varepsilon >\n0$ there is a $c$ such that every member $G$ and every nonempty vertex\nsubset $A$ satisfy $|\\{N(v) \\cap A : v \\in V(G)\\}| \\le c\\,|A|^{1+\\varepsilon}$.\n\nThe concept surface has twelve review units. Seven definitions: graph classes\non the canonical vertex types, together with weak sparseness; non-copying\nfirst-order transductions between\nclasses of arbitrary relational structures (a domain formula and one\nformula per target relation symbol, over a monadic color expansion); graph\ntransductions as the special case over the language of graphs; monadic\ndependence (the class does not transduce all graphs); neighborhood\ncomplexity, with the shared bound predicate $|A|^{1+o(1)}$; nowhere\ndenseness via shallow-minor models; and weak coloring numbers, with the\nshared subpolynomial bound predicate. Five theorems: weakly sparse\nmonadically dependent classes are nowhere dense; nowhere dense classes have\nsubpolynomial weak coloring numbers, uniformly over subgraphs of members;\nnowhere dense classes have almost linear neighborhood complexity; the\nheadline theorem; and nowhere dense classes are monadically dependent\n(Adler–Adler).\n\nThe proof package discharges the headline theorem via the paper's\nVC-dimension sparsification argument; the nowhere dense counting\nstatement from the coloring-number theorem, via radius-1 trace counting\nalong a weak coloring order and localization; the weakly sparse\ntheorem via Mählmann's Ramsey-theoretic extraction of induced subdivided\nbicliques (thesis, Lemma 13.8) together with a star-crossing transduction\nof all graphs; and the Adler–Adler direction via uniform quasi-wideness\nand a semantic locality argument — the deletion specialization of the\nflip-breakability route, with hereditarily finite rank-bounded local\ntypes of decorated balls and a ball-swap back-and-forth system in place\nof Gaifman's theorem. A transduction of all graphs would shatter\narbitrarily large sets; quasi-wide scattering, a local-type pigeonhole,\nand the swap lemma refute this. With that, all five theorem concepts are\nproved — the surface carries the full classical equivalence that on weakly\nsparse classes, monadic dependence and nowhere denseness coincide.\n\nThe proofs do not contain the classical sparsity and Ramsey material they\nrest on; they *assume* it, from two upstream submissions, so that the\ndependency is visible in the archive's proof network. Uniform\nquasi-wideness and subpolynomial weak coloring numbers of nowhere dense\nclasses are assumed from the *Sparsity Lectures* submission (Lax12),\nwhich formalizes the lecture notes of Pilipczuk, Pilipczuk and Siebertz;\nRamsey's theorem for colourings of pairs and its order-type form for\ntuples are assumed from the *Finite Ramsey* submission (Lax14). Both\nsubmissions state those notions over their own, textually identical\ncopies of the shallow-minor and weak-coloring definitions — a deliberate\nnominal duplication, kept so that no dependency cycle can form between\nthe concept packages, and paid for by transports that are field-for-field\nrepackings and definitional unfoldings. Inside this submission the same\ndiscipline applies: the headline theorem assumes Corollary 6a and\nCorollary 6b instead of importing their proofs, and Corollary 6b assumes\nthe coloring-number statement instead of importing its proof. What each\nproof reports beyond Lean's standard logical axioms is exactly the list\nin its `assumptions` block.\n",
-  "requiredByConcepts": [],
+  "abstract": "This submission states Theorem 2 of Dreier, Mählmann, McCarty, Pilipczuk,\nToruńczyk, *Neighborhood Complexity and Radius-1 Merge-Width in Monadically\nDependent Graph Classes* (2026): every monadically dependent class of finite\ngraphs has almost linear neighborhood complexity — for every $\\varepsilon >\n0$ there is a $c$ such that every member $G$ and every nonempty vertex\nsubset $A$ satisfy $|\\{N(v) \\cap A : v \\in V(G)\\}| \\le c\\,|A|^{1+\\varepsilon}$.\nNeighborhood complexity is a notion of sparsity theory, and the theorem\nextends a classical bound for nowhere dense classes to a much larger,\nmodel-theoretically defined family. The submission is organized to say\nexactly that: it builds on the *Sparsity Lectures* submission (Lax12), whose\nconcepts of graph classes, nowhere denseness and neighborhood complexity it\nimports and states its own theorems over, and it contributes the\nmodel-theoretic side — transductions, monadic dependence, weak sparseness —\ntogether with three theorems relating the two.\n\nThe concept surface has seven review units. Four definitions: weakly sparse\ngraph classes — the class of all graphs and weak sparseness, the exclusion\nof some complete bipartite graph $K_{t,t}$ as a subgraph, on top of the\nimported notion of a graph class; non-copying first-order transductions\nbetween classes of arbitrary relational structures (a domain formula and one\nformula per target relation symbol, over a monadic color expansion); graph\ntransductions as the special case over the language of graphs; and monadic\ndependence (the class does not transduce all graphs). Three theorems: weakly\nsparse monadically dependent classes are nowhere dense; the headline\ntheorem; and nowhere dense classes are monadically dependent (Adler–Adler).\nThe nowhere-denseness hypotheses and conclusions, and the almost-linear\nbound predicate $|A|^{1+o(1)}$, are the imported and separately endorsed\ndefinitions of Lax12, so these three statements compose directly with the\nsparsity theory stated there — no restatement, and no second copy of a\nnotion that already has a home.\n\nThe proof package discharges the headline theorem via the paper's\nVC-dimension sparsification argument; the weakly sparse theorem via\nMählmann's Ramsey-theoretic extraction of induced subdivided bicliques\n(thesis, Lemma 13.8) together with a star-crossing transduction of all\ngraphs; and the Adler–Adler direction via uniform quasi-wideness and a\nsemantic locality argument — the deletion specialization of the\nflip-breakability route, with hereditarily finite rank-bounded local types\nof decorated balls and a ball-swap back-and-forth system in place of\nGaifman's theorem. A transduction of all graphs would shatter arbitrarily\nlarge sets; quasi-wide scattering, a local-type pigeonhole, and the swap\nlemma refute this. With that, all three theorem concepts are proved — the\nsurface carries the full classical equivalence that on weakly sparse\nclasses, monadic dependence and nowhere denseness coincide.\n\nThe proofs do not contain the classical sparsity and Ramsey material they\nrest on; they *assume* it, from two upstream submissions, so that the\ndependency is visible in the archive's proof network. Uniform quasi-wideness\nof nowhere dense classes, and their almost linear neighborhood complexity,\nare assumed from the *Sparsity Lectures* submission (Lax12), which\nformalizes the lecture notes of Pilipczuk, Pilipczuk and Siebertz; Ramsey's\ntheorem for colourings of pairs and its order-type form for tuples are\nassumed from the *Finite Ramsey* submission (Lax14). Inside this submission\nthe same discipline applies: the terminal step of the headline proof\ncomposes the *statements* of the two halves of the paper's Corollary 6 — the\nweakly sparse theorem stated here and the nowhere dense counting theorem\nstated in Lax12 — instead of importing their proofs. What each proof reports\nbeyond Lean's standard logical axioms is exactly the list in its\n`assumptions` block.\n",
+  "requiredByConcepts": [
+    "Lax12"
+  ],
   "requiredByProofs": [
     "Lax12",
     "Lax14"
@@ -36,22 +38,22 @@
       "sections": [
         {
           "title": "Formalization notes",
-          "markdown": "Adler and Adler proved that nowhere dense classes are monadically\n*stable*; monadic dependence is the weakening stated here, which is how\nthe equivalence is used in the literature."
+          "markdown": "Adler and Adler proved that nowhere dense classes are monadically\n*stable*; monadic dependence is the weakening stated here, which is how\nthe equivalence is used in the literature. The hypothesis is\n`NowhereDense`, the shallow-minor definition of the *Sparsity Lectures*\nsubmission (Lax12), where nowhere denseness is defined and endorsed."
         }
       ],
       "imports": [
-        "Lax5.MonadicDependence",
-        "Lax5.NowhereDenseClasses"
+        "Lax12.NowhereDenseClasses",
+        "Lax5.MonadicDependence"
       ],
       "mathlibImports": [],
-      "sourceText": "import Lax5.MonadicDependence\nimport Lax5.NowhereDenseClasses\n\n/-!\n---\ntitle: Nowhere dense classes are monadically dependent\ntype: theorem\n---\nEvery nowhere dense graph class is monadically dependent. Together with\nthe statement that weakly sparse monadically dependent classes are\nnowhere dense, this carries the classical equivalence: on weakly sparse\nclasses, monadic dependence and nowhere denseness coincide.\n\n# Formalization notes\n\nAdler and Adler proved that nowhere dense classes are monadically\n*stable*; monadic dependence is the weakening stated here, which is how\nthe equivalence is used in the literature.\n-/\n\nnamespace Lax5.AdlerAdler\n\nopen Lax5.GraphClasses Lax5.MonadicDependence Lax5.NowhereDenseClasses\n\n/-- Nowhere dense graph classes are monadically dependent. -/\naxiom monadicallyDependent_of_nowhereDense\n    (C : GraphClass) (h : NowhereDense C) :\n    MonadicallyDependent C\n\nend Lax5.AdlerAdler\n",
+      "sourceText": "import Lax5.MonadicDependence\nimport Lax12.NowhereDenseClasses\n\n/-!\n---\ntitle: Nowhere dense classes are monadically dependent\ntype: theorem\n---\nEvery nowhere dense graph class is monadically dependent. Together with\nthe statement that weakly sparse monadically dependent classes are\nnowhere dense, this carries the classical equivalence: on weakly sparse\nclasses, monadic dependence and nowhere denseness coincide.\n\n# Formalization notes\n\nAdler and Adler proved that nowhere dense classes are monadically\n*stable*; monadic dependence is the weakening stated here, which is how\nthe equivalence is used in the literature. The hypothesis is\n`NowhereDense`, the shallow-minor definition of the *Sparsity Lectures*\nsubmission (Lax12), where nowhere denseness is defined and endorsed.\n-/\n\nnamespace Lax5.AdlerAdler\n\nopen Lax12.GraphClasses Lax12.NowhereDenseClasses\nopen Lax5.MonadicDependence\n\n/-- Nowhere dense graph classes are monadically dependent. -/\naxiom monadicallyDependent_of_nowhereDense\n    (C : GraphClass) (h : NowhereDense C) :\n    MonadicallyDependent C\n\nend Lax5.AdlerAdler\n",
       "statements": [
         {
           "id": "Lax5.AdlerAdler.monadicallyDependent_of_nowhereDense",
-          "signature": "monadicallyDependent_of_nowhereDense : ∀ (C : Lax5.GraphClasses.GraphClass),\n  Lax5.NowhereDenseClasses.NowhereDense C → Lax5.MonadicDependence.MonadicallyDependent C",
+          "signature": "monadicallyDependent_of_nowhereDense : ∀ (C : Lax12.GraphClasses.GraphClass),\n  Lax12.NowhereDenseClasses.NowhereDense C → Lax5.MonadicDependence.MonadicallyDependent C",
           "doc": "Nowhere dense graph classes are monadically dependent.",
-          "startLine": 25,
-          "endLine": 28
+          "startLine": 28,
+          "endLine": 31
         }
       ]
     },
@@ -64,43 +66,44 @@
       "sections": [
         {
           "title": "Formalization notes",
-          "markdown": "The hypothesis is the transduction-based definition of monadic\ndependence; the conclusion is the shared predicate `HasAlmostLinearNC`\nof the neighborhood complexity concept, so this statement and the\nnowhere dense counting statement read uniformly."
+          "markdown": "The hypothesis is the transduction-based definition of monadic\ndependence, the subject of this submission; the conclusion is the\npredicate `HasAlmostLinearNC` of the *Sparsity Lectures* submission\n(Lax12), where neighborhood complexity is defined and endorsed. Stating\nthe theorem over that predicate is what makes it directly comparable to\nthe nowhere dense counting statement there: the same bound, under a\nstrictly weaker hypothesis."
         }
       ],
       "imports": [
-        "Lax5.MonadicDependence",
-        "Lax5.NeighborhoodComplexity"
+        "Lax12.NeighborhoodComplexity",
+        "Lax5.MonadicDependence"
       ],
       "mathlibImports": [],
-      "sourceText": "import Lax5.MonadicDependence\nimport Lax5.NeighborhoodComplexity\n\n/-!\n---\ntitle: Monadically dependent classes have almost linear neighborhood complexity\ntype: theorem\n---\nEvery monadically dependent graph class has almost linear neighborhood\ncomplexity: for every ε > 0 there is a constant *c* such that every\nmember *G* and every nonempty vertex subset *A* satisfy\n|{N(v) ∩ A : v ∈ V(G)}| ≤ *c* · |A|^(1+ε).\n\nThis is Theorem 2 of Dreier, Mählmann, McCarty, Pilipczuk, Toruńczyk,\n*Neighborhood Complexity and Radius-1 Merge-Width in Monadically\nDependent Graph Classes* (2026).\n\n# Formalization notes\n\nThe hypothesis is the transduction-based definition of monadic\ndependence; the conclusion is the shared predicate `HasAlmostLinearNC`\nof the neighborhood complexity concept, so this statement and the\nnowhere dense counting statement read uniformly.\n-/\n\nnamespace Lax5.AlmostLinearNC\n\nopen Lax5.GraphClasses Lax5.MonadicDependence Lax5.NeighborhoodComplexity\n\n/-- Monadically dependent graph classes have almost linear neighborhood\ncomplexity. -/\naxiom hasAlmostLinearNC_of_monadicallyDependent\n    (C : GraphClass) (h : MonadicallyDependent C) :\n    HasAlmostLinearNC C\n\nend Lax5.AlmostLinearNC\n",
+      "sourceText": "import Lax5.MonadicDependence\nimport Lax12.NeighborhoodComplexity\n\n/-!\n---\ntitle: Monadically dependent classes have almost linear neighborhood complexity\ntype: theorem\n---\nEvery monadically dependent graph class has almost linear neighborhood\ncomplexity: for every ε > 0 there is a constant *c* such that every\nmember *G* and every nonempty vertex subset *A* satisfy\n|{N(v) ∩ A : v ∈ V(G)}| ≤ *c* · |A|^(1+ε).\n\nThis is Theorem 2 of Dreier, Mählmann, McCarty, Pilipczuk, Toruńczyk,\n*Neighborhood Complexity and Radius-1 Merge-Width in Monadically\nDependent Graph Classes* (2026).\n\n# Formalization notes\n\nThe hypothesis is the transduction-based definition of monadic\ndependence, the subject of this submission; the conclusion is the\npredicate `HasAlmostLinearNC` of the *Sparsity Lectures* submission\n(Lax12), where neighborhood complexity is defined and endorsed. Stating\nthe theorem over that predicate is what makes it directly comparable to\nthe nowhere dense counting statement there: the same bound, under a\nstrictly weaker hypothesis.\n-/\n\nnamespace Lax5.AlmostLinearNC\n\nopen Lax12.GraphClasses Lax12.NeighborhoodComplexity Lax5.MonadicDependence\n\n/-- Monadically dependent graph classes have almost linear neighborhood\ncomplexity. -/\naxiom hasAlmostLinearNC_of_monadicallyDependent\n    (C : GraphClass) (h : MonadicallyDependent C) :\n    HasAlmostLinearNC C\n\nend Lax5.AlmostLinearNC\n",
       "statements": [
         {
           "id": "Lax5.AlmostLinearNC.hasAlmostLinearNC_of_monadicallyDependent",
-          "signature": "hasAlmostLinearNC_of_monadicallyDependent : ∀ (C : Lax5.GraphClasses.GraphClass),\n  Lax5.MonadicDependence.MonadicallyDependent C → Lax5.NeighborhoodComplexity.HasAlmostLinearNC C",
+          "signature": "hasAlmostLinearNC_of_monadicallyDependent : ∀ (C : Lax12.GraphClasses.GraphClass),\n  Lax5.MonadicDependence.MonadicallyDependent C → Lax12.NeighborhoodComplexity.HasAlmostLinearNC C",
           "doc": "Monadically dependent graph classes have almost linear neighborhood\ncomplexity.",
-          "startLine": 30,
-          "endLine": 34
+          "startLine": 33,
+          "endLine": 37
         }
       ]
     },
     {
       "id": "Lax5.GraphClasses",
       "path": "concepts/Lax5/GraphClasses.lean",
-      "title": "Graph classes",
+      "title": "Weakly sparse graph classes",
       "type": "definition",
-      "description": "A graph class is a set of finite simple graphs. A class contains, for\neach number of vertices *n*, some of the simple graphs on the canonical\n*n*-element vertex type. A graph class is weakly sparse if some complete\nbipartite graph K_{t,t} occurs in no member as a subgraph.",
+      "description": "A graph class is a set of finite simple graphs: for each number of\nvertices *n*, some of the simple graphs on the canonical *n*-element\nvertex type. A graph class is weakly sparse if some complete bipartite\ngraph K_{t,t} occurs in no member as a subgraph.",
       "sections": [
         {
           "title": "Formalization notes",
-          "markdown": "Every finite simple graph is isomorphic to a graph on some `Fin n`, so\nranging over the canonical carriers loses no generality. Closure under\nisomorphism is deliberately not required: no statement of this\nsubmission needs it, and all hypotheses range over concrete members.\n`GraphClass` is an abbreviation, so class membership is plain\napplication `C n G` throughout the submission.\n\nSubgraph containment is mathlib's `⊑` (an injective homomorphism of\n`completeBipartiteGraph (Fin t) (Fin t)` into the member). The value\n`t = 0` does not trivialize weak sparseness: the empty graph is\ncontained in every graph, so `¬ K_{0,0} ⊑ G` never holds and no side\ncondition on `t` is needed."
+          "markdown": "The notion of a graph class is not restated here. `GraphClass` is the\nabbreviation of the *Sparsity Lectures* submission (Lax12), imported and\nused as is, so that the statements of this submission and the statements\nassumed from that one speak about literally the same objects. This\nconcept adds the two class-level notions this submission needs on top of\nit: the class of all graphs, which the definition of monadic dependence\nnames as the transduction target, and weak sparseness.\n\nSubgraph containment is mathlib's `⊑` (an injective homomorphism of\n`completeBipartiteGraph (Fin t) (Fin t)` into the member). The value\n`t = 0` does not trivialize weak sparseness: the empty graph is\ncontained in every graph, so `¬ K_{0,0} ⊑ G` never holds and no side\ncondition on `t` is needed."
         }
       ],
-      "imports": [],
+      "imports": [
+        "Lax12.GraphClasses"
+      ],
       "mathlibImports": [
-        "Mathlib.Combinatorics.SimpleGraph.Basic",
         "Mathlib.Combinatorics.SimpleGraph.Copy"
       ],
-      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Basic\nimport Mathlib.Combinatorics.SimpleGraph.Copy\n\n/-!\n---\ntitle: Graph classes\ntype: definition\n---\nA graph class is a set of finite simple graphs. A class contains, for\neach number of vertices *n*, some of the simple graphs on the canonical\n*n*-element vertex type. A graph class is weakly sparse if some complete\nbipartite graph K_{t,t} occurs in no member as a subgraph.\n\n# Formalization notes\n\nEvery finite simple graph is isomorphic to a graph on some `Fin n`, so\nranging over the canonical carriers loses no generality. Closure under\nisomorphism is deliberately not required: no statement of this\nsubmission needs it, and all hypotheses range over concrete members.\n`GraphClass` is an abbreviation, so class membership is plain\napplication `C n G` throughout the submission.\n\nSubgraph containment is mathlib's `⊑` (an injective homomorphism of\n`completeBipartiteGraph (Fin t) (Fin t)` into the member). The value\n`t = 0` does not trivialize weak sparseness: the empty graph is\ncontained in every graph, so `¬ K_{0,0} ⊑ G` never holds and no side\ncondition on `t` is needed.\n-/\n\nnamespace Lax5.GraphClasses\n\nopen scoped SimpleGraph\n\n/-- A class of finite simple graphs: for each number of vertices `n`, a\npredicate on the simple graphs over the canonical `n`-element type. -/\nabbrev GraphClass : Type := ∀ n : ℕ, SimpleGraph (Fin n) → Prop\n\n/-- The class of all finite simple graphs. -/\ndef allGraphs : GraphClass := fun _ _ => True\n\n/-- A graph class is weakly sparse if some complete bipartite graph\n`K_{t,t}` occurs in no member as a subgraph. -/\ndef WeaklySparse (C : GraphClass) : Prop :=\n  ∃ t : ℕ, ∀ (n : ℕ) (G : SimpleGraph (Fin n)), C n G →\n    ¬ completeBipartiteGraph (Fin t) (Fin t) ⊑ G\n\nend Lax5.GraphClasses\n",
+      "sourceText": "import Lax12.GraphClasses\nimport Mathlib.Combinatorics.SimpleGraph.Copy\n\n/-!\n---\ntitle: Weakly sparse graph classes\ntype: definition\n---\nA graph class is a set of finite simple graphs: for each number of\nvertices *n*, some of the simple graphs on the canonical *n*-element\nvertex type. A graph class is weakly sparse if some complete bipartite\ngraph K_{t,t} occurs in no member as a subgraph.\n\n# Formalization notes\n\nThe notion of a graph class is not restated here. `GraphClass` is the\nabbreviation of the *Sparsity Lectures* submission (Lax12), imported and\nused as is, so that the statements of this submission and the statements\nassumed from that one speak about literally the same objects. This\nconcept adds the two class-level notions this submission needs on top of\nit: the class of all graphs, which the definition of monadic dependence\nnames as the transduction target, and weak sparseness.\n\nSubgraph containment is mathlib's `⊑` (an injective homomorphism of\n`completeBipartiteGraph (Fin t) (Fin t)` into the member). The value\n`t = 0` does not trivialize weak sparseness: the empty graph is\ncontained in every graph, so `¬ K_{0,0} ⊑ G` never holds and no side\ncondition on `t` is needed.\n-/\n\nnamespace Lax5.GraphClasses\n\nopen scoped SimpleGraph\nopen Lax12.GraphClasses\n\n/-- The class of all finite simple graphs. -/\ndef allGraphs : GraphClass := fun _ _ => True\n\n/-- A graph class is weakly sparse if some complete bipartite graph\n`K_{t,t}` occurs in no member as a subgraph. -/\ndef WeaklySparse (C : GraphClass) : Prop :=\n  ∃ t : ℕ, ∀ (n : ℕ) (G : SimpleGraph (Fin n)), C n G →\n    ¬ completeBipartiteGraph (Fin t) (Fin t) ⊑ G\n\nend Lax5.GraphClasses\n",
       "statements": []
     },
     {
@@ -122,7 +125,7 @@
       "mathlibImports": [
         "Mathlib.ModelTheory.Graph"
       ],
-      "sourceText": "import Lax5.GraphClasses\nimport Lax5.Transductions\nimport Mathlib.ModelTheory.Graph\n\n/-!\n---\ntitle: Graph transductions\ntype: definition\n---\nA finite simple graph is a structure of the language of graphs, with the\nsingle binary relation interpreted as adjacency. A graph class\ntransduces another if the corresponding classes of graph structures are\nrelated by a first-order transduction.\n\n# Formalization notes\n\nGraphs enter as structures via mathlib's `SimpleGraph.structure`. The\ntarget structures of a graph transduction are therefore honest graph\nstructures — symmetric and irreflexive — so the interpreting formula\nmust define the output adjacency exactly. This matches the common\nconvention of interpreting by an arbitrary formula `φ` and keeping the\npairs `u ≠ v` with `φ(u,v) ∧ φ(v,u)`: that symmetrized condition is\nitself a formula, so both conventions define the same transduces\nrelation on graph classes.\n-/\n\nnamespace Lax5.GraphTransductions\n\nopen FirstOrder Lax5.GraphClasses\n\n/-- The members of a graph class, as structures of the language of\ngraphs: adjacency interprets the binary relation. -/\ndef structureClass (C : GraphClass) :\n    Transductions.StructureClass Language.graph :=\n  fun n S => ∃ G : SimpleGraph (Fin n), C n G ∧ S = G.structure\n\n/-- `C` transduces `D` as graph classes: the corresponding classes of\ngraph structures are related by a first-order transduction. -/\ndef Transduces (C D : GraphClass) : Prop :=\n  Transductions.Transduces (structureClass C) (structureClass D)\n\nend Lax5.GraphTransductions\n",
+      "sourceText": "import Lax5.GraphClasses\nimport Lax5.Transductions\nimport Mathlib.ModelTheory.Graph\n\n/-!\n---\ntitle: Graph transductions\ntype: definition\n---\nA finite simple graph is a structure of the language of graphs, with the\nsingle binary relation interpreted as adjacency. A graph class\ntransduces another if the corresponding classes of graph structures are\nrelated by a first-order transduction.\n\n# Formalization notes\n\nGraphs enter as structures via mathlib's `SimpleGraph.structure`. The\ntarget structures of a graph transduction are therefore honest graph\nstructures — symmetric and irreflexive — so the interpreting formula\nmust define the output adjacency exactly. This matches the common\nconvention of interpreting by an arbitrary formula `φ` and keeping the\npairs `u ≠ v` with `φ(u,v) ∧ φ(v,u)`: that symmetrized condition is\nitself a formula, so both conventions define the same transduces\nrelation on graph classes.\n-/\n\nnamespace Lax5.GraphTransductions\n\nopen FirstOrder Lax12.GraphClasses\n\n/-- The members of a graph class, as structures of the language of\ngraphs: adjacency interprets the binary relation. -/\ndef structureClass (C : GraphClass) :\n    Transductions.StructureClass Language.graph :=\n  fun n S => ∃ G : SimpleGraph (Fin n), C n G ∧ S = G.structure\n\n/-- `C` transduces `D` as graph classes: the corresponding classes of\ngraph structures are related by a first-order transduction. -/\ndef Transduces (C D : GraphClass) : Prop :=\n  Transductions.Transduces (structureClass C) (structureClass D)\n\nend Lax5.GraphTransductions\n",
       "statements": []
     },
     {
@@ -142,107 +145,8 @@
         "Lax5.GraphTransductions"
       ],
       "mathlibImports": [],
-      "sourceText": "import Lax5.GraphClasses\nimport Lax5.GraphTransductions\n\n/-!\n---\ntitle: Monadic dependence\ntype: definition\n---\nA graph class is monadically dependent (also called monadically NIP) if\nit does not transduce the class of all graphs.\n\n# Formalization notes\n\nThis is the standard transduction-based definition from the model theory\nof graph classes, stated over the transduction relation of the\nprerequisite concepts.\n-/\n\nnamespace Lax5.MonadicDependence\n\nopen Lax5.GraphClasses\n\n/-- A graph class is monadically dependent if it does not transduce the\nclass of all finite simple graphs. -/\ndef MonadicallyDependent (C : GraphClass) : Prop :=\n  ¬ GraphTransductions.Transduces C allGraphs\n\nend Lax5.MonadicDependence\n",
+      "sourceText": "import Lax5.GraphClasses\nimport Lax5.GraphTransductions\n\n/-!\n---\ntitle: Monadic dependence\ntype: definition\n---\nA graph class is monadically dependent (also called monadically NIP) if\nit does not transduce the class of all graphs.\n\n# Formalization notes\n\nThis is the standard transduction-based definition from the model theory\nof graph classes, stated over the transduction relation of the\nprerequisite concepts.\n-/\n\nnamespace Lax5.MonadicDependence\n\nopen Lax12.GraphClasses Lax5.GraphClasses\n\n/-- A graph class is monadically dependent if it does not transduce the\nclass of all finite simple graphs. -/\ndef MonadicallyDependent (C : GraphClass) : Prop :=\n  ¬ GraphTransductions.Transduces C allGraphs\n\nend Lax5.MonadicDependence\n",
       "statements": []
-    },
-    {
-      "id": "Lax5.NeighborhoodComplexity",
-      "path": "concepts/Lax5/NeighborhoodComplexity.lean",
-      "title": "Neighborhood complexity",
-      "type": "definition",
-      "description": "The neighborhood complexity of a graph *G* on a vertex set *A* counts\nthe distinct traces of vertex neighborhoods on *A*, that is, the sets\n*N(v) ∩ A* for *v* ranging over all vertices of *G*. A graph class has\nalmost linear neighborhood complexity if for every ε > 0 there is a\nconstant *c* such that every member *G* and every nonempty vertex subset\n*A* leave at most *c* · |A|^(1+ε) traces — neighborhood complexity\n|A|^(1+o(1)).",
-      "sections": [
-        {
-          "title": "Formalization notes",
-          "markdown": "The trace count is the natural cardinality (`Set.ncard`) of the set of\ntraces; on the finite carriers where it is used this is the exact count.\n(Over an infinite vertex type with infinitely many traces `ncard` takes\nthe junk value 0; every use in this submission is on `Fin n`.) Working\nwith `Set` rather than `Finset` keeps the trace literally `N(v) ∩ A`\nand needs no decidability instances.\n\nThe bound is stated for nonempty `A` only: the empty set always has\nexactly one trace (the empty trace), while `c · 0^(1+ε) = 0`, so the\nliteral inequality must exclude `A = ∅` — and nothing is lost by doing\nso. The exponent is a real power of the cast cardinality, and the\nconstant `c` is real."
-        }
-      ],
-      "imports": [
-        "Lax5.GraphClasses"
-      ],
-      "mathlibImports": [
-        "Mathlib.Analysis.SpecialFunctions.Pow.Real",
-        "Mathlib.Data.Set.Card"
-      ],
-      "sourceText": "import Lax5.GraphClasses\nimport Mathlib.Data.Set.Card\nimport Mathlib.Analysis.SpecialFunctions.Pow.Real\n\n/-!\n---\ntitle: Neighborhood complexity\ntype: definition\n---\nThe neighborhood complexity of a graph *G* on a vertex set *A* counts\nthe distinct traces of vertex neighborhoods on *A*, that is, the sets\n*N(v) ∩ A* for *v* ranging over all vertices of *G*. A graph class has\nalmost linear neighborhood complexity if for every ε > 0 there is a\nconstant *c* such that every member *G* and every nonempty vertex subset\n*A* leave at most *c* · |A|^(1+ε) traces — neighborhood complexity\n|A|^(1+o(1)).\n\n# Formalization notes\n\nThe trace count is the natural cardinality (`Set.ncard`) of the set of\ntraces; on the finite carriers where it is used this is the exact count.\n(Over an infinite vertex type with infinitely many traces `ncard` takes\nthe junk value 0; every use in this submission is on `Fin n`.) Working\nwith `Set` rather than `Finset` keeps the trace literally `N(v) ∩ A`\nand needs no decidability instances.\n\nThe bound is stated for nonempty `A` only: the empty set always has\nexactly one trace (the empty trace), while `c · 0^(1+ε) = 0`, so the\nliteral inequality must exclude `A = ∅` — and nothing is lost by doing\nso. The exponent is a real power of the cast cardinality, and the\nconstant `c` is real.\n-/\n\nnamespace Lax5.NeighborhoodComplexity\n\nopen Lax5.GraphClasses\n\n/-- The number of distinct neighborhood traces `N(v) ∩ A` that the\nvertices of `G` leave on the vertex set `A`. -/\nnoncomputable def traceCount {V : Type*} (G : SimpleGraph V)\n    (A : Set V) : ℕ :=\n  {S : Set V | ∃ v : V, S = G.neighborSet v ∩ A}.ncard\n\n/-- Every graph in the class leaves at most `c · |A|^(1+ε)` neighborhood\ntraces on every nonempty vertex subset `A`, where `c` depends only on\n`ε > 0`: neighborhood complexity `|A|^(1+o(1))`. -/\ndef HasAlmostLinearNC (C : GraphClass) : Prop :=\n  ∀ ε : ℝ, 0 < ε → ∃ c : ℝ,\n    ∀ (n : ℕ) (G : SimpleGraph (Fin n)), C n G →\n      ∀ A : Set (Fin n), A.Nonempty →\n        (traceCount G A : ℝ) ≤ c * (A.ncard : ℝ) ^ (1 + ε)\n\nend Lax5.NeighborhoodComplexity\n",
-      "statements": []
-    },
-    {
-      "id": "Lax5.NowhereDenseClasses",
-      "path": "concepts/Lax5/NowhereDenseClasses.lean",
-      "title": "Nowhere dense graph classes",
-      "type": "definition",
-      "description": "A graph *H* is a depth-*r* minor of a graph *G* if *H* can be obtained\nfrom *G* by deleting vertices and edges and contracting pairwise\ndisjoint connected subgraphs of radius at most *r*. A graph class is\nnowhere dense if for every depth *r* there is a *t* such that no member\nhas the complete graph on *t* vertices as a depth-*r* minor.",
-      "sections": [
-        {
-          "title": "Formalization notes",
-          "markdown": "A depth-`r` minor is witnessed by a `ShallowMinorModel`: pairwise\ndisjoint branch sets, one per vertex of `H`, and an edge of `G` between\nthe branch sets of any two adjacent vertices of `H`. The radius\ncondition — every element of a branch set is reached from its center by\na walk of length at most `r` staying inside the branch set — subsumes\nconnectivity of the branch sets, so no separate connectivity field is\ncarried. `center_mem` is not derivable: it also rules out empty branch\nsets, as the standard definition requires. `⊤ : SimpleGraph (Fin t)` is\nmathlib's complete graph."
-        }
-      ],
-      "imports": [
-        "Lax5.GraphClasses"
-      ],
-      "mathlibImports": [
-        "Mathlib.Combinatorics.SimpleGraph.Walk.Basic"
-      ],
-      "sourceText": "import Lax5.GraphClasses\nimport Mathlib.Combinatorics.SimpleGraph.Walk.Basic\n\n/-!\n---\ntitle: Nowhere dense graph classes\ntype: definition\n---\nA graph *H* is a depth-*r* minor of a graph *G* if *H* can be obtained\nfrom *G* by deleting vertices and edges and contracting pairwise\ndisjoint connected subgraphs of radius at most *r*. A graph class is\nnowhere dense if for every depth *r* there is a *t* such that no member\nhas the complete graph on *t* vertices as a depth-*r* minor.\n\n# Formalization notes\n\nA depth-`r` minor is witnessed by a `ShallowMinorModel`: pairwise\ndisjoint branch sets, one per vertex of `H`, and an edge of `G` between\nthe branch sets of any two adjacent vertices of `H`. The radius\ncondition — every element of a branch set is reached from its center by\na walk of length at most `r` staying inside the branch set — subsumes\nconnectivity of the branch sets, so no separate connectivity field is\ncarried. `center_mem` is not derivable: it also rules out empty branch\nsets, as the standard definition requires. `⊤ : SimpleGraph (Fin t)` is\nmathlib's complete graph.\n-/\n\nnamespace Lax5.NowhereDenseClasses\n\nopen Lax5.GraphClasses\n\n/-- A model of `H` as a depth-`r` minor of `G`: pairwise disjoint branch\nsets, each spanned by walks of length at most `r` from a center vertex\n(hence connected of radius at most `r`), with an edge of `G` between the\nbranch sets of any two adjacent vertices of `H`. -/\nstructure ShallowMinorModel {V W : Type*} (r : ℕ) (H : SimpleGraph W)\n    (G : SimpleGraph V) where\n  /-- The branch set of each vertex of `H`. -/\n  branch : W → Set V\n  /-- The center of each branch set. -/\n  center : W → V\n  /-- Centers lie in their branch sets (so branch sets are nonempty). -/\n  center_mem : ∀ u, center u ∈ branch u\n  /-- Distinct branch sets are disjoint. -/\n  disjoint : ∀ u v, u ≠ v → Disjoint (branch u) (branch v)\n  /-- Every vertex of a branch set is reached from the center by a walk\n  of length at most `r` inside the branch set. -/\n  radius_le : ∀ u, ∀ x ∈ branch u, ∃ w : G.Walk (center u) x,\n    w.length ≤ r ∧ ∀ y ∈ w.support, y ∈ branch u\n  /-- Adjacent vertices of `H` have adjacent branch sets. -/\n  adj : ∀ u v, H.Adj u v → ∃ x ∈ branch u, ∃ y ∈ branch v, G.Adj x y\n\n/-- `H` is a minor of `G` at depth `r`. -/\ndef HasShallowMinor {V W : Type*} (G : SimpleGraph V) (r : ℕ)\n    (H : SimpleGraph W) : Prop :=\n  Nonempty (ShallowMinorModel r H G)\n\n/-- A graph class is nowhere dense if for every depth `r` some complete\ngraph is not a depth-`r` minor of any member. -/\ndef NowhereDense (C : GraphClass) : Prop :=\n  ∀ r : ℕ, ∃ t : ℕ, ∀ (n : ℕ) (G : SimpleGraph (Fin n)), C n G →\n    ¬ HasShallowMinor G r (⊤ : SimpleGraph (Fin t))\n\nend Lax5.NowhereDenseClasses\n",
-      "statements": []
-    },
-    {
-      "id": "Lax5.NowhereDenseNC",
-      "path": "concepts/Lax5/NowhereDenseNC.lean",
-      "title": "Nowhere dense classes have almost linear neighborhood complexity",
-      "type": "theorem",
-      "description": "Every nowhere dense graph class has almost linear neighborhood\ncomplexity: for every ε > 0 there is a constant *c* such that every\nmember *G* and every nonempty vertex subset *A* satisfy\n|{N(v) ∩ A : v ∈ V(G)}| ≤ *c* · |A|^(1+ε).",
-      "sections": [
-        {
-          "title": "Formalization notes",
-          "markdown": "The conclusion is the shared predicate `HasAlmostLinearNC` of the\nneighborhood complexity concept; the hypothesis is the shallow-minor\ndefinition of the nowhere dense concept. This is the radius-1 case of a\nclassical result on nowhere dense classes (Eickmeyer, Giannopoulou,\nKreutzer, Kwon, Pilipczuk, Rabinovich, Siebertz)."
-        }
-      ],
-      "imports": [
-        "Lax5.NeighborhoodComplexity",
-        "Lax5.NowhereDenseClasses"
-      ],
-      "mathlibImports": [],
-      "sourceText": "import Lax5.NeighborhoodComplexity\nimport Lax5.NowhereDenseClasses\n\n/-!\n---\ntitle: Nowhere dense classes have almost linear neighborhood complexity\ntype: theorem\n---\nEvery nowhere dense graph class has almost linear neighborhood\ncomplexity: for every ε > 0 there is a constant *c* such that every\nmember *G* and every nonempty vertex subset *A* satisfy\n|{N(v) ∩ A : v ∈ V(G)}| ≤ *c* · |A|^(1+ε).\n\n# Formalization notes\n\nThe conclusion is the shared predicate `HasAlmostLinearNC` of the\nneighborhood complexity concept; the hypothesis is the shallow-minor\ndefinition of the nowhere dense concept. This is the radius-1 case of a\nclassical result on nowhere dense classes (Eickmeyer, Giannopoulou,\nKreutzer, Kwon, Pilipczuk, Rabinovich, Siebertz).\n-/\n\nnamespace Lax5.NowhereDenseNC\n\nopen Lax5.GraphClasses Lax5.NeighborhoodComplexity Lax5.NowhereDenseClasses\n\n/-- Nowhere dense graph classes have almost linear neighborhood\ncomplexity. -/\naxiom hasAlmostLinearNC_of_nowhereDense\n    (C : GraphClass) (h : NowhereDense C) :\n    HasAlmostLinearNC C\n\nend Lax5.NowhereDenseNC\n",
-      "statements": [
-        {
-          "id": "Lax5.NowhereDenseNC.hasAlmostLinearNC_of_nowhereDense",
-          "signature": "hasAlmostLinearNC_of_nowhereDense : ∀ (C : Lax5.GraphClasses.GraphClass),\n  Lax5.NowhereDenseClasses.NowhereDense C → Lax5.NeighborhoodComplexity.HasAlmostLinearNC C",
-          "doc": "Nowhere dense graph classes have almost linear neighborhood\ncomplexity.",
-          "startLine": 27,
-          "endLine": 31
-        }
-      ]
-    },
-    {
-      "id": "Lax5.NowhereDenseWcol",
-      "path": "concepts/Lax5/NowhereDenseWcol.lean",
-      "title": "Nowhere dense classes have subpolynomial weak coloring numbers",
-      "type": "theorem",
-      "description": "Every nowhere dense graph class has subpolynomial weak coloring\nnumbers: for every radius *r* and every ε > 0 there is a constant *c*\nsuch that every subgraph *H* of a member, on *m* vertices, satisfies\nwcol_r(*H*) ≤ *c* · *m*^ε.",
-      "sections": [
-        {
-          "title": "Formalization notes",
-          "markdown": "The hypothesis is the shallow-minor definition of the nowhere dense\nconcept; the conclusion is the shared predicate `HasSubpolynomialWcol`\nof the weak coloring concept. Since nowhere denseness survives taking\nsubgraphs, the uniformity of that predicate over subgraph copies of\nmembers loses nothing here. The theorem combines Zhu's bounds relating\nweak coloring numbers to densities of shallow minors with the\nsubpolynomial density bounds for nowhere dense classes (Nešetřil,\nOssona de Mendez); see chapters 2 and 5 of the sparsity lecture notes\nof Pilipczuk, Pilipczuk, Siebertz."
-        }
-      ],
-      "imports": [
-        "Lax5.NowhereDenseClasses",
-        "Lax5.WeakColoring"
-      ],
-      "mathlibImports": [],
-      "sourceText": "import Lax5.NowhereDenseClasses\nimport Lax5.WeakColoring\n\n/-!\n---\ntitle: Nowhere dense classes have subpolynomial weak coloring numbers\ntype: theorem\n---\nEvery nowhere dense graph class has subpolynomial weak coloring\nnumbers: for every radius *r* and every ε > 0 there is a constant *c*\nsuch that every subgraph *H* of a member, on *m* vertices, satisfies\nwcol_r(*H*) ≤ *c* · *m*^ε.\n\n# Formalization notes\n\nThe hypothesis is the shallow-minor definition of the nowhere dense\nconcept; the conclusion is the shared predicate `HasSubpolynomialWcol`\nof the weak coloring concept. Since nowhere denseness survives taking\nsubgraphs, the uniformity of that predicate over subgraph copies of\nmembers loses nothing here. The theorem combines Zhu's bounds relating\nweak coloring numbers to densities of shallow minors with the\nsubpolynomial density bounds for nowhere dense classes (Nešetřil,\nOssona de Mendez); see chapters 2 and 5 of the sparsity lecture notes\nof Pilipczuk, Pilipczuk, Siebertz.\n-/\n\nnamespace Lax5.NowhereDenseWcol\n\nopen Lax5.GraphClasses Lax5.NowhereDenseClasses Lax5.WeakColoring\n\n/-- Nowhere dense graph classes have subpolynomial weak coloring\nnumbers. -/\naxiom hasSubpolynomialWcol_of_nowhereDense\n    (C : GraphClass) (h : NowhereDense C) :\n    HasSubpolynomialWcol C\n\nend Lax5.NowhereDenseWcol\n",
-      "statements": [
-        {
-          "id": "Lax5.NowhereDenseWcol.hasSubpolynomialWcol_of_nowhereDense",
-          "signature": "hasSubpolynomialWcol_of_nowhereDense : ∀ (C : Lax5.GraphClasses.GraphClass), Lax5.NowhereDenseClasses.NowhereDense C → Lax5.WeakColoring.HasSubpolynomialWcol C",
-          "doc": "Nowhere dense graph classes have subpolynomial weak coloring\nnumbers.",
-          "startLine": 31,
-          "endLine": 35
-        }
-      ]
     },
     {
       "id": "Lax5.Transductions",
@@ -265,31 +169,6 @@
       "statements": []
     },
     {
-      "id": "Lax5.WeakColoring",
-      "path": "concepts/Lax5/WeakColoring.lean",
-      "title": "Weak coloring numbers",
-      "type": "definition",
-      "description": "Fix a linear ordering of the vertices of a graph *G*. A vertex *u* is\nweakly *r*-reachable from *v* if some path from *v* to *u* of length\nat most *r* has *u* as its smallest vertex. The weak *r*-coloring\nnumber wcol_r(*G*) is the minimum over all orderings of the maximum\nnumber of vertices weakly *r*-reachable from a single vertex. A graph\nclass has subpolynomial weak coloring numbers if for every radius *r*\nand every ε > 0 there is a constant *c* such that every subgraph *H* of\na member, on *m* vertices, satisfies wcol_r(*H*) ≤ *c* · *m*^ε.",
-      "sections": [
-        {
-          "title": "Formalization notes",
-          "markdown": "An ordering of the vertices is a permutation `π` of `Fin m` assigning\neach vertex its position. Weak reachability is stated with walks, as\nin the nowhere dense concept: shortcutting a walk to a path only\nshrinks its support, so walks of length at most `r` with `π`-minimal\nendpoint reach exactly the vertices that such paths do. `wcol` is the\nleast achievable bound `k`, a `Nat.sInf` (attained: `k = m` works for\nany ordering); the count is `Set.ncard` as in the neighborhood\ncomplexity concept.\n\nThe class-level bound is uniform over subgraph copies (`⊑`, as in the\ngraph classes concept) of members, each measured by its own vertex\ncount `m`; this is the literature form for subgraph-closed classes, and\nthe uniformity is what localization arguments downstream consume. At\n`m = 0` both sides vanish, so no nonemptiness hypothesis is needed."
-        }
-      ],
-      "imports": [
-        "Lax5.GraphClasses"
-      ],
-      "mathlibImports": [
-        "Mathlib.Analysis.SpecialFunctions.Pow.Real",
-        "Mathlib.Combinatorics.SimpleGraph.Copy",
-        "Mathlib.Combinatorics.SimpleGraph.Walk.Basic",
-        "Mathlib.Data.Nat.Lattice",
-        "Mathlib.Data.Set.Card"
-      ],
-      "sourceText": "import Lax5.GraphClasses\nimport Mathlib.Combinatorics.SimpleGraph.Copy\nimport Mathlib.Combinatorics.SimpleGraph.Walk.Basic\nimport Mathlib.Data.Set.Card\nimport Mathlib.Data.Nat.Lattice\nimport Mathlib.Analysis.SpecialFunctions.Pow.Real\n\n/-!\n---\ntitle: Weak coloring numbers\ntype: definition\n---\nFix a linear ordering of the vertices of a graph *G*. A vertex *u* is\nweakly *r*-reachable from *v* if some path from *v* to *u* of length\nat most *r* has *u* as its smallest vertex. The weak *r*-coloring\nnumber wcol_r(*G*) is the minimum over all orderings of the maximum\nnumber of vertices weakly *r*-reachable from a single vertex. A graph\nclass has subpolynomial weak coloring numbers if for every radius *r*\nand every ε > 0 there is a constant *c* such that every subgraph *H* of\na member, on *m* vertices, satisfies wcol_r(*H*) ≤ *c* · *m*^ε.\n\n# Formalization notes\n\nAn ordering of the vertices is a permutation `π` of `Fin m` assigning\neach vertex its position. Weak reachability is stated with walks, as\nin the nowhere dense concept: shortcutting a walk to a path only\nshrinks its support, so walks of length at most `r` with `π`-minimal\nendpoint reach exactly the vertices that such paths do. `wcol` is the\nleast achievable bound `k`, a `Nat.sInf` (attained: `k = m` works for\nany ordering); the count is `Set.ncard` as in the neighborhood\ncomplexity concept.\n\nThe class-level bound is uniform over subgraph copies (`⊑`, as in the\ngraph classes concept) of members, each measured by its own vertex\ncount `m`; this is the literature form for subgraph-closed classes, and\nthe uniformity is what localization arguments downstream consume. At\n`m = 0` both sides vanish, so no nonemptiness hypothesis is needed.\n-/\n\nnamespace Lax5.WeakColoring\n\nopen scoped SimpleGraph\nopen Lax5.GraphClasses\n\n/-- The set of vertices weakly `r`-reachable from `v` in `G` under the\nvertex ordering `π` (vertex `u` sits at position `π u`): the endpoints\n`u` of walks from `v` of length at most `r` on whose support `u` is\n`π`-minimal. Contains `v` itself. -/\ndef wreach {n : ℕ} (G : SimpleGraph (Fin n)) (π : Equiv.Perm (Fin n))\n    (r : ℕ) (v : Fin n) : Set (Fin n) :=\n  {u | ∃ w : G.Walk v u, w.length ≤ r ∧ ∀ y ∈ w.support, π u ≤ π y}\n\n/-- The weak `r`-coloring number of `G`: the least `k` such that under\nsome vertex ordering every vertex weakly `r`-reaches at most `k`\nvertices. -/\nnoncomputable def wcol {n : ℕ} (G : SimpleGraph (Fin n)) (r : ℕ) : ℕ :=\n  sInf {k | ∃ π : Equiv.Perm (Fin n), ∀ v, (wreach G π r v).ncard ≤ k}\n\n/-- Every subgraph of every member of the class, on `m` vertices, has\nweak `r`-coloring number at most `c · m^ε`, where `c` depends only on\nthe radius `r` and on `ε > 0`: weak coloring numbers `m^{o(1)}`. -/\ndef HasSubpolynomialWcol (C : GraphClass) : Prop :=\n  ∀ (r : ℕ) (ε : ℝ), 0 < ε → ∃ c : ℝ,\n    ∀ (n : ℕ) (G : SimpleGraph (Fin n)), C n G →\n      ∀ (m : ℕ) (H : SimpleGraph (Fin m)), H ⊑ G →\n        (wcol H r : ℝ) ≤ c * (m : ℝ) ^ ε\n\nend Lax5.WeakColoring\n",
-      "statements": []
-    },
-    {
       "id": "Lax5.WeaklySparseDependent",
       "path": "concepts/Lax5/WeaklySparseDependent.lean",
       "title": "Weakly sparse monadically dependent classes are nowhere dense",
@@ -298,23 +177,23 @@
       "sections": [
         {
           "title": "Formalization notes",
-          "markdown": "The hypotheses are the weak sparseness predicate of the graph classes\nconcept and the transduction-based definition of monadic dependence;\nthe conclusion is the shallow-minor definition of the nowhere dense\nconcept."
+          "markdown": "The hypotheses are the weak sparseness predicate of the graph classes\nconcept of this submission and the transduction-based definition of\nmonadic dependence; the conclusion is `NowhereDense`, the shallow-minor\ndefinition of the *Sparsity Lectures* submission (Lax12), where nowhere\ndenseness is defined and endorsed. Stating the conclusion over that\ndefinition is what lets this statement compose directly with the\nsparsity theory built on it."
         }
       ],
       "imports": [
+        "Lax12.NowhereDenseClasses",
         "Lax5.GraphClasses",
-        "Lax5.MonadicDependence",
-        "Lax5.NowhereDenseClasses"
+        "Lax5.MonadicDependence"
       ],
       "mathlibImports": [],
-      "sourceText": "import Lax5.GraphClasses\nimport Lax5.MonadicDependence\nimport Lax5.NowhereDenseClasses\n\n/-!\n---\ntitle: Weakly sparse monadically dependent classes are nowhere dense\ntype: theorem\n---\nEvery weakly sparse monadically dependent graph class is nowhere dense.\nTogether with the statement that nowhere dense classes are monadically\ndependent, this carries the classical equivalence: on weakly sparse\nclasses, monadic dependence and nowhere denseness coincide.\n\n# Formalization notes\n\nThe hypotheses are the weak sparseness predicate of the graph classes\nconcept and the transduction-based definition of monadic dependence;\nthe conclusion is the shallow-minor definition of the nowhere dense\nconcept.\n-/\n\nnamespace Lax5.WeaklySparseDependent\n\nopen Lax5.GraphClasses Lax5.MonadicDependence Lax5.NowhereDenseClasses\n\n/-- Every weakly sparse monadically dependent graph class is nowhere\ndense. -/\naxiom nowhereDense_of_weaklySparse_of_monadicallyDependent\n    (C : GraphClass) (hs : WeaklySparse C) (hd : MonadicallyDependent C) :\n    NowhereDense C\n\nend Lax5.WeaklySparseDependent\n",
+      "sourceText": "import Lax5.GraphClasses\nimport Lax5.MonadicDependence\nimport Lax12.NowhereDenseClasses\n\n/-!\n---\ntitle: Weakly sparse monadically dependent classes are nowhere dense\ntype: theorem\n---\nEvery weakly sparse monadically dependent graph class is nowhere dense.\nTogether with the statement that nowhere dense classes are monadically\ndependent, this carries the classical equivalence: on weakly sparse\nclasses, monadic dependence and nowhere denseness coincide.\n\n# Formalization notes\n\nThe hypotheses are the weak sparseness predicate of the graph classes\nconcept of this submission and the transduction-based definition of\nmonadic dependence; the conclusion is `NowhereDense`, the shallow-minor\ndefinition of the *Sparsity Lectures* submission (Lax12), where nowhere\ndenseness is defined and endorsed. Stating the conclusion over that\ndefinition is what lets this statement compose directly with the\nsparsity theory built on it.\n-/\n\nnamespace Lax5.WeaklySparseDependent\n\nopen Lax12.GraphClasses Lax12.NowhereDenseClasses\nopen Lax5.GraphClasses Lax5.MonadicDependence\n\n/-- Every weakly sparse monadically dependent graph class is nowhere\ndense. -/\naxiom nowhereDense_of_weaklySparse_of_monadicallyDependent\n    (C : GraphClass) (hs : WeaklySparse C) (hd : MonadicallyDependent C) :\n    NowhereDense C\n\nend Lax5.WeaklySparseDependent\n",
       "statements": [
         {
           "id": "Lax5.WeaklySparseDependent.nowhereDense_of_weaklySparse_of_monadicallyDependent",
-          "signature": "nowhereDense_of_weaklySparse_of_monadicallyDependent : ∀ (C : Lax5.GraphClasses.GraphClass),\n  Lax5.GraphClasses.WeaklySparse C →\n    Lax5.MonadicDependence.MonadicallyDependent C → Lax5.NowhereDenseClasses.NowhereDense C",
+          "signature": "nowhereDense_of_weaklySparse_of_monadicallyDependent : ∀ (C : Lax12.GraphClasses.GraphClass),\n  Lax5.GraphClasses.WeaklySparse C →\n    Lax5.MonadicDependence.MonadicallyDependent C → Lax12.NowhereDenseClasses.NowhereDense C",
           "doc": "Every weakly sparse monadically dependent graph class is nowhere\ndense.",
-          "startLine": 27,
-          "endLine": 31
+          "startLine": 31,
+          "endLine": 35
         }
       ]
     }
@@ -331,7 +210,7 @@
       "sections": [
         {
           "title": "Proof strategy",
-          "markdown": "The quasi-wideness input is no longer reproved here: uniform\nquasi-wideness of a nowhere dense class is assumed from the\n`sparsity-lectures` submission and transported across the nominal\nduplication of the shallow-minor and distance-independence definitions by\n`Lax5Proofs.QuasiWideness`.  Everything below it — shattering, local\ntypes, ball swapping and the pigeonhole — is proved here, as sketched in\nthe module docstring."
+          "markdown": "The quasi-wideness input is not reproved here: uniform quasi-wideness of\na nowhere dense class is assumed from the `sparsity-lectures` submission,\nwhose nowhere-denseness definition is the very one this statement is\nphrased over, so no transport is needed —\n`Lax5Proofs.QuasiWideness` only reshapes the conclusion from `Set` to\n`Finset`.  Everything below it — shattering, local types, ball swapping\nand the pigeonhole — is proved here, as sketched in the module docstring."
         }
       ]
     },
@@ -352,49 +231,11 @@
       ]
     },
     {
-      "id": "Lax5Proofs.Corollary6b.hasAlmostLinearNC_of_nowhereDense",
-      "path": "proofs/Lax5Proofs/Corollary6b.lean",
-      "conclusion": "Lax5.NowhereDenseNC.hasAlmostLinearNC_of_nowhereDense",
-      "assumptions": [
-        "Lax5.NowhereDenseWcol.hasSubpolynomialWcol_of_nowhereDense"
-      ],
-      "description": "Nowhere dense graph classes have almost linear neighborhood complexity:\nthe radius-1 case of the theorem of Eickmeyer, Giannopoulou, Kreutzer,\nKwon, Pilipczuk, Rabinovich, Siebertz.",
-      "sections": [
-        {
-          "title": "Proof strategy",
-          "markdown": "Radius-1 specialization of the generalized-coloring-number route: a\nnowhere dense class is K_{t,t}-free, so its neighborhood set systems\nhave VC dimension O(t + log t); Dvořák's densification bounds the\ndepth-1 grad by f(ε)·n^ε, which bounds the weak 2-coloring number;\ncounting neighborhood traces along a weak coloring order then yields\n|A| · n^ε traces, and localization to a polynomially small witness set\nrescales this to c · |A|^(1+ε).  The weak-coloring input is the assumed\nstatement `Lax5.NowhereDenseWcol.hasSubpolynomialWcol_of_nowhereDense`."
-        },
-        {
-          "title": "Attribution",
-          "markdown": "Sparsity lecture notes of Pilipczuk, Pilipczuk, Siebertz (chapters 1,\n2, 5), specialized to radius 1; densification following Dvořák."
-        }
-      ]
-    },
-    {
-      "id": "Lax5Proofs.NowhereDenseWcol.hasSubpolynomialWcol_of_nowhereDense",
-      "path": "proofs/Lax5Proofs/NowhereDenseWcol.lean",
-      "conclusion": "Lax5.NowhereDenseWcol.hasSubpolynomialWcol_of_nowhereDense",
-      "assumptions": [
-        "Lax12.NowhereDenseWcol.hasSubpolynomialWcol_of_nowhereDense"
-      ],
-      "description": "Nowhere dense classes have subpolynomial weak coloring numbers, uniformly\nover graph copies contained in their members.",
-      "sections": [
-        {
-          "title": "Proof strategy",
-          "markdown": "Assume the statement of the `sparsity-lectures` submission, which is the\nsame claim over that submission's own copies of the shallow-minor and\nweak-coloring definitions.  Nowhere denseness transports by repacking the\nshallow-minor model field for field, and the conclusion transports by\nunfolding: the two `HasSubpolynomialWcol` predicates, and the `wcol` and\n`wreach` definitions they are built from, are byte-identical, and\n`GraphClass` is the same abbreviation on both sides."
-        },
-        {
-          "title": "Attribution",
-          "markdown": "Theorem 3.4 of the sparsity lecture notes of Pilipczuk, Pilipczuk, and\nSiebertz, formalized in the `sparsity-lectures` submission."
-        }
-      ]
-    },
-    {
       "id": "Lax5Proofs.Theorem2.hasAlmostLinearNC_of_monadicallyDependent",
       "path": "proofs/Lax5Proofs/Theorem2.lean",
       "conclusion": "Lax5.AlmostLinearNC.hasAlmostLinearNC_of_monadicallyDependent",
       "assumptions": [
-        "Lax5.NowhereDenseNC.hasAlmostLinearNC_of_nowhereDense",
+        "Lax12.NowhereDenseNC.hasAlmostLinearNC_of_nowhereDense",
         "Lax5.WeaklySparseDependent.nowhereDense_of_weaklySparse_of_monadicallyDependent"
       ],
       "description": "Monadically dependent graph classes have almost linear neighborhood\ncomplexity: Theorem 2 of DMMPT26.",
@@ -410,5 +251,5 @@
       ]
     }
   ],
-  "captureId": "53eb91966a1ac69be4d41d57aeaf121e"
+  "captureId": "aff9d63c26aa93c5d6445e3c8c83a32a"
 }
