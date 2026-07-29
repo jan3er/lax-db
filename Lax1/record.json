@@ -1,17 +1,13 @@
 {
   "specVersion": "1",
   "id": "Lax1",
-  "state": "draft",
+  "state": "deleted",
   "createdAt": "2026-07-23T18:50:56Z",
+  "deletedAt": "2026-07-29T18:08:44Z",
   "owners": [
     {
       "githubId": 2657497,
       "handle": "jan3er"
     }
-  ],
-  "source": {
-    "repository": "https://github.com/lax-archive/lax-submissions",
-    "commit": "6c96e9c55c20274b7cd9dee59b89ed2dbbebf1cc",
-    "folder": "twin-width-treewidth-separation"
-  }
+  ]
 }
