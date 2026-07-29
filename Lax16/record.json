@@ -1,12 +1,17 @@
 {
   "specVersion": "1",
   "id": "Lax16",
-  "state": "init",
+  "state": "draft",
   "createdAt": "2026-07-28T13:48:23Z",
   "owners": [
     {
       "githubId": 33251410,
       "handle": "clemenskuske"
     }
-  ]
+  ],
+  "source": {
+    "repository": "https://github.com/clemenskuske/nctd-autoformalization",
+    "commit": "cc8273824c505a73d0f99c3fdbf62e42ab04c1bb",
+    "folder": "submission"
+  }
 }
