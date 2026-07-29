@@ -48,7 +48,7 @@
         "Lax17.Paths"
       ],
       "mathlibImports": [],
-      "sourceText": "import Lax17.Minor\nimport Lax17.PathOfSets\nimport Lax17.Paths\n\n/-!\n---\ntitle: Crossbars and pseudo-grids\ntype: definition\n---\nAn \\((A,B,X)\\)-crossbar consists of disjoint main paths from \\(A\\) to \\(B\\)\nand one disjoint spoke from every main path to \\(X\\).  Each spoke meets its own\nmain path exactly once and avoids all other main paths.\n\nA pseudo-grid records the alternative produced by Theorem 4.1: disjoint\n\\(A\\)-to-\\(B\\) rows, disjoint selected columns reaching \\(X\\), and disjoint\nsmall blocks of rows.  Property P1 says that every unreserved row avoids all\nselected columns; property P2 says that, for each reserved block, all but at\nmost \\(2g^2\\) columns meet a row in that block.\n-/\n\nnamespace Lax17.Crossbar\n\nuniverse u\n\nopen Lax17.Paths\n\n/-- The parameter is an integral power of two. -/\ndef IsPowerOfTwo (g : ℕ) : Prop :=\n  ∃ exponent : ℕ, g = 2 ^ exponent\n\n/-- The graph has a minor carrying a strong path-of-sets system of the\nspecified length and width. -/\ndef HasStrongPathOfSetsMinor {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (length width : ℕ) : Prop :=\n  ∃ (W : Type u) (_ : Fintype W) (_ : DecidableEq W)\n    (H : SimpleGraph W),\n      Lax17.Minor.IsMinor H G ∧\n        Nonempty (Lax17.PathOfSets.StrongSystem H length width)\n\n/-- A crossbar of width `ρ`. -/\nstructure System {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (A B X : Finset V) (ρ : ℕ) where\n  mainPath : Fin ρ → Path G\n  main_connects : ∀ i : Fin ρ, (mainPath i).Connects A B\n  main_disjoint :\n    Pairwise fun i j => Disjoint (mainPath i).vertices (mainPath j).vertices\n  spokePath : Fin ρ → Path G\n  spoke_disjoint :\n    Pairwise fun i j => Disjoint (spokePath i).vertices (spokePath j).vertices\n  attachment : Fin ρ → V\n  attachment_on_main :\n    ∀ i : Fin ρ, attachment i ∈ (mainPath i).vertices\n  attachment_on_spoke :\n    ∀ i : Fin ρ, attachment i ∈ (spokePath i).vertices\n  exact_attachment :\n    ∀ i : Fin ρ,\n      (mainPath i).vertices ∩ (spokePath i).vertices = {attachment i}\n  spoke_reaches_X :\n    ∀ i : Fin ρ,\n      (spokePath i).source ∈ X ∨ (spokePath i).target ∈ X\n  spoke_avoids_other_main :\n    ∀ ⦃i j : Fin ρ⦄, i ≠ j →\n      Disjoint (spokePath i).vertices (mainPath j).vertices\n\n/-- A depth-`D` pseudo-grid with `κ` main rows at scale `g`. -/\nstructure PseudoGrid {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (A B X : Finset V)\n    (g D κ : ℕ) where\n  RowIndex : Type\n  [rowFintype : Fintype RowIndex]\n  [rowDecidableEq : DecidableEq RowIndex]\n  row_count : Fintype.card RowIndex = κ\n  row : RowIndex → Path G\n  row_connects : ∀ i : RowIndex, (row i).Connects A B\n  rows_disjoint :\n    Pairwise fun i j => Disjoint (row i).vertices (row j).vertices\n  depth_pos : 0 < D\n  reserved : Fin D → Finset RowIndex\n  reserved_card_le :\n    ∀ i : Fin D, (reserved i).card ≤ g ^ 2\n  reserved_disjoint :\n    ∀ ⦃i j : Fin D⦄, i ≠ j →\n      Disjoint (reserved i) (reserved j)\n  ColumnIndex : Type\n  [columnFintype : Fintype ColumnIndex]\n  [columnDecidableEq : DecidableEq ColumnIndex]\n  column_count : Fintype.card ColumnIndex = κ / 4\n  column : ColumnIndex → Path G\n  columns_disjoint :\n    Pairwise fun i j => Disjoint (column i).vertices (column j).vertices\n  column_reaches_X_cleanly :\n    ∀ j : ColumnIndex,\n      ((column j).source ∈ X ∨ (column j).target ∈ X) ∧\n        (column j).InternallyAvoids X\n  unreserved_row_avoids_columns :\n    ∀ p : RowIndex,\n      (∀ i : Fin D, p ∉ reserved i) →\n        ∀ j : ColumnIndex,\n          Disjoint (row p).vertices (column j).vertices\n  few_columns_miss_reserved :\n    ∀ i : Fin D,\n      ∃ miss : Finset ColumnIndex,\n        miss.card ≤ 2 * g ^ 2 ∧\n          ∀ j : ColumnIndex, j ∉ miss →\n            ∃ p ∈ reserved i,\n              ¬ Disjoint (row p).vertices (column j).vertices\n\nend Lax17.Crossbar\n",
+      "sourceText": "import Lax17.Minor\nimport Lax17.PathOfSets\nimport Lax17.Paths\n\n/-!\n---\ntitle: Crossbars and pseudo-grids\ntype: definition\n---\nAn \\((A,B,X)\\)-crossbar consists of disjoint main paths from \\(A\\) to \\(B\\)\nand one disjoint spoke from every main path to \\(X\\).  Each spoke meets its own\nmain path exactly once and avoids all other main paths.\n\nA pseudo-grid records the alternative produced by Theorem 4.1: disjoint\n\\(A\\)-to-\\(B\\) rows, disjoint selected columns reaching \\(X\\), and disjoint\nsmall blocks of rows.  Property P1 says that every unreserved row avoids all\nselected columns; property P2 says that, for each reserved block, all but at\nmost \\(2g^2\\) columns meet a row in that block.\n-/\n\nnamespace Lax17.Crossbar\n\nuniverse u\n\nopen Lax17.Paths\n\n/-- The parameter is an integral power of two. -/\ndef IsPowerOfTwo (g : ℕ) : Prop :=\n  ∃ exponent : ℕ, g = 2 ^ exponent\n\n/-- The graph has a minor carrying a strong path-of-sets system of the\nspecified length and width. -/\ndef HasStrongPathOfSetsMinor {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (length width : ℕ) : Prop :=\n  ∃ (W : Type u) (_ : Fintype W) (_ : DecidableEq W)\n    (H : SimpleGraph W),\n      Lax17.Minor.IsMinor H G ∧\n        Nonempty (Lax17.PathOfSets.StrongSystem H length width)\n\n/-- A crossbar of width `ρ`. -/\nstructure System {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (A B X : Finset V) (ρ : ℕ) where\n  mainPath : Fin ρ → Path G\n  main_connects : ∀ i : Fin ρ, (mainPath i).Connects A B\n  main_disjoint :\n    Pairwise fun i j => Disjoint (mainPath i).vertices (mainPath j).vertices\n  spokePath : Fin ρ → Path G\n  spoke_disjoint :\n    Pairwise fun i j => Disjoint (spokePath i).vertices (spokePath j).vertices\n  attachment : Fin ρ → V\n  attachment_on_main :\n    ∀ i : Fin ρ, attachment i ∈ (mainPath i).vertices\n  attachment_on_spoke :\n    ∀ i : Fin ρ, attachment i ∈ (spokePath i).vertices\n  exact_attachment :\n    ∀ i : Fin ρ,\n      (mainPath i).vertices ∩ (spokePath i).vertices = {attachment i}\n  exit : Fin ρ → V\n  attachment_is_endpoint :\n    ∀ i : Fin ρ,\n      attachment i = (spokePath i).source ∨\n        attachment i = (spokePath i).target\n  exit_is_other_endpoint :\n    ∀ i : Fin ρ,\n      exit i =\n        if (spokePath i).source = attachment i then\n          (spokePath i).target\n        else\n          (spokePath i).source\n  exit_in_X : ∀ i : Fin ρ, exit i ∈ X\n  exit_off_main :\n    ∀ i : Fin ρ, exit i ∉ (mainPath i).vertices\n  spoke_avoids_other_main :\n    ∀ ⦃i j : Fin ρ⦄, i ≠ j →\n      Disjoint (spokePath i).vertices (mainPath j).vertices\n\n/-- A depth-`D` pseudo-grid with `κ` main rows at scale `g`. -/\nstructure PseudoGrid {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (A B X : Finset V)\n    (g D κ : ℕ) where\n  RowIndex : Type\n  [rowFintype : Fintype RowIndex]\n  [rowDecidableEq : DecidableEq RowIndex]\n  row_count : Fintype.card RowIndex = κ\n  row : RowIndex → Path G\n  row_connects : ∀ i : RowIndex, (row i).Connects A B\n  rows_disjoint :\n    Pairwise fun i j => Disjoint (row i).vertices (row j).vertices\n  depth_pos : 0 < D\n  reserved : Fin D → Finset RowIndex\n  reserved_card_le :\n    ∀ i : Fin D, (reserved i).card ≤ g ^ 2\n  reserved_disjoint :\n    ∀ ⦃i j : Fin D⦄, i ≠ j →\n      Disjoint (reserved i) (reserved j)\n  ColumnIndex : Type\n  [columnFintype : Fintype ColumnIndex]\n  [columnDecidableEq : DecidableEq ColumnIndex]\n  column_count : Fintype.card ColumnIndex = κ / 4\n  column : ColumnIndex → Path G\n  columns_disjoint :\n    Pairwise fun i j => Disjoint (column i).vertices (column j).vertices\n  column_reaches_X_cleanly :\n    ∀ j : ColumnIndex,\n      ((column j).source ∈ X ∨ (column j).target ∈ X) ∧\n        (column j).InternallyAvoids X\n  unreserved_row_avoids_columns :\n    ∀ p : RowIndex,\n      (∀ i : Fin D, p ∉ reserved i) →\n        ∀ j : ColumnIndex,\n          Disjoint (row p).vertices (column j).vertices\n  few_columns_miss_reserved :\n    ∀ i : Fin D,\n      ∃ miss : Finset ColumnIndex,\n        miss.card ≤ 2 * g ^ 2 ∧\n          ∀ j : ColumnIndex, j ∉ miss →\n            ∃ p ∈ reserved i,\n              ¬ Disjoint (row p).vertices (column j).vertices\n\nend Lax17.Crossbar\n",
       "statements": []
     },
     {
@@ -439,7 +439,7 @@
       "mathlibImports": [
         "Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected"
       ],
-      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected\nimport Lax17.Linkedness\n\n/-!\n---\ntitle: Strong and hairy path-of-sets systems\ntype: definition\n---\nA path-of-sets system is an ordered sequence of pairwise disjoint connected\nclusters.  Each cluster has equally large, disjoint left and right interfaces,\nand consecutive interfaces are joined by disjoint path families that otherwise\navoid every cluster.  It is strong when the two interfaces are well-linked and\nmutually linked inside each cluster.\n\nA hairy path-of-sets system adds one disjoint connected hair cluster at every\nposition and a disjoint linkage from the base cluster to that hair.  Its\nhair-side endpoints are well-linked in the hair cluster.\n-/\n\nnamespace Lax17.PathOfSets\n\nuniverse u\n\nopen Lax17.Linkedness\nopen Lax17.Paths\n\n/-- A finite vertex set inducing a connected graph. -/\ndef IsCluster {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C : Finset V) : Prop :=\n  (G.induce {v : V | v ∈ C}).Connected\n\n/-- A path-of-sets system of length `ℓ` and width `w`. -/\nstructure System {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (ℓ w : ℕ) where\n  length_pos : 0 < ℓ\n  width_pos : 0 < w\n  cluster : Fin ℓ → Finset V\n  cluster_connected : ∀ i : Fin ℓ, IsCluster G (cluster i)\n  cluster_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄, i ≠ j → Disjoint (cluster i) (cluster j)\n  left : Fin ℓ → Finset V\n  right : Fin ℓ → Finset V\n  left_subset : ∀ i : Fin ℓ, left i ⊆ cluster i\n  right_subset : ∀ i : Fin ℓ, right i ⊆ cluster i\n  interfaces_disjoint : ∀ i : Fin ℓ, Disjoint (left i) (right i)\n  left_card : ∀ i : Fin ℓ, (left i).card = w\n  right_card : ∀ i : Fin ℓ, (right i).card = w\n  connector :\n    (i : Fin ℓ) → (hi : i.1 + 1 < ℓ) →\n      VertexLinkage G (right i) (left ⟨i.1 + 1, hi⟩) w\n  connector_avoids_clusters :\n    ∀ (i : Fin ℓ) (hi : i.1 + 1 < ℓ) (j : Fin ℓ)\n      (a : Fin w),\n        (connector i hi).path a |>.InternallyAvoids (cluster j)\n  connectors_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄ (hi : i.1 + 1 < ℓ) (hj : j.1 + 1 < ℓ),\n      i ≠ j → ∀ a b : Fin w,\n        Disjoint ((connector i hi).path a).vertices\n          ((connector j hj).path b).vertices\n\nnamespace System\n\n/-- The first cluster index. -/\ndef firstIndex {V : Type u} [DecidableEq V]\n    {G : SimpleGraph V} {ℓ w : ℕ}\n    (P : System G ℓ w) : Fin ℓ :=\n  ⟨0, P.length_pos⟩\n\n/-- The last cluster index. -/\ndef lastIndex {V : Type u} [DecidableEq V]\n    {G : SimpleGraph V} {ℓ w : ℕ}\n    (P : System G ℓ w) : Fin ℓ :=\n  ⟨ℓ - 1, Nat.sub_lt P.length_pos Nat.zero_lt_one⟩\n\nend System\n\n/-- A strong path-of-sets system. -/\nstructure StrongSystem {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (ℓ w : ℕ) extends System G ℓ w where\n  left_well_linked :\n    ∀ i : Fin ℓ, NodeWellLinkedIn G (cluster i) (left i)\n  right_well_linked :\n    ∀ i : Fin ℓ, NodeWellLinkedIn G (cluster i) (right i)\n  interfaces_linked :\n    ∀ i : Fin ℓ, NodeLinkedIn G (cluster i) (left i) (right i)\n\n/-- A hairy path-of-sets system. -/\nstructure HairySystem {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (ℓ w : ℕ) where\n  base : StrongSystem G ℓ w\n  hairCluster : Fin ℓ → Finset V\n  hair_connected : ∀ i : Fin ℓ, IsCluster G (hairCluster i)\n  hair_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄, i ≠ j → Disjoint (hairCluster i) (hairCluster j)\n  hair_disjoint_base :\n    ∀ i j : Fin ℓ, Disjoint (hairCluster i) (base.cluster j)\n  baseEndpoint : Fin ℓ → Finset V\n  hairEndpoint : Fin ℓ → Finset V\n  baseEndpoint_subset :\n    ∀ i : Fin ℓ, baseEndpoint i ⊆ base.cluster i\n  hairEndpoint_subset :\n    ∀ i : Fin ℓ, hairEndpoint i ⊆ hairCluster i\n  baseEndpoint_card : ∀ i : Fin ℓ, (baseEndpoint i).card = w\n  hairEndpoint_card : ∀ i : Fin ℓ, (hairEndpoint i).card = w\n  baseEndpoint_avoids_interfaces :\n    ∀ i : Fin ℓ,\n      Disjoint (baseEndpoint i) (base.left i ∪ base.right i)\n  hairEndpoint_well_linked :\n    ∀ i : Fin ℓ,\n      NodeWellLinkedIn G (hairCluster i) (hairEndpoint i)\n  hairLinkage :\n    ∀ i : Fin ℓ,\n      VertexLinkage G (baseEndpoint i) (hairEndpoint i) w\n  hair_linkages_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄, i ≠ j → ∀ a b : Fin w,\n      Disjoint ((hairLinkage i).path a).vertices\n        ((hairLinkage j).path b).vertices\n\n/-- The output of splitting one connected cluster into three disjoint\nconnected subclusters while retaining prescribed terminal subsets. -/\nstructure ThreeWayClusterSplit {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C A B X : Finset V) (q : ℕ) where\n  firstCluster : Finset V\n  secondCluster : Finset V\n  thirdCluster : Finset V\n  first_subset : firstCluster ⊆ C\n  second_subset : secondCluster ⊆ C\n  third_subset : thirdCluster ⊆ C\n  first_connected : IsCluster G firstCluster\n  second_connected : IsCluster G secondCluster\n  third_connected : IsCluster G thirdCluster\n  first_second_disjoint : Disjoint firstCluster secondCluster\n  first_third_disjoint : Disjoint firstCluster thirdCluster\n  second_third_disjoint : Disjoint secondCluster thirdCluster\n  firstTerminals : Finset V\n  secondTerminals : Finset V\n  thirdTerminals : Finset V\n  firstTerminals_subset :\n    firstTerminals ⊆ A ∩ firstCluster\n  secondTerminals_subset :\n    secondTerminals ⊆ B ∩ secondCluster\n  thirdTerminals_subset :\n    thirdTerminals ⊆ X ∩ thirdCluster\n  first_card : firstTerminals.card = q\n  second_card : secondTerminals.card = q\n  third_card : thirdTerminals.card = q\n  first_well_linked :\n    NodeWellLinkedIn G firstCluster firstTerminals\n  second_well_linked :\n    NodeWellLinkedIn G secondCluster secondTerminals\n  third_well_linked :\n    NodeWellLinkedIn G thirdCluster thirdTerminals\n\n/-- The Appendix A.3 split of one cluster into a new base cluster and a\ndisjoint hair cluster, together with the retained interfaces and hair\nlinkage. -/\nstructure HairyClusterSplit {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C A B : Finset V) (w : ℕ) where\n  baseCluster : Finset V\n  hairCluster : Finset V\n  left : Finset V\n  right : Finset V\n  baseEndpoint : Finset V\n  hairEndpoint : Finset V\n  base_subset : baseCluster ⊆ C\n  hair_subset : hairCluster ⊆ C\n  base_connected : IsCluster G baseCluster\n  hair_connected : IsCluster G hairCluster\n  clusters_disjoint : Disjoint baseCluster hairCluster\n  left_subset_base : left ⊆ baseCluster\n  right_subset_base : right ⊆ baseCluster\n  baseEndpoint_subset : baseEndpoint ⊆ baseCluster\n  hairEndpoint_subset : hairEndpoint ⊆ hairCluster\n  left_subset_original : left ⊆ A\n  right_subset_original : right ⊆ B\n  left_card : left.card = w\n  right_card : right.card = w\n  baseEndpoint_card : baseEndpoint.card = w\n  hairEndpoint_card : hairEndpoint.card = w\n  interfaces_disjoint : Disjoint left right\n  baseEndpoint_disjoint_interfaces :\n    Disjoint baseEndpoint (left ∪ right)\n  left_well_linked : NodeWellLinkedIn G baseCluster left\n  right_well_linked : NodeWellLinkedIn G baseCluster right\n  interfaces_linked : NodeLinkedIn G baseCluster left right\n  left_baseEndpoint_linked :\n    NodeLinkedIn G baseCluster left baseEndpoint\n  hairEndpoint_well_linked :\n    NodeWellLinkedIn G hairCluster hairEndpoint\n  hairLinkage :\n    VertexLinkage G baseEndpoint hairEndpoint w\n  hairLinkage_stays_in_cluster :\n    ∀ i : Fin w, (hairLinkage.path i).StaysIn C\n  hairLinkage_avoids_base :\n    ∀ i : Fin w, (hairLinkage.path i).InternallyAvoids baseCluster\n  hairLinkage_avoids_hair :\n    ∀ i : Fin w, (hairLinkage.path i).InternallyAvoids hairCluster\n\nend Lax17.PathOfSets\n",
+      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected\nimport Lax17.Linkedness\n\n/-!\n---\ntitle: Strong and hairy path-of-sets systems\ntype: definition\n---\nA path-of-sets system is an ordered sequence of pairwise disjoint connected\nclusters.  Each cluster has equally large, disjoint left and right interfaces,\nand consecutive interfaces are joined by disjoint path families that otherwise\navoid every cluster.  It is strong when the two interfaces are well-linked and\nmutually linked inside each cluster.\n\nA hairy path-of-sets system adds one disjoint connected hair cluster at every\nposition and a disjoint linkage from the base cluster to that hair.  Its\nhair-side endpoints are well-linked in the hair cluster.\n-/\n\nnamespace Lax17.PathOfSets\n\nuniverse u\n\nopen Lax17.Linkedness\nopen Lax17.Paths\n\n/-- A finite vertex set inducing a connected graph. -/\ndef IsCluster {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C : Finset V) : Prop :=\n  (G.induce {v : V | v ∈ C}).Connected\n\n/-- A path-of-sets system of length `ℓ` and width `w`. -/\nstructure System {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (ℓ w : ℕ) where\n  length_pos : 0 < ℓ\n  width_pos : 0 < w\n  cluster : Fin ℓ → Finset V\n  cluster_connected : ∀ i : Fin ℓ, IsCluster G (cluster i)\n  cluster_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄, i ≠ j → Disjoint (cluster i) (cluster j)\n  left : Fin ℓ → Finset V\n  right : Fin ℓ → Finset V\n  left_subset : ∀ i : Fin ℓ, left i ⊆ cluster i\n  right_subset : ∀ i : Fin ℓ, right i ⊆ cluster i\n  interfaces_disjoint : ∀ i : Fin ℓ, Disjoint (left i) (right i)\n  left_card : ∀ i : Fin ℓ, (left i).card = w\n  right_card : ∀ i : Fin ℓ, (right i).card = w\n  connector :\n    (i : Fin ℓ) → (hi : i.1 + 1 < ℓ) →\n      VertexLinkage G (right i) (left ⟨i.1 + 1, hi⟩) w\n  connector_avoids_clusters :\n    ∀ (i : Fin ℓ) (hi : i.1 + 1 < ℓ) (j : Fin ℓ)\n      (a : Fin w),\n        (connector i hi).path a |>.InternallyAvoids (cluster j)\n  connectors_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄ (hi : i.1 + 1 < ℓ) (hj : j.1 + 1 < ℓ),\n      i ≠ j → ∀ a b : Fin w,\n        Disjoint ((connector i hi).path a).vertices\n          ((connector j hj).path b).vertices\n\nnamespace System\n\n/-- The first cluster index. -/\ndef firstIndex {V : Type u} [DecidableEq V]\n    {G : SimpleGraph V} {ℓ w : ℕ}\n    (P : System G ℓ w) : Fin ℓ :=\n  ⟨0, P.length_pos⟩\n\n/-- The last cluster index. -/\ndef lastIndex {V : Type u} [DecidableEq V]\n    {G : SimpleGraph V} {ℓ w : ℕ}\n    (P : System G ℓ w) : Fin ℓ :=\n  ⟨ℓ - 1, Nat.sub_lt P.length_pos Nat.zero_lt_one⟩\n\nend System\n\n/-- A strong path-of-sets system. -/\nstructure StrongSystem {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (ℓ w : ℕ) extends System G ℓ w where\n  left_well_linked :\n    ∀ i : Fin ℓ, NodeWellLinkedIn G (cluster i) (left i)\n  right_well_linked :\n    ∀ i : Fin ℓ, NodeWellLinkedIn G (cluster i) (right i)\n  interfaces_linked :\n    ∀ i : Fin ℓ, NodeLinkedIn G (cluster i) (left i) (right i)\n\n/-- A hairy path-of-sets system. -/\nstructure HairySystem {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (ℓ w : ℕ) where\n  base : StrongSystem G ℓ w\n  hairCluster : Fin ℓ → Finset V\n  hair_connected : ∀ i : Fin ℓ, IsCluster G (hairCluster i)\n  hair_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄, i ≠ j → Disjoint (hairCluster i) (hairCluster j)\n  hair_disjoint_base :\n    ∀ i j : Fin ℓ, Disjoint (hairCluster i) (base.cluster j)\n  hair_disjoint_connectors :\n    ∀ i j : Fin ℓ, ∀ (hj : j.1 + 1 < ℓ), ∀ a : Fin w,\n      Disjoint (hairCluster i) ((base.connector j hj).path a).vertices\n  baseEndpoint : Fin ℓ → Finset V\n  hairEndpoint : Fin ℓ → Finset V\n  baseEndpoint_subset :\n    ∀ i : Fin ℓ, baseEndpoint i ⊆ base.cluster i\n  hairEndpoint_subset :\n    ∀ i : Fin ℓ, hairEndpoint i ⊆ hairCluster i\n  baseEndpoint_card : ∀ i : Fin ℓ, (baseEndpoint i).card = w\n  hairEndpoint_card : ∀ i : Fin ℓ, (hairEndpoint i).card = w\n  baseEndpoint_avoids_interfaces :\n    ∀ i : Fin ℓ,\n      Disjoint (baseEndpoint i) (base.left i ∪ base.right i)\n  hairEndpoint_well_linked :\n    ∀ i : Fin ℓ,\n      NodeWellLinkedIn G (hairCluster i) (hairEndpoint i)\n  baseEndpoint_linked :\n    ∀ i : Fin ℓ,\n      NodeLinkedIn G (base.cluster i) (base.left i) (baseEndpoint i)\n  hairLinkage :\n    ∀ i : Fin ℓ,\n      VertexLinkage G (baseEndpoint i) (hairEndpoint i) w\n  hair_linkages_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄, i ≠ j → ∀ a b : Fin w,\n      Disjoint ((hairLinkage i).path a).vertices\n        ((hairLinkage j).path b).vertices\n  hair_linkages_disjoint_connectors :\n    ∀ i j : Fin ℓ, ∀ (hj : j.1 + 1 < ℓ), ∀ a b : Fin w,\n      Disjoint ((hairLinkage i).path a).vertices\n        ((base.connector j hj).path b).vertices\n  hair_linkages_avoid_base :\n    ∀ i j : Fin ℓ, ∀ a : Fin w,\n      ((hairLinkage i).path a).InternallyAvoids (base.cluster j)\n  hair_linkages_avoid_hair :\n    ∀ i j : Fin ℓ, ∀ a : Fin w,\n      ((hairLinkage i).path a).InternallyAvoids (hairCluster j)\n\n/-- The output of splitting one connected cluster into three disjoint\nconnected subclusters while retaining prescribed terminal subsets. -/\nstructure ThreeWayClusterSplit {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C A B X : Finset V) (q : ℕ) where\n  firstCluster : Finset V\n  secondCluster : Finset V\n  thirdCluster : Finset V\n  first_subset : firstCluster ⊆ C\n  second_subset : secondCluster ⊆ C\n  third_subset : thirdCluster ⊆ C\n  first_connected : IsCluster G firstCluster\n  second_connected : IsCluster G secondCluster\n  third_connected : IsCluster G thirdCluster\n  first_second_disjoint : Disjoint firstCluster secondCluster\n  first_third_disjoint : Disjoint firstCluster thirdCluster\n  second_third_disjoint : Disjoint secondCluster thirdCluster\n  firstTerminals : Finset V\n  secondTerminals : Finset V\n  thirdTerminals : Finset V\n  firstTerminals_subset :\n    firstTerminals ⊆ A ∩ firstCluster\n  secondTerminals_subset :\n    secondTerminals ⊆ B ∩ secondCluster\n  thirdTerminals_subset :\n    thirdTerminals ⊆ X ∩ thirdCluster\n  first_card : firstTerminals.card = q\n  second_card : secondTerminals.card = q\n  third_card : thirdTerminals.card = q\n  first_well_linked :\n    NodeWellLinkedIn G firstCluster firstTerminals\n  second_well_linked :\n    NodeWellLinkedIn G secondCluster secondTerminals\n  third_well_linked :\n    NodeWellLinkedIn G thirdCluster thirdTerminals\n\n/-- The Appendix A.3 split of one cluster into a new base cluster and a\ndisjoint hair cluster, together with the retained interfaces and hair\nlinkage. -/\nstructure HairyClusterSplit {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C A B : Finset V) (w : ℕ) where\n  baseCluster : Finset V\n  hairCluster : Finset V\n  left : Finset V\n  right : Finset V\n  baseEndpoint : Finset V\n  hairEndpoint : Finset V\n  base_subset : baseCluster ⊆ C\n  hair_subset : hairCluster ⊆ C\n  base_connected : IsCluster G baseCluster\n  hair_connected : IsCluster G hairCluster\n  clusters_disjoint : Disjoint baseCluster hairCluster\n  left_subset_base : left ⊆ baseCluster\n  right_subset_base : right ⊆ baseCluster\n  baseEndpoint_subset : baseEndpoint ⊆ baseCluster\n  hairEndpoint_subset : hairEndpoint ⊆ hairCluster\n  left_subset_original : left ⊆ A\n  right_subset_original : right ⊆ B\n  left_card : left.card = w\n  right_card : right.card = w\n  baseEndpoint_card : baseEndpoint.card = w\n  hairEndpoint_card : hairEndpoint.card = w\n  interfaces_disjoint : Disjoint left right\n  baseEndpoint_disjoint_interfaces :\n    Disjoint baseEndpoint (left ∪ right)\n  left_well_linked : NodeWellLinkedIn G baseCluster left\n  right_well_linked : NodeWellLinkedIn G baseCluster right\n  interfaces_linked : NodeLinkedIn G baseCluster left right\n  left_baseEndpoint_linked :\n    NodeLinkedIn G baseCluster left baseEndpoint\n  hairEndpoint_well_linked :\n    NodeWellLinkedIn G hairCluster hairEndpoint\n  hairLinkage :\n    VertexLinkage G baseEndpoint hairEndpoint w\n  hairLinkage_stays_in_cluster :\n    ∀ i : Fin w, (hairLinkage.path i).StaysIn C\n  hairLinkage_avoids_base :\n    ∀ i : Fin w, (hairLinkage.path i).InternallyAvoids baseCluster\n  hairLinkage_avoids_hair :\n    ∀ i : Fin w, (hairLinkage.path i).InternallyAvoids hairCluster\n\nend Lax17.PathOfSets\n",
       "statements": []
     },
     {
@@ -792,7 +792,10 @@
       "id": "Lax17Proofs.Exposed.crossbarOrPseudoGrid",
       "path": "proofs/Lax17Proofs/Exposed.lean",
       "conclusion": "Lax17.CrossbarOrPseudoGrid.crossbarOrPseudoGrid",
-      "assumptions": [],
+      "assumptions": [
+        "Lax17.EdgeMenger.edgeMenger",
+        "Lax17.VertexMenger.vertexMenger"
+      ],
       "description": "Theorem 4.1 produces either a width-`g²` crossbar or a depth-`D`\npseudo-grid satisfying P1 and P2."
     },
     {
@@ -806,7 +809,11 @@
       "id": "Lax17Proofs.Exposed.degreeThreeTreewidthSparsifier",
       "path": "proofs/Lax17Proofs/Exposed.lean",
       "conclusion": "Lax17.TreewidthSparsifier.degreeThreeTreewidthSparsifier",
-      "assumptions": [],
+      "assumptions": [
+        "Lax17.LowDegreeWellLinkedCore.lowDegreeWellLinkedCore",
+        "Lax17.StrongPathOfSetsFromTreewidth.strongPathOfSetsFromTreewidth",
+        "Lax17.TreewidthMinorMonotonicity.treewidth_mono_minor"
+      ],
       "description": "Treewidth has a degree-three spanning sparsifier with polylogarithmic loss."
     },
     {
@@ -827,28 +834,38 @@
       "id": "Lax17Proofs.Exposed.exponentTenCrossbarDichotomy",
       "path": "proofs/Lax17Proofs/Exposed.lean",
       "conclusion": "Lax17.ExponentTenCrossbarDichotomy.exponentTenCrossbarDichotomy",
-      "assumptions": [],
+      "assumptions": [
+        "Lax17.CrossbarOrPseudoGrid.crossbarOrPseudoGrid"
+      ],
       "description": "At the exponent-ten threshold, either a large crossbar exists or a minor\ncarries a proportionally large strong path-of-sets system."
     },
     {
       "id": "Lax17Proofs.Exposed.hairyPathOfSetsFromTreewidth",
       "path": "proofs/Lax17Proofs/Exposed.lean",
       "conclusion": "Lax17.HairyPathOfSetsFromTreewidth.hairyPathOfSetsFromTreewidth",
-      "assumptions": [],
+      "assumptions": [
+        "Lax17.ParallelClusterSplitting.parallelClusterSplitting",
+        "Lax17.StrongTreeOfSetsConstruction.strongTreeOfSetsConstruction",
+        "Lax17.TreewidthSparsifier.degreeThreeTreewidthSparsifier"
+      ],
       "description": "Large treewidth produces a subcubic subgraph carrying a hairy path-of-sets\nsystem."
     },
     {
       "id": "Lax17Proofs.Exposed.hindOellermannDeletionContraction",
       "path": "proofs/Lax17Proofs/Exposed.lean",
       "conclusion": "Lax17.HindOellermann.hindOellermannDeletionContraction",
-      "assumptions": [],
+      "assumptions": [
+        "Lax17.TerminalElementMenger.terminalElementMenger"
+      ],
       "description": "Hind--Oellermann deletion--contraction for terminal element connectivity."
     },
     {
       "id": "Lax17Proofs.Exposed.localRoutingOrGrid",
       "path": "proofs/Lax17Proofs/Exposed.lean",
       "conclusion": "Lax17.LocalRoutingOrGrid.localRoutingOrGrid",
-      "assumptions": [],
+      "assumptions": [
+        "Lax17.VertexMenger.vertexMenger"
+      ],
       "description": "Linked terminal sets in a connected cluster admit bridged local routes unless\nthe target grid is already a minor."
     },
     {
@@ -862,7 +879,9 @@
       "id": "Lax17Proofs.Exposed.lowDegreeWellLinkedCore",
       "path": "proofs/Lax17Proofs/Exposed.lean",
       "conclusion": "Lax17.LowDegreeWellLinkedCore.lowDegreeWellLinkedCore",
-      "assumptions": [],
+      "assumptions": [
+        "Lax17.SinghLau.singhLauBoundedDegreeSpanningTree"
+      ],
       "description": "A sufficiently long strong path-of-sets system yields a subcubic subgraph in\nwhich its first left interface is still polylogarithmically well-linked."
     },
     {
@@ -911,21 +930,34 @@
       "id": "Lax17Proofs.Exposed.strongPathOfSetsContainsGrid",
       "path": "proofs/Lax17Proofs/Exposed.lean",
       "conclusion": "Lax17.StrongPathOfSetsContainsGrid.strongPathOfSetsContainsGrid",
-      "assumptions": [],
+      "assumptions": [
+        "Lax17.CrossbarStitching.crossbarStitching",
+        "Lax17.LocalRoutingOrGrid.localRoutingOrGrid"
+      ],
       "description": "A sufficiently long and wide strong path-of-sets system contains a grid."
     },
     {
       "id": "Lax17Proofs.Exposed.strongPathOfSetsFromTreewidth",
       "path": "proofs/Lax17Proofs/Exposed.lean",
       "conclusion": "Lax17.StrongPathOfSetsFromTreewidth.strongPathOfSetsFromTreewidth",
-      "assumptions": [],
+      "assumptions": [
+        "Lax17.NodeWellLinkedSetFromTreewidth.nodeWellLinkedSetFromTreewidth",
+        "Lax17.StrongPathExtraction.strongPathExtraction",
+        "Lax17.StrongTreeOfSetsConstruction.strongTreeOfSetsConstruction"
+      ],
       "description": "Large treewidth produces a strong path-of-sets system."
     },
     {
       "id": "Lax17Proofs.Exposed.strongTreeOfSetsConstruction",
       "path": "proofs/Lax17Proofs/Exposed.lean",
       "conclusion": "Lax17.StrongTreeOfSetsConstruction.strongTreeOfSetsConstruction",
-      "assumptions": [],
+      "assumptions": [
+        "Lax17.EdgeMenger.edgeMenger",
+        "Lax17.HindOellermann.hindOellermannDeletionContraction",
+        "Lax17.Mader.maderAdmissibleSplitOff",
+        "Lax17.VertexMenger.vertexMenger",
+        "Lax17.WellLinkednessBoosting.wellLinkednessBoosting"
+      ],
       "description": "A bounded-degree node-well-linked core supports a strong tree-of-sets system."
     },
     {
@@ -953,16 +985,26 @@
       "id": "Lax17Proofs.Exposed.wellLinkednessBoosting",
       "path": "proofs/Lax17Proofs/Exposed.lean",
       "conclusion": "Lax17.WellLinkednessBoosting.wellLinkednessBoosting",
-      "assumptions": [],
+      "assumptions": [
+        "Lax17.EdgeMenger.edgeMenger",
+        "Lax17.SmallLinkedSubsets.smallLinkedSubsets",
+        "Lax17.VertexMenger.vertexMenger"
+      ],
       "description": "Bounded-degree edge-well-linkedness contains a large node-well-linked core."
     },
     {
-      "id": "Lax17Proofs.polynomial_grid_minor",
-      "path": "proofs/Lax17Proofs/Public.lean",
+      "id": "Lax17Proofs.Final.polynomial_grid_minor",
+      "path": "proofs/Lax17Proofs/Final.lean",
       "conclusion": "Lax17.PolynomialGridMinor.polynomial_grid_minor",
-      "assumptions": [],
-      "description": "The direct exponent-ten polynomial grid-minor theorem, expressed with the\nsubmission's canonical grid, standard set-valued minor model, and native\ntreewidth definition."
+      "assumptions": [
+        "Lax17.CutMatchingTheorem.logarithmicCutMatchingExpansion",
+        "Lax17.ExpanderGrid.expanderContainsGrid",
+        "Lax17.ExponentTenCrossbarDichotomy.exponentTenCrossbarDichotomy",
+        "Lax17.HairyPathOfSetsFromTreewidth.hairyPathOfSetsFromTreewidth",
+        "Lax17.StrongPathOfSetsContainsGrid.strongPathOfSetsContainsGrid"
+      ],
+      "description": "The direct exponent-ten polynomial grid-minor theorem, assembled from the\nexposed hairy-system theorem, exponent-ten crossbar dichotomy, and\npath-of-sets-to-grid theorem."
     }
   ],
-  "captureId": "275af680ef400d75409e8806d7cb3631.0"
+  "captureId": "e12f55f8a1f3dcd503f060dff690c0ee.0"
 }
