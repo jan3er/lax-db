@@ -1,12 +1,17 @@
 {
   "specVersion": "1",
   "id": "Lax17",
-  "state": "init",
+  "state": "draft",
   "createdAt": "2026-07-28T23:13:41Z",
   "owners": [
     {
       "githubId": 91967389,
       "handle": "EdouardBonnet"
     }
-  ]
+  ],
+  "source": {
+    "repository": "https://github.com/EdouardBonnet/polynomial-grid-minor-theorem",
+    "commit": "ae3a61526727bfce9bdd9953f3823d136bdf36bb",
+    "folder": "."
+  }
 }

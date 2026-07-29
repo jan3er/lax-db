@@ -1,0 +1,798 @@
+{
+  "specVersion": "1",
+  "id": "Lax17",
+  "manifest": {
+    "specVersion": "1",
+    "id": "Lax17",
+    "leanVersion": "v4.30.0",
+    "mathlibVersion": "c5ea00351c28e24afc9f0f84379aa41082b1188f",
+    "title": "A Polynomial Bound for the Grid-Minor Theorem",
+    "authors": [
+      {
+        "name": "Édouard Bonnet"
+      },
+      {
+        "name": "Codex 5.5"
+      },
+      {
+        "name": "Codex 5.6"
+      }
+    ],
+    "bibEntries": [
+      "@article{ChuzhoyTan2021,\n  author = {Julia Chuzhoy and Zihan Tan},\n  title = {Towards tight(er) bounds for the Excluded Grid Theorem},\n  journal = {Journal of Combinatorial Theory, Series B},\n  volume = {146},\n  pages = {219--265},\n  year = {2021},\n  doi = {10.1016/j.jctb.2020.09.010}\n}",
+      "@article{ChekuriChuzhoy2016,\n  author = {Chandra Chekuri and Julia Chuzhoy},\n  title = {Polynomial Bounds for the Grid-Minor Theorem},\n  journal = {Journal of the ACM},\n  volume = {63},\n  number = {5},\n  pages = {40:1--40:65},\n  year = {2016},\n  doi = {10.1145/2820609}\n}",
+      "@misc{Chuzhoy2016Improved,\n  author = {Julia Chuzhoy},\n  title = {Improved Bounds for the Excluded Grid Theorem},\n  year = {2016},\n  eprint = {1602.02629},\n  archivePrefix = {arXiv},\n  primaryClass = {cs.DM}\n}",
+      "@inproceedings{ChekuriChuzhoy2015Sparsifiers,\n  author = {Chandra Chekuri and Julia Chuzhoy},\n  title = {Degree-3 Treewidth Sparsifiers},\n  editor = {Piotr Indyk},\n  booktitle = {Proceedings of the Twenty-Sixth Annual ACM-SIAM Symposium on Discrete Algorithms},\n  pages = {242--255},\n  publisher = {SIAM},\n  year = {2015}\n}",
+      "@techreport{KhandekarKhotOrecchiaVishnoi2007,\n  author = {Rohit Khandekar and Subhash A. Khot and Lorenzo Orecchia and Nisheeth K. Vishnoi},\n  title = {On a Cut-Matching Game for the Sparsest Cut Problem},\n  institution = {University of California, Berkeley},\n  number = {UCB/EECS-2007-177},\n  year = {2007},\n  url = {http://www.eecs.berkeley.edu/Pubs/TechRpts/2007/EECS-2007-177.html}\n}",
+      "@misc{Krivelevich2019Expanders,\n  author = {Michael Krivelevich},\n  title = {Expanders---How to Find Them, and What to Find in Them},\n  year = {2019},\n  eprint = {1812.11562},\n  archivePrefix = {arXiv},\n  primaryClass = {math.CO}\n}",
+      "@book{Diestel2017GraphTheory,\n  author = {Reinhard Diestel},\n  title = {Graph Theory},\n  edition = {5},\n  series = {Graduate Texts in Mathematics},\n  volume = {173},\n  publisher = {Springer},\n  year = {2017},\n  doi = {10.1007/978-3-662-53622-3}\n}",
+      "@article{Menger1927,\n  author = {Karl Menger},\n  title = {Zur allgemeinen Kurventheorie},\n  journal = {Fundamenta Mathematicae},\n  volume = {10},\n  pages = {96--115},\n  year = {1927}\n}",
+      "@article{HindOellermann1996,\n  author = {H. R. Hind and O. Oellermann},\n  title = {Menger-Type Results for Three or More Vertices},\n  journal = {Congressus Numerantium},\n  volume = {113},\n  pages = {179--204},\n  year = {1996}\n}",
+      "@article{Mader1978,\n  author = {W. Mader},\n  title = {A Reduction Method for Edge Connectivity in Graphs},\n  journal = {Annals of Discrete Mathematics},\n  volume = {3},\n  pages = {145--164},\n  year = {1978}\n}",
+      "@article{SinghLau2015,\n  author = {Mohit Singh and Lap Chi Lau},\n  title = {Approximating Minimum Bounded Degree Spanning Trees to within One of Optimal},\n  journal = {Journal of the ACM},\n  volume = {62},\n  number = {1},\n  pages = {1:1--1:19},\n  year = {2015},\n  doi = {10.1145/2629366}\n}"
+    ]
+  },
+  "abstract": "This submission formalizes the polynomial excluded-grid theorem of Chuzhoy\nand Tan in an explicit exponent-ten form. It proves that there are universal\npositive constants \\(c\\) and \\(d\\) such that every finite simple graph of\ntreewidth at least\n\\[\n  c\\,g^{10}(\\log_2 g)^d\n\\]\ncontains the \\(g\\times g\\) square grid as a minor.\n\nTreewidth is defined through finite tree decompositions, with width equal to\nthe largest bag cardinality minus one. The grid is the box product of two\nfinite path graphs, and the minor relation is the standard branch-set model.\nMajor structural results in the proof are exposed as separate statements,\nincluding finite Menger theorems, the degree-three treewidth sparsifier,\nstrong and hairy path-of-sets constructions, the crossbar dichotomy, the\ncut-matching expansion theorem, and the expander-to-grid argument.\n\nThe proof follows the weaker Section 4 route of Chuzhoy--Tan, giving the\npolynomial exponent ten. Algorithmic running times and probability guarantees\nare deliberately omitted; all submitted claims are finite existential\nstatements.\n",
+  "requiredByConcepts": [],
+  "requiredByProofs": [],
+  "concepts": [
+    {
+      "id": "Lax17.Crossbar",
+      "path": "concepts/Lax17/Crossbar.lean",
+      "title": "Crossbars and pseudo-grids",
+      "type": "definition",
+      "description": "An \\((A,B,X)\\)-crossbar consists of disjoint main paths from \\(A\\) to \\(B\\)\nand one disjoint spoke from every main path to \\(X\\).  Each spoke meets its own\nmain path exactly once and avoids all other main paths.\n\nA pseudo-grid is a pair of internally disjoint path families in which every\nrow meets every column.  It records the grid-like alternative produced by the\ncrossbar analysis before branch sets are assembled.",
+      "imports": [
+        "Lax17.Paths"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Paths\n\n/-!\n---\ntitle: Crossbars and pseudo-grids\ntype: definition\n---\nAn \\((A,B,X)\\)-crossbar consists of disjoint main paths from \\(A\\) to \\(B\\)\nand one disjoint spoke from every main path to \\(X\\).  Each spoke meets its own\nmain path exactly once and avoids all other main paths.\n\nA pseudo-grid is a pair of internally disjoint path families in which every\nrow meets every column.  It records the grid-like alternative produced by the\ncrossbar analysis before branch sets are assembled.\n-/\n\nnamespace Lax17.Crossbar\n\nuniverse u\n\nopen Lax17.Paths\n\n/-- A crossbar of width `ρ`. -/\nstructure System {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (A B X : Finset V) (ρ : ℕ) where\n  mainPath : Fin ρ → Path G\n  main_connects : ∀ i : Fin ρ, (mainPath i).Connects A B\n  main_disjoint :\n    Pairwise fun i j => Disjoint (mainPath i).vertices (mainPath j).vertices\n  spokePath : Fin ρ → Path G\n  spoke_disjoint :\n    Pairwise fun i j => Disjoint (spokePath i).vertices (spokePath j).vertices\n  attachment : Fin ρ → V\n  attachment_on_main :\n    ∀ i : Fin ρ, attachment i ∈ (mainPath i).vertices\n  attachment_on_spoke :\n    ∀ i : Fin ρ, attachment i ∈ (spokePath i).vertices\n  exact_attachment :\n    ∀ i : Fin ρ,\n      (mainPath i).vertices ∩ (spokePath i).vertices = {attachment i}\n  spoke_reaches_X :\n    ∀ i : Fin ρ,\n      (spokePath i).source ∈ X ∨ (spokePath i).target ∈ X\n  spoke_avoids_other_main :\n    ∀ ⦃i j : Fin ρ⦄, i ≠ j →\n      Disjoint (spokePath i).vertices (mainPath j).vertices\n\n/-- A grid-like family of rows and columns. -/\nstructure PseudoGrid {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (rows columns : ℕ) where\n  row : Fin rows → Path G\n  column : Fin columns → Path G\n  rows_disjoint :\n    Pairwise fun i j => Disjoint (row i).vertices (row j).vertices\n  columns_disjoint :\n    Pairwise fun i j => Disjoint (column i).vertices (column j).vertices\n  row_meets_column :\n    ∀ i : Fin rows, ∀ j : Fin columns,\n      ((row i).vertices ∩ (column j).vertices).Nonempty\n\nend Lax17.Crossbar\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.CrossbarOrPseudoGrid",
+      "path": "concepts/Lax17/CrossbarOrPseudoGrid.lean",
+      "title": "Crossbar-or-pseudo-grid dichotomy",
+      "type": "theorem",
+      "description": "Large linked terminal sets yield either a crossbar or a pseudo-grid.",
+      "imports": [
+        "Lax17.Crossbar",
+        "Lax17.Linkedness"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Crossbar\nimport Lax17.Linkedness\n\n/-!\n---\ntitle: Crossbar-or-pseudo-grid dichotomy\ntype: theorem\n---\nLarge linked terminal sets yield either a crossbar or a pseudo-grid.\n-/\n\nnamespace Lax17.CrossbarOrPseudoGrid\n\nuniverse u\n\n/-- Large linked terminal sets yield either a crossbar or a pseudo-grid. -/\naxiom crossbarOrPseudoGrid :\n  ∃ c : ℕ, 0 < c ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V] (G : SimpleGraph V)\n      (A B X : Finset V) (k ρ : ℕ),\n        Disjoint A B → Disjoint A X → Disjoint B X →\n          Lax17.Linkedness.NodeWellLinkedIn G Finset.univ (A ∪ B ∪ X) →\n            c * ρ ^ 2 ≤ k →\n              k ≤ A.card → k ≤ B.card → k ≤ X.card →\n                Nonempty (Lax17.Crossbar.System G A B X ρ) ∨\n                  Nonempty (Lax17.Crossbar.PseudoGrid G ρ ρ)\n\nend Lax17.CrossbarOrPseudoGrid\n",
+      "statements": [
+        {
+          "id": "Lax17.CrossbarOrPseudoGrid.crossbarOrPseudoGrid",
+          "signature": "crossbarOrPseudoGrid : Exists fun c =>\n  And (instLTNat.lt 0 c)\n    (∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V) (A B X : Finset V) (k ρ : Nat),\n      Disjoint A B →\n        Disjoint A X →\n          Disjoint B X →\n            Lax17.Linkedness.NodeWellLinkedIn G Finset.univ (Finset.instUnion.union (Finset.instUnion.union A B) X) →\n              instLENat.le (instHMul.hMul c (instHPow.hPow ρ 2)) k →\n                instLENat.le k A.card →\n                  instLENat.le k B.card →\n                    instLENat.le k X.card →\n                      Or (Nonempty (Lax17.Crossbar.System G A B X ρ)) (Nonempty (Lax17.Crossbar.PseudoGrid G ρ ρ)))",
+          "doc": "Large linked terminal sets yield either a crossbar or a pseudo-grid.",
+          "startLine": 16,
+          "endLine": 26
+        }
+      ]
+    },
+    {
+      "id": "Lax17.CrossbarStitching",
+      "path": "concepts/Lax17/CrossbarStitching.lean",
+      "title": "Crossbar stitching",
+      "type": "theorem",
+      "description": "Compatible local crossbars along a hairy path-of-sets system can be stitched\ninto a square grid minor.",
+      "imports": [
+        "Lax17.Crossbar",
+        "Lax17.GridMinor",
+        "Lax17.PathOfSets"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Crossbar\nimport Lax17.GridMinor\nimport Lax17.PathOfSets\n\n/-!\n---\ntitle: Crossbar stitching\ntype: theorem\n---\nCompatible local crossbars along a hairy path-of-sets system can be stitched\ninto a square grid minor.\n-/\n\nnamespace Lax17.CrossbarStitching\n\nuniverse u\n\n/-- Compatible local crossbars along a hairy path-of-sets system can be\nstitched into a square grid minor. -/\naxiom crossbarStitching :\n  ∃ c : ℕ, 0 < c ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) {ℓ w g : ℕ}\n      (H : Lax17.PathOfSets.HairySystem G ℓ w),\n        2 ≤ g → c * g ≤ ℓ → g ≤ w →\n          (∀ i : Fin ℓ,\n            Nonempty\n              (Lax17.Crossbar.System G\n                (H.base.left i) (H.base.right i)\n                (H.hairEndpoint i) g)) →\n            Lax17.GridMinor.ContainsGridMinor G g\n\nend Lax17.CrossbarStitching\n",
+      "statements": [
+        {
+          "id": "Lax17.CrossbarStitching.crossbarStitching",
+          "signature": "crossbarStitching : Exists fun c =>\n  And (instLTNat.lt 0 c)\n    (∀ {V : Type u} [Fintype V] [inst : DecidableEq V] (G : SimpleGraph V) {ℓ w g : Nat}\n      (H : Lax17.PathOfSets.HairySystem G ℓ w),\n      instLENat.le 2 g →\n        instLENat.le (instHMul.hMul c g) ℓ →\n          instLENat.le g w →\n            (∀ (i : Fin ℓ), Nonempty (Lax17.Crossbar.System G (H.base.left i) (H.base.right i) (H.hairEndpoint i) g)) →\n              Lax17.GridMinor.ContainsGridMinor G g)",
+          "doc": "Compatible local crossbars along a hairy path-of-sets system can be\nstitched into a square grid minor.",
+          "startLine": 18,
+          "endLine": 31
+        }
+      ]
+    },
+    {
+      "id": "Lax17.CutMatchingTheorem",
+      "path": "concepts/Lax17/CutMatchingTheorem.lean",
+      "title": "Cut-matching expansion theorem",
+      "type": "theorem",
+      "description": "On every finite even vertex set, a logarithmic-squared number of perfect\nmatching rounds can be chosen across successive bisections so that the union\nof the matchings is a constant edge-expander.  This is the existential form of\nthe cut-matching game used in the grid-minor proof; algorithmic running-time\nclaims are intentionally omitted.",
+      "imports": [
+        "Lax17.Expansion"
+      ],
+      "mathlibImports": [
+        "Mathlib.Data.Nat.Log"
+      ],
+      "sourceText": "import Mathlib.Data.Nat.Log\nimport Lax17.Expansion\n\n/-!\n---\ntitle: Cut-matching expansion theorem\ntype: theorem\n---\nOn every finite even vertex set, a logarithmic-squared number of perfect\nmatching rounds can be chosen across successive bisections so that the union\nof the matchings is a constant edge-expander.  This is the existential form of\nthe cut-matching game used in the grid-minor proof; algorithmic running-time\nclaims are intentionally omitted.\n-/\n\nnamespace Lax17.CutMatchingTheorem\n\nuniverse u\n\n/-- A cut-matching transcript of \\(O(\\log^2 n)\\) rounds whose union is a\nconstant edge-expander. -/\naxiom logarithmicCutMatchingExpansion :\n  ∃ c : ℕ, 0 < c ∧\n    ∀ (V : Type u) [Fintype V] [DecidableEq V],\n      2 ≤ Fintype.card V → (∃ n : ℕ, Fintype.card V = 2 * n) →\n        ∃ rounds : ℕ,\n          ∃ T : Lax17.Expansion.CutMatchingTranscript V rounds,\n            rounds ≤ c * (Nat.log 2 (Fintype.card V)) ^ 2 ∧\n              Lax17.Expansion.IsEdgeExpander T.unionGraph 1 4\n\nend Lax17.CutMatchingTheorem\n",
+      "statements": [
+        {
+          "id": "Lax17.CutMatchingTheorem.logarithmicCutMatchingExpansion",
+          "signature": "logarithmicCutMatchingExpansion : Exists fun c =>\n  And (instLTNat.lt 0 c)\n    (∀ (V : Type u) [inst : Fintype V] [inst_1 : DecidableEq V],\n      instLENat.le 2 (Fintype.card V) →\n        (Exists fun n => Eq (Fintype.card V) (instHMul.hMul 2 n)) →\n          Exists fun rounds =>\n            Exists fun T =>\n              And (instLENat.le rounds (instHMul.hMul c (instHPow.hPow (Nat.log 2 (Fintype.card V)) 2)))\n                (Lax17.Expansion.IsEdgeExpander T.unionGraph 1 4))",
+          "doc": "A cut-matching transcript of \\(O(\\log^2 n)\\) rounds whose union is a\nconstant edge-expander.",
+          "startLine": 20,
+          "endLine": 29
+        }
+      ]
+    },
+    {
+      "id": "Lax17.Degree",
+      "path": "concepts/Lax17/Degree.lean",
+      "title": "Degree bounds",
+      "type": "definition",
+      "description": "For a finite simple graph, a vertex has degree at most \\(d\\) when its\nneighbourhood has at most \\(d\\) vertices.  A graph has maximum degree at most\n\\(d\\) when this holds at every vertex.\n\nThe definition is phrased through a finite set representing the neighbourhood.\nIt therefore does not require choosing a decidable adjacency relation.",
+      "imports": [],
+      "mathlibImports": [
+        "Mathlib.Combinatorics.SimpleGraph.Finite"
+      ],
+      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Finite\n\n/-!\n---\ntitle: Degree bounds\ntype: definition\n---\nFor a finite simple graph, a vertex has degree at most \\(d\\) when its\nneighbourhood has at most \\(d\\) vertices.  A graph has maximum degree at most\n\\(d\\) when this holds at every vertex.\n\nThe definition is phrased through a finite set representing the neighbourhood.\nIt therefore does not require choosing a decidable adjacency relation.\n-/\n\nnamespace Lax17.Degree\n\nuniverse u\n\n/-- `N` is the neighbourhood of `v` in `G`. -/\ndef IsNeighbourhood {V : Type u} (G : SimpleGraph V) (v : V)\n    (N : Finset V) : Prop :=\n  ∀ w : V, w ∈ N ↔ G.Adj v w\n\n/-- The degree of `v` in `G` is at most `d`. -/\ndef AtMost {V : Type u} (G : SimpleGraph V) (v : V) (d : ℕ) : Prop :=\n  ∃ N : Finset V, IsNeighbourhood G v N ∧ N.card ≤ d\n\n/-- The degree of `v` in `G` is exactly `d`. -/\ndef Exactly {V : Type u} (G : SimpleGraph V) (v : V) (d : ℕ) : Prop :=\n  ∃ N : Finset V, IsNeighbourhood G v N ∧ N.card = d\n\n/-- Every vertex of `G` has degree at most `d`. -/\ndef MaximumAtMost {V : Type u} (G : SimpleGraph V) (d : ℕ) : Prop :=\n  ∀ v : V, AtMost G v d\n\nend Lax17.Degree\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.EdgeMenger",
+      "path": "concepts/Lax17/EdgeMenger.lean",
+      "title": "Edge-Menger theorem",
+      "type": "theorem",
+      "description": "The edge form of Menger's theorem gives an exact alternative between\n\\(k\\) edge-disjoint terminal-to-terminal paths and an edge separator of\nsize less than \\(k\\).",
+      "imports": [
+        "Lax17.Paths"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Paths\n\n/-!\n---\ntitle: Edge-Menger theorem\ntype: theorem\n---\nThe edge form of Menger's theorem gives an exact alternative between\n\\(k\\) edge-disjoint terminal-to-terminal paths and an edge separator of\nsize less than \\(k\\).\n-/\n\nnamespace Lax17.EdgeMenger\n\nuniverse u\n\n/-- Finite edge-Menger in packing-or-separator form. -/\naxiom edgeMenger :\n  ∀ {V : Type u} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V) (A B : Finset V) (k : ℕ),\n      Nonempty (Lax17.Paths.EdgeLinkage G A B k) ∨\n        ∃ F : Finset (Sym2 V),\n          F.card < k ∧ Lax17.Paths.IsEdgeSeparator G A B F\n\nend Lax17.EdgeMenger\n",
+      "statements": [
+        {
+          "id": "Lax17.EdgeMenger.edgeMenger",
+          "signature": "edgeMenger : ∀ {V : Type u} [Fintype V] [inst : DecidableEq V] (G : SimpleGraph V) (A B : Finset V) (k : Nat),\n  Or (Nonempty (Lax17.Paths.EdgeLinkage G A B k))\n    (Exists fun F => And (instLTNat.lt F.card k) (Lax17.Paths.IsEdgeSeparator G A B F))",
+          "doc": "Finite edge-Menger in packing-or-separator form.",
+          "startLine": 17,
+          "endLine": 23
+        }
+      ]
+    },
+    {
+      "id": "Lax17.ExpanderGrid",
+      "path": "concepts/Lax17/ExpanderGrid.lean",
+      "title": "Grid minors in bounded-degree expanders",
+      "type": "theorem",
+      "description": "A sufficiently large bounded-degree constant edge-expander contains a\nprescribed square grid as a minor.  The size threshold is polynomial in the\ngrid order and maximum degree, with a polylogarithmic factor in the number of\nvertices.",
+      "imports": [
+        "Lax17.Degree",
+        "Lax17.Expansion",
+        "Lax17.GridMinor"
+      ],
+      "mathlibImports": [
+        "Mathlib.Data.Nat.Log"
+      ],
+      "sourceText": "import Mathlib.Data.Nat.Log\nimport Lax17.Degree\nimport Lax17.Expansion\nimport Lax17.GridMinor\n\n/-!\n---\ntitle: Grid minors in bounded-degree expanders\ntype: theorem\n---\nA sufficiently large bounded-degree constant edge-expander contains a\nprescribed square grid as a minor.  The size threshold is polynomial in the\ngrid order and maximum degree, with a polylogarithmic factor in the number of\nvertices.\n-/\n\nnamespace Lax17.ExpanderGrid\n\nuniverse u\n\n/-- The bounded-degree expander-to-grid theorem. -/\naxiom expanderContainsGrid :\n  ∃ c d : ℕ, 0 < c ∧ 0 < d ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) (Δ g : ℕ),\n        Lax17.Expansion.IsEdgeExpander G 1 4 →\n          Lax17.Degree.MaximumAtMost G Δ →\n            2 ≤ g →\n              c * (Δ + 1) ^ 2 * g ^ 2 *\n                  (Nat.log 2 (Fintype.card V)) ^ d ≤ Fintype.card V →\n                Lax17.GridMinor.ContainsGridMinor G g\n\nend Lax17.ExpanderGrid\n",
+      "statements": [
+        {
+          "id": "Lax17.ExpanderGrid.expanderContainsGrid",
+          "signature": "expanderContainsGrid : Exists fun c =>\n  Exists fun d =>\n    And (instLTNat.lt 0 c)\n      (And (instLTNat.lt 0 d)\n        (∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V) (Δ g : Nat),\n          Lax17.Expansion.IsEdgeExpander G 1 4 →\n            Lax17.Degree.MaximumAtMost G Δ →\n              instLENat.le 2 g →\n                instLENat.le\n                    (instHMul.hMul\n                      (instHMul.hMul (instHMul.hMul c (instHPow.hPow (instHAdd.hAdd Δ 1) 2)) (instHPow.hPow g 2))\n                      (instHPow.hPow (Nat.log 2 (Fintype.card V)) d))\n                    (Fintype.card V) →\n                  Lax17.GridMinor.ContainsGridMinor G g))",
+          "doc": "The bounded-degree expander-to-grid theorem.",
+          "startLine": 21,
+          "endLine": 31
+        }
+      ]
+    },
+    {
+      "id": "Lax17.Expansion",
+      "path": "concepts/Lax17/Expansion.lean",
+      "title": "Edge expansion and cut-matching transcripts",
+      "type": "definition",
+      "description": "The edge boundary of a vertex set consists of the graph edges with exactly one\nendpoint in the set.  A finite graph is an \\((a/b)\\)-edge-expander when every\nset containing at most half of the vertices has boundary at least\n\\((a/b)\\) times its size.\n\nA cut-matching transcript is a sequence of perfect matchings, each crossing a\nbisection chosen in that round.  Its union graph is the union of those\nmatchings.",
+      "imports": [
+        "Lax17.Degree"
+      ],
+      "mathlibImports": [
+        "Mathlib.Combinatorics.SimpleGraph.DeleteEdges"
+      ],
+      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.DeleteEdges\nimport Lax17.Degree\n\n/-!\n---\ntitle: Edge expansion and cut-matching transcripts\ntype: definition\n---\nThe edge boundary of a vertex set consists of the graph edges with exactly one\nendpoint in the set.  A finite graph is an \\((a/b)\\)-edge-expander when every\nset containing at most half of the vertices has boundary at least\n\\((a/b)\\) times its size.\n\nA cut-matching transcript is a sequence of perfect matchings, each crossing a\nbisection chosen in that round.  Its union graph is the union of those\nmatchings.\n-/\n\nnamespace Lax17.Expansion\n\nuniverse u\n\nopen Lax17.Degree\n\n/-- The finite edge boundary of `S`. -/\nnoncomputable def edgeBoundary {V : Type u} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V) (S : Finset V) : Finset (Sym2 V) := by\n  classical\n  exact G.edgeFinset.filter fun e =>\n    ∃ x y : V, e = s(x, y) ∧\n      ((x ∈ S ∧ y ∉ S) ∨ (y ∈ S ∧ x ∉ S))\n\n/-- Every set of at most half the vertices expands by a factor of `a / b`. -/\ndef IsEdgeExpander {V : Type u} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V) (a b : ℕ) : Prop :=\n  0 < a ∧ 0 < b ∧\n    ∀ S : Finset V, 0 < S.card → 2 * S.card ≤ Fintype.card V →\n      b * (edgeBoundary G S).card ≥ a * S.card\n\n/-- Every vertex has exactly one neighbour. -/\ndef IsPerfectMatching {V : Type u}\n    (M : SimpleGraph V) : Prop :=\n  ∀ v : V, Exactly M v 1\n\n/-- A sequence of perfect matchings crossing prescribed bisections. -/\nstructure CutMatchingTranscript (V : Type u) [Fintype V] [DecidableEq V]\n    (rounds : ℕ) where\n  cut : Fin rounds → Finset V\n  cut_is_half :\n    ∀ i : Fin rounds, 2 * (cut i).card = Fintype.card V\n  matching : Fin rounds → SimpleGraph V\n  matching_perfect :\n    ∀ i : Fin rounds, IsPerfectMatching (matching i)\n  matching_crosses_cut :\n    ∀ i : Fin rounds, ∀ ⦃x y : V⦄,\n      (matching i).Adj x y →\n        (x ∈ cut i ∧ y ∉ cut i) ∨ (y ∈ cut i ∧ x ∉ cut i)\n\nnamespace CutMatchingTranscript\n\n/-- The graph obtained by taking the union of all matching rounds. -/\ndef unionGraph {V : Type u} [Fintype V] [DecidableEq V] {rounds : ℕ}\n    (T : CutMatchingTranscript V rounds) : SimpleGraph V :=\n  ⨆ i : Fin rounds, T.matching i\n\nend CutMatchingTranscript\n\nend Lax17.Expansion\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.ExponentTenCrossbarDichotomy",
+      "path": "concepts/Lax17/ExponentTenCrossbarDichotomy.lean",
+      "title": "Exponent-ten crossbar dichotomy",
+      "type": "theorem",
+      "description": "At the exponent-ten scale, a hairy path-of-sets system either already\ncontains the target grid or supplies a local crossbar at every position.",
+      "imports": [
+        "Lax17.Crossbar",
+        "Lax17.GridMinor",
+        "Lax17.PathOfSets"
+      ],
+      "mathlibImports": [
+        "Mathlib.Data.Nat.Log"
+      ],
+      "sourceText": "import Mathlib.Data.Nat.Log\nimport Lax17.Crossbar\nimport Lax17.GridMinor\nimport Lax17.PathOfSets\n\n/-!\n---\ntitle: Exponent-ten crossbar dichotomy\ntype: theorem\n---\nAt the exponent-ten scale, a hairy path-of-sets system either already\ncontains the target grid or supplies a local crossbar at every position.\n-/\n\nnamespace Lax17.ExponentTenCrossbarDichotomy\n\nuniverse u\n\n/-- At the exponent-ten scale, a hairy path-of-sets system either already\ncontains the target grid or supplies a local crossbar at every position. -/\naxiom exponentTenCrossbarDichotomy :\n  ∃ c d : ℕ, 0 < c ∧ 0 < d ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) {ℓ w g : ℕ}\n      (H : Lax17.PathOfSets.HairySystem G ℓ w),\n        2 ≤ g → g ≤ ℓ →\n          c * g ^ 10 * (Nat.log 2 g) ^ d ≤ w →\n            Lax17.GridMinor.ContainsGridMinor G g ∨\n              ∀ i : Fin ℓ,\n                Nonempty\n                  (Lax17.Crossbar.System G\n                    (H.base.left i) (H.base.right i)\n                    (H.hairEndpoint i) g)\n\nend Lax17.ExponentTenCrossbarDichotomy\n",
+      "statements": [
+        {
+          "id": "Lax17.ExponentTenCrossbarDichotomy.exponentTenCrossbarDichotomy",
+          "signature": "exponentTenCrossbarDichotomy : Exists fun c =>\n  Exists fun d =>\n    And (instLTNat.lt 0 c)\n      (And (instLTNat.lt 0 d)\n        (∀ {V : Type u} [Fintype V] [inst : DecidableEq V] (G : SimpleGraph V) {ℓ w g : Nat}\n          (H : Lax17.PathOfSets.HairySystem G ℓ w),\n          instLENat.le 2 g →\n            instLENat.le g ℓ →\n              instLENat.le (instHMul.hMul (instHMul.hMul c (instHPow.hPow g 10)) (instHPow.hPow (Nat.log 2 g) d)) w →\n                Or (Lax17.GridMinor.ContainsGridMinor G g)\n                  (∀ (i : Fin ℓ),\n                    Nonempty (Lax17.Crossbar.System G (H.base.left i) (H.base.right i) (H.hairEndpoint i) g))))",
+          "doc": "At the exponent-ten scale, a hairy path-of-sets system either already\ncontains the target grid or supplies a local crossbar at every position.",
+          "startLine": 19,
+          "endLine": 33
+        }
+      ]
+    },
+    {
+      "id": "Lax17.Grid",
+      "path": "concepts/Lax17/Grid.lean",
+      "title": "Square grid graphs",
+      "type": "definition",
+      "description": "The square grid of order \\(g\\) has vertex set\n\\(\\{0,\\ldots,g-1\\}\\times\\{0,\\ldots,g-1\\}\\). Two vertices are adjacent when\nthey agree in one coordinate and are consecutive in the other.\n\nThe definition is the Cartesian box product of two copies of mathlib's\nfinite path graph. Thus order zero gives the empty graph and order one gives\na single isolated vertex.",
+      "imports": [],
+      "mathlibImports": [
+        "Mathlib.Combinatorics.SimpleGraph.Hasse",
+        "Mathlib.Combinatorics.SimpleGraph.Prod"
+      ],
+      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Hasse\nimport Mathlib.Combinatorics.SimpleGraph.Prod\n\n/-!\n---\ntitle: Square grid graphs\ntype: definition\n---\nThe square grid of order \\(g\\) has vertex set\n\\(\\{0,\\ldots,g-1\\}\\times\\{0,\\ldots,g-1\\}\\). Two vertices are adjacent when\nthey agree in one coordinate and are consecutive in the other.\n\nThe definition is the Cartesian box product of two copies of mathlib's\nfinite path graph. Thus order zero gives the empty graph and order one gives\na single isolated vertex.\n-/\n\nnamespace Lax17.Grid\n\n/-- The canonical `g × g` square grid. -/\ndef squareGrid (g : ℕ) : SimpleGraph (Fin g × Fin g) :=\n  SimpleGraph.pathGraph g □ SimpleGraph.pathGraph g\n\nend Lax17.Grid\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.GridMinor",
+      "path": "concepts/Lax17/GridMinor.lean",
+      "title": "Square grid minors",
+      "type": "definition",
+      "description": "A graph contains a square grid minor of order \\(g\\) when the canonical\n\\(g\\times g\\) square grid is a minor of it.\n\nBecause graph-minor containment is invariant under relabelling, choosing the\ncanonical coordinate grid loses no generality.",
+      "imports": [
+        "Lax17.Grid",
+        "Lax17.Minor"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Grid\nimport Lax17.Minor\n\n/-!\n---\ntitle: Square grid minors\ntype: definition\n---\nA graph contains a square grid minor of order \\(g\\) when the canonical\n\\(g\\times g\\) square grid is a minor of it.\n\nBecause graph-minor containment is invariant under relabelling, choosing the\ncanonical coordinate grid loses no generality.\n-/\n\nnamespace Lax17.GridMinor\n\nuniverse u\n\n/-- `G` contains the `g × g` square grid as a minor. -/\ndef ContainsGridMinor {V : Type u} (G : SimpleGraph V) (g : ℕ) : Prop :=\n  Lax17.Minor.IsMinor (Lax17.Grid.squareGrid g) G\n\nend Lax17.GridMinor\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.HairyPathOfSetsFromTreewidth",
+      "path": "concepts/Lax17/HairyPathOfSetsFromTreewidth.lean",
+      "title": "A hairy path-of-sets system from treewidth",
+      "type": "theorem",
+      "description": "Sufficiently large treewidth produces a hairy strong path-of-sets system.",
+      "imports": [
+        "Lax17.PathOfSets",
+        "Lax17.Treewidth"
+      ],
+      "mathlibImports": [
+        "Mathlib.Data.Nat.Log"
+      ],
+      "sourceText": "import Mathlib.Data.Nat.Log\nimport Lax17.PathOfSets\nimport Lax17.Treewidth\n\n/-!\n---\ntitle: A hairy path-of-sets system from treewidth\ntype: theorem\n---\nSufficiently large treewidth produces a hairy strong path-of-sets system.\n-/\n\nnamespace Lax17.HairyPathOfSetsFromTreewidth\n\nuniverse u\n\n/-- Sufficiently large treewidth produces a hairy strong path-of-sets\nsystem. -/\naxiom hairyPathOfSetsFromTreewidth :\n  ∃ c d : ℕ, 0 < c ∧ 0 < d ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) (ℓ w : ℕ),\n        2 ≤ ℓ → 2 ≤ w →\n          c * ℓ * w * (Nat.log 2 (ℓ * w)) ^ d ≤\n              Lax17.Treewidth.treewidth G →\n            Nonempty (Lax17.PathOfSets.HairySystem G ℓ w)\n\nend Lax17.HairyPathOfSetsFromTreewidth\n",
+      "statements": [
+        {
+          "id": "Lax17.HairyPathOfSetsFromTreewidth.hairyPathOfSetsFromTreewidth",
+          "signature": "hairyPathOfSetsFromTreewidth : Exists fun c =>\n  Exists fun d =>\n    And (instLTNat.lt 0 c)\n      (And (instLTNat.lt 0 d)\n        (∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V) (ℓ w : Nat),\n          instLENat.le 2 ℓ →\n            instLENat.le 2 w →\n              instLENat.le\n                  (instHMul.hMul (instHMul.hMul (instHMul.hMul c ℓ) w)\n                    (instHPow.hPow (Nat.log 2 (instHMul.hMul ℓ w)) d))\n                  (Lax17.Treewidth.treewidth G) →\n                Nonempty (Lax17.PathOfSets.HairySystem G ℓ w)))",
+          "doc": "Sufficiently large treewidth produces a hairy strong path-of-sets\nsystem.",
+          "startLine": 17,
+          "endLine": 26
+        }
+      ]
+    },
+    {
+      "id": "Lax17.HindOellermann",
+      "path": "concepts/Lax17/HindOellermann.lean",
+      "title": "Hind--Oellermann deletion--contraction theorem",
+      "type": "theorem",
+      "description": "Deleting or contracting a nonterminal edge preserves terminal\nelement-connectivity.",
+      "imports": [
+        "Lax17.TerminalConnectivity"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.TerminalConnectivity\n\n/-!\n---\ntitle: Hind--Oellermann deletion--contraction theorem\ntype: theorem\n---\nDeleting or contracting a nonterminal edge preserves terminal\nelement-connectivity.\n-/\n\nnamespace Lax17.HindOellermann\n\nuniverse u v\n\n/-- Hind--Oellermann deletion--contraction for terminal element\nconnectivity. -/\naxiom hindOellermannDeletionContraction :\n  ∀ {V : Type u} [Fintype V] [DecidableEq V]\n    (H : Lax17.TerminalConnectivity.EdgeIndexedGraph V)\n    (terminals : Finset V) (k : ℕ) (e₀ : H.Edge),\n      H.left e₀ ∉ terminals → H.right e₀ ∉ terminals →\n        H.TerminalElementConnectedAtLeast terminals k →\n          (H.deleteEdge e₀).TerminalElementConnectedAtLeast terminals k ∨\n            ∃ (W : Type v) (_ : Fintype W) (_ : DecidableEq W)\n              (K : Lax17.TerminalConnectivity.EdgeIndexedGraph W)\n              (mapVertex : V → W),\n                Nonempty (H.IsContraction e₀ K mapVertex) ∧\n                  K.TerminalElementConnectedAtLeast\n                    (Lax17.TerminalConnectivity.EdgeIndexedGraph.terminalImage\n                      mapVertex terminals) k\n\nend Lax17.HindOellermann\n",
+      "statements": [
+        {
+          "id": "Lax17.HindOellermann.hindOellermannDeletionContraction",
+          "signature": "hindOellermannDeletionContraction : ∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (H : Lax17.TerminalConnectivity.EdgeIndexedGraph V)\n  (terminals : Finset V) (k : Nat) (e₀ : H.Edge),\n  Not (SetLike.instMembership.mem terminals (H.left e₀)) →\n    Not (SetLike.instMembership.mem terminals (H.right e₀)) →\n      H.TerminalElementConnectedAtLeast terminals k →\n        Or ((H.deleteEdge e₀).TerminalElementConnectedAtLeast terminals k)\n          (Exists fun W =>\n            Exists fun x =>\n              Exists fun x_1 =>\n                Exists fun K =>\n                  Exists fun mapVertex =>\n                    And (Nonempty (H.IsContraction e₀ K mapVertex))\n                      (K.TerminalElementConnectedAtLeast\n                        (Lax17.TerminalConnectivity.EdgeIndexedGraph.terminalImage mapVertex terminals) k))",
+          "doc": "Hind--Oellermann deletion--contraction for terminal element\nconnectivity.",
+          "startLine": 16,
+          "endLine": 31
+        }
+      ]
+    },
+    {
+      "id": "Lax17.Linkedness",
+      "path": "concepts/Lax17/Linkedness.lean",
+      "title": "Linked terminal sets",
+      "type": "definition",
+      "description": "Two terminal sets are linked inside a cluster when equally large subsets can\nbe joined by that many vertex-disjoint paths contained in the cluster.  A\nterminal set is node-well-linked when every two disjoint equally large subsets\nof it are linked.  The edge versions replace vertex-disjointness by\nedge-disjointness.",
+      "imports": [
+        "Lax17.Paths"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Paths\n\n/-!\n---\ntitle: Linked terminal sets\ntype: definition\n---\nTwo terminal sets are linked inside a cluster when equally large subsets can\nbe joined by that many vertex-disjoint paths contained in the cluster.  A\nterminal set is node-well-linked when every two disjoint equally large subsets\nof it are linked.  The edge versions replace vertex-disjointness by\nedge-disjointness.\n-/\n\nnamespace Lax17.Linkedness\n\nuniverse u\n\nopen Lax17.Paths\n\n/-- `A` and `B` are node-linked by paths contained in `C`. -/\ndef NodeLinkedIn {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C A B : Finset V) : Prop :=\n  ∀ A' B' : Finset V,\n    A' ⊆ A → B' ⊆ B → A'.card = B'.card →\n      ∃ P : VertexLinkage G A' B' A'.card,\n        ∀ i : Fin A'.card, (P.path i).StaysIn C\n\n/-- `X` is node-well-linked inside `C`. -/\ndef NodeWellLinkedIn {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C X : Finset V) : Prop :=\n  ∀ A B : Finset V,\n    A ⊆ X → B ⊆ X → Disjoint A B → A.card = B.card →\n      ∃ P : VertexLinkage G A B A.card,\n        ∀ i : Fin A.card, (P.path i).StaysIn C\n\n/-- `A` and `B` are edge-linked by paths contained in `C`. -/\ndef EdgeLinkedIn {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C A B : Finset V) : Prop :=\n  ∀ A' B' : Finset V,\n    A' ⊆ A → B' ⊆ B → A'.card = B'.card →\n      ∃ P : EdgeLinkage G A' B' A'.card,\n        ∀ i : Fin A'.card, (P.path i).StaysIn C\n\n/-- `X` is edge-well-linked inside `C`. -/\ndef EdgeWellLinkedIn {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C X : Finset V) : Prop :=\n  ∀ A B : Finset V,\n    A ⊆ X → B ⊆ X → Disjoint A B → A.card = B.card →\n      ∃ P : EdgeLinkage G A B A.card,\n        ∀ i : Fin A.card, (P.path i).StaysIn C\n\nend Lax17.Linkedness\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.LocalRoutingOrGrid",
+      "path": "concepts/Lax17/LocalRoutingOrGrid.lean",
+      "title": "Local routing-or-grid alternative",
+      "type": "theorem",
+      "description": "In one strong cluster, large equal terminal sets either admit the desired\nlocal routing or force the target grid minor.",
+      "imports": [
+        "Lax17.GridMinor",
+        "Lax17.PathOfSets"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.GridMinor\nimport Lax17.PathOfSets\n\n/-!\n---\ntitle: Local routing-or-grid alternative\ntype: theorem\n---\nIn one strong cluster, large equal terminal sets either admit the desired\nlocal routing or force the target grid minor.\n-/\n\nnamespace Lax17.LocalRoutingOrGrid\n\nuniverse u\n\n/-- In one strong cluster, large equal terminal sets either admit the desired\nlocal routing or force the target grid minor. -/\naxiom localRoutingOrGrid :\n  ∃ c : ℕ, 0 < c ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) {ℓ w g k : ℕ}\n      (P : Lax17.PathOfSets.StrongSystem G ℓ w)\n      (i : Fin ℓ) (A B : Finset V),\n        A ⊆ P.cluster i → B ⊆ P.cluster i →\n          Disjoint A B → A.card = k → B.card = k →\n            2 ≤ g → c * g ^ 2 ≤ k →\n              Lax17.GridMinor.ContainsGridMinor G g ∨\n                ∃ Q : Lax17.Paths.VertexLinkage G A B k,\n                  ∀ j : Fin k, (Q.path j).StaysIn (P.cluster i)\n\nend Lax17.LocalRoutingOrGrid\n",
+      "statements": [
+        {
+          "id": "Lax17.LocalRoutingOrGrid.localRoutingOrGrid",
+          "signature": "localRoutingOrGrid : Exists fun c =>\n  And (instLTNat.lt 0 c)\n    (∀ {V : Type u} [Fintype V] [inst : DecidableEq V] (G : SimpleGraph V) {ℓ w g k : Nat}\n      (P : Lax17.PathOfSets.StrongSystem G ℓ w) (i : Fin ℓ) (A B : Finset V),\n      Finset.instHasSubset.Subset A (P.cluster i) →\n        Finset.instHasSubset.Subset B (P.cluster i) →\n          Disjoint A B →\n            Eq A.card k →\n              Eq B.card k →\n                instLENat.le 2 g →\n                  instLENat.le (instHMul.hMul c (instHPow.hPow g 2)) k →\n                    Or (Lax17.GridMinor.ContainsGridMinor G g)\n                      (Exists fun Q => ∀ (j : Fin k), (Q.path j).StaysIn (P.cluster i)))",
+          "doc": "In one strong cluster, large equal terminal sets either admit the desired\nlocal routing or force the target grid minor.",
+          "startLine": 17,
+          "endLine": 30
+        }
+      ]
+    },
+    {
+      "id": "Lax17.LowDegreeWellLinkedCore",
+      "path": "concepts/Lax17/LowDegreeWellLinkedCore.lean",
+      "title": "A low-degree well-linked core",
+      "type": "theorem",
+      "description": "A sufficiently large node-well-linked set contains a large subcubic\nwell-linked core in a spanning subgraph.",
+      "imports": [
+        "Lax17.Degree",
+        "Lax17.Linkedness"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Degree\nimport Lax17.Linkedness\n\n/-!\n---\ntitle: A low-degree well-linked core\ntype: theorem\n---\nA sufficiently large node-well-linked set contains a large subcubic\nwell-linked core in a spanning subgraph.\n-/\n\nnamespace Lax17.LowDegreeWellLinkedCore\n\nuniverse u\n\n/-- A sufficiently large node-well-linked set has a large subcubic\nwell-linked core in a spanning subgraph. -/\naxiom lowDegreeWellLinkedCore :\n  ∃ c : ℕ, 0 < c ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) (X : Finset V) {k : ℕ},\n        Lax17.Linkedness.NodeWellLinkedIn G Finset.univ X →\n          c * k ≤ X.card →\n            ∃ H : SimpleGraph V, ∃ Y : Finset V,\n              H ≤ G ∧ Y ⊆ X ∧ k ≤ Y.card ∧\n                Lax17.Degree.MaximumAtMost H 3 ∧\n                  Lax17.Linkedness.NodeWellLinkedIn H Finset.univ Y\n\nend Lax17.LowDegreeWellLinkedCore\n",
+      "statements": [
+        {
+          "id": "Lax17.LowDegreeWellLinkedCore.lowDegreeWellLinkedCore",
+          "signature": "lowDegreeWellLinkedCore : Exists fun c =>\n  And (instLTNat.lt 0 c)\n    (∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V) (X : Finset V) {k : Nat},\n      Lax17.Linkedness.NodeWellLinkedIn G Finset.univ X →\n        instLENat.le (instHMul.hMul c k) X.card →\n          Exists fun H =>\n            Exists fun Y =>\n              And (SimpleGraph.instLE.le H G)\n                (And (Finset.instHasSubset.Subset Y X)\n                  (And (instLENat.le k Y.card)\n                    (And (Lax17.Degree.MaximumAtMost H 3) (Lax17.Linkedness.NodeWellLinkedIn H Finset.univ Y)))))",
+          "doc": "A sufficiently large node-well-linked set has a large subcubic\nwell-linked core in a spanning subgraph.",
+          "startLine": 17,
+          "endLine": 28
+        }
+      ]
+    },
+    {
+      "id": "Lax17.Mader",
+      "path": "concepts/Lax17/Mader.lean",
+      "title": "Mader's admissible split-off theorem",
+      "type": "theorem",
+      "description": "Every eligible splitting centre has a pair of incident edges whose split-off\npreserves the relevant local edge-connectivities.",
+      "imports": [
+        "Lax17.TerminalConnectivity"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.TerminalConnectivity\n\n/-!\n---\ntitle: Mader's admissible split-off theorem\ntype: theorem\n---\nEvery eligible splitting centre has a pair of incident edges whose split-off\npreserves the relevant local edge-connectivities.\n-/\n\nnamespace Lax17.Mader\n\nuniverse u\n\n/-- Mader's admissible split-off theorem, including the exceptional\ndegree-three exclusion. -/\naxiom maderAdmissibleSplitOff :\n  ∀ {V : Type u} [Fintype V] [DecidableEq V]\n    (H : Lax17.TerminalConnectivity.EdgeIndexedGraph V) (s : V),\n      2 ≤ H.degree s → H.degree s ≠ 3 → H.NoIncidentCutEdge s →\n        ∃ p : H.SplitPair s, H.IsMaderAdmissible p\n\nend Lax17.Mader\n",
+      "statements": [
+        {
+          "id": "Lax17.Mader.maderAdmissibleSplitOff",
+          "signature": "maderAdmissibleSplitOff : ∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (H : Lax17.TerminalConnectivity.EdgeIndexedGraph V) (s : V),\n  instLENat.le 2 (H.degree s) → Ne (H.degree s) 3 → H.NoIncidentCutEdge s → Exists fun p => H.IsMaderAdmissible p",
+          "doc": "Mader's admissible split-off theorem, including the exceptional\ndegree-three exclusion.",
+          "startLine": 16,
+          "endLine": 22
+        }
+      ]
+    },
+    {
+      "id": "Lax17.Minor",
+      "path": "concepts/Lax17/Minor.lean",
+      "title": "Graph minors",
+      "type": "definition",
+      "description": "A graph \\(H\\) is a minor of a graph \\(G\\) when every vertex of \\(H\\) can be\nrepresented by a nonempty connected branch set of vertices of \\(G\\), distinct\nbranch sets are disjoint, and every edge of \\(H\\) is represented by an edge of\n\\(G\\) between the corresponding branch sets.\n\nThis is the standard branch-set definition. It applies to arbitrary simple\ngraphs; the polynomial grid-minor theorem later specializes the host graph to\na finite vertex type.",
+      "imports": [],
+      "mathlibImports": [
+        "Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected"
+      ],
+      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected\n\n/-!\n---\ntitle: Graph minors\ntype: definition\n---\nA graph \\(H\\) is a minor of a graph \\(G\\) when every vertex of \\(H\\) can be\nrepresented by a nonempty connected branch set of vertices of \\(G\\), distinct\nbranch sets are disjoint, and every edge of \\(H\\) is represented by an edge of\n\\(G\\) between the corresponding branch sets.\n\nThis is the standard branch-set definition. It applies to arbitrary simple\ngraphs; the polynomial grid-minor theorem later specializes the host graph to\na finite vertex type.\n-/\n\nnamespace Lax17.Minor\n\nuniverse u v\n\n/-- Branch-set data witnessing that `H` is a minor of `G`. -/\nstructure Model {W : Type u} {V : Type v}\n    (H : SimpleGraph W) (G : SimpleGraph V) where\n  /-- The branch set representing each vertex of `H`. -/\n  branchSet : W → Set V\n  /-- Every branch set is nonempty. -/\n  branch_nonempty : ∀ w : W, (branchSet w).Nonempty\n  /-- Every branch set induces a connected graph in `G`. -/\n  branch_connected :\n    ∀ w : W, (G.induce (branchSet w)).Connected\n  /-- Branch sets representing distinct vertices are disjoint. -/\n  branch_disjoint :\n    ∀ ⦃x y : W⦄, x ≠ y → Disjoint (branchSet x) (branchSet y)\n  /-- Every edge of `H` is represented by an edge between branch sets. -/\n  adjacent :\n    ∀ ⦃x y : W⦄, H.Adj x y →\n      ∃ a ∈ branchSet x, ∃ b ∈ branchSet y, G.Adj a b\n\n/-- `H` is a graph minor of `G`. -/\ndef IsMinor {W : Type u} {V : Type v}\n    (H : SimpleGraph W) (G : SimpleGraph V) : Prop :=\n  Nonempty (Model H G)\n\nend Lax17.Minor\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.NodeWellLinkedSetFromTreewidth",
+      "path": "concepts/Lax17/NodeWellLinkedSetFromTreewidth.lean",
+      "title": "A well-linked set from treewidth",
+      "type": "theorem",
+      "description": "Large treewidth yields a proportionally large node-well-linked set.",
+      "imports": [
+        "Lax17.Linkedness",
+        "Lax17.Treewidth"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Linkedness\nimport Lax17.Treewidth\n\n/-!\n---\ntitle: A well-linked set from treewidth\ntype: theorem\n---\nLarge treewidth yields a proportionally large node-well-linked set.\n-/\n\nnamespace Lax17.NodeWellLinkedSetFromTreewidth\n\nuniverse u\n\n/-- Large treewidth yields a large node-well-linked vertex set. -/\naxiom nodeWellLinkedSetFromTreewidth :\n  ∃ c : ℕ, 0 < c ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) {k : ℕ},\n        c * k ≤ Lax17.Treewidth.treewidth G →\n          ∃ X : Finset V,\n            k ≤ X.card ∧\n              Lax17.Linkedness.NodeWellLinkedIn G Finset.univ X\n\nend Lax17.NodeWellLinkedSetFromTreewidth\n",
+      "statements": [
+        {
+          "id": "Lax17.NodeWellLinkedSetFromTreewidth.nodeWellLinkedSetFromTreewidth",
+          "signature": "nodeWellLinkedSetFromTreewidth : Exists fun c =>\n  And (instLTNat.lt 0 c)\n    (∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V) {k : Nat},\n      instLENat.le (instHMul.hMul c k) (Lax17.Treewidth.treewidth G) →\n        Exists fun X => And (instLENat.le k X.card) (Lax17.Linkedness.NodeWellLinkedIn G Finset.univ X))",
+          "doc": "Large treewidth yields a large node-well-linked vertex set.",
+          "startLine": 16,
+          "endLine": 24
+        }
+      ]
+    },
+    {
+      "id": "Lax17.ParallelClusterSplitting",
+      "path": "concepts/Lax17/ParallelClusterSplitting.lean",
+      "title": "Parallel cluster splitting",
+      "type": "theorem",
+      "description": "Three large linked terminal sets in one cluster can be retained in three\npairwise disjoint connected subclusters.",
+      "imports": [
+        "Lax17.PathOfSets"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.PathOfSets\n\n/-!\n---\ntitle: Parallel cluster splitting\ntype: theorem\n---\nThree large linked terminal sets in one cluster can be retained in three\npairwise disjoint connected subclusters.\n-/\n\nnamespace Lax17.ParallelClusterSplitting\n\nuniverse u\n\n/-- Three large linked terminal sets in one cluster can be retained in three\npairwise disjoint connected subclusters. -/\naxiom parallelClusterSplitting :\n  ∃ c : ℕ, 0 < c ∧\n    ∀ {V : Type u} [DecidableEq V] (G : SimpleGraph V)\n      (C A B X : Finset V) (q : ℕ),\n        Lax17.PathOfSets.IsCluster G C →\n          A ⊆ C → B ⊆ C → X ⊆ C →\n            Disjoint A B → Disjoint A X → Disjoint B X →\n              Lax17.Linkedness.NodeWellLinkedIn G C (A ∪ B ∪ X) →\n                c * q ≤ A.card → c * q ≤ B.card → c * q ≤ X.card →\n                  Nonempty\n                    (Lax17.PathOfSets.ThreeWayClusterSplit\n                      G C A B X q)\n\nend Lax17.ParallelClusterSplitting\n",
+      "statements": [
+        {
+          "id": "Lax17.ParallelClusterSplitting.parallelClusterSplitting",
+          "signature": "parallelClusterSplitting : Exists fun c =>\n  And (instLTNat.lt 0 c)\n    (∀ {V : Type u} [inst : DecidableEq V] (G : SimpleGraph V) (C A B X : Finset V) (q : Nat),\n      Lax17.PathOfSets.IsCluster G C →\n        Finset.instHasSubset.Subset A C →\n          Finset.instHasSubset.Subset B C →\n            Finset.instHasSubset.Subset X C →\n              Disjoint A B →\n                Disjoint A X →\n                  Disjoint B X →\n                    Lax17.Linkedness.NodeWellLinkedIn G C (Finset.instUnion.union (Finset.instUnion.union A B) X) →\n                      instLENat.le (instHMul.hMul c q) A.card →\n                        instLENat.le (instHMul.hMul c q) B.card →\n                          instLENat.le (instHMul.hMul c q) X.card →\n                            Nonempty (Lax17.PathOfSets.ThreeWayClusterSplit G C A B X q))",
+          "doc": "Three large linked terminal sets in one cluster can be retained in three\npairwise disjoint connected subclusters.",
+          "startLine": 16,
+          "endLine": 29
+        }
+      ]
+    },
+    {
+      "id": "Lax17.PathOfSets",
+      "path": "concepts/Lax17/PathOfSets.lean",
+      "title": "Strong and hairy path-of-sets systems",
+      "type": "definition",
+      "description": "A path-of-sets system is an ordered sequence of pairwise disjoint connected\nclusters.  Each cluster has equally large, disjoint left and right interfaces,\nand consecutive interfaces are joined by disjoint path families that otherwise\navoid every cluster.  It is strong when the two interfaces are well-linked and\nmutually linked inside each cluster.\n\nA hairy path-of-sets system adds one disjoint connected hair cluster at every\nposition and a disjoint linkage from the base cluster to that hair.  Its\nhair-side endpoints are well-linked in the hair cluster.",
+      "imports": [
+        "Lax17.Linkedness"
+      ],
+      "mathlibImports": [
+        "Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected"
+      ],
+      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Connectivity.Connected\nimport Lax17.Linkedness\n\n/-!\n---\ntitle: Strong and hairy path-of-sets systems\ntype: definition\n---\nA path-of-sets system is an ordered sequence of pairwise disjoint connected\nclusters.  Each cluster has equally large, disjoint left and right interfaces,\nand consecutive interfaces are joined by disjoint path families that otherwise\navoid every cluster.  It is strong when the two interfaces are well-linked and\nmutually linked inside each cluster.\n\nA hairy path-of-sets system adds one disjoint connected hair cluster at every\nposition and a disjoint linkage from the base cluster to that hair.  Its\nhair-side endpoints are well-linked in the hair cluster.\n-/\n\nnamespace Lax17.PathOfSets\n\nuniverse u\n\nopen Lax17.Linkedness\nopen Lax17.Paths\n\n/-- A finite vertex set inducing a connected graph. -/\ndef IsCluster {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C : Finset V) : Prop :=\n  (G.induce {v : V | v ∈ C}).Connected\n\n/-- A path-of-sets system of length `ℓ` and width `w`. -/\nstructure System {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (ℓ w : ℕ) where\n  length_pos : 0 < ℓ\n  width_pos : 0 < w\n  cluster : Fin ℓ → Finset V\n  cluster_connected : ∀ i : Fin ℓ, IsCluster G (cluster i)\n  cluster_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄, i ≠ j → Disjoint (cluster i) (cluster j)\n  left : Fin ℓ → Finset V\n  right : Fin ℓ → Finset V\n  left_subset : ∀ i : Fin ℓ, left i ⊆ cluster i\n  right_subset : ∀ i : Fin ℓ, right i ⊆ cluster i\n  interfaces_disjoint : ∀ i : Fin ℓ, Disjoint (left i) (right i)\n  left_card : ∀ i : Fin ℓ, (left i).card = w\n  right_card : ∀ i : Fin ℓ, (right i).card = w\n  connector :\n    (i : Fin ℓ) → (hi : i.1 + 1 < ℓ) →\n      VertexLinkage G (right i) (left ⟨i.1 + 1, hi⟩) w\n  connector_avoids_clusters :\n    ∀ (i : Fin ℓ) (hi : i.1 + 1 < ℓ) (j : Fin ℓ)\n      (a : Fin w),\n        (connector i hi).path a |>.InternallyAvoids (cluster j)\n  connectors_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄ (hi : i.1 + 1 < ℓ) (hj : j.1 + 1 < ℓ),\n      i ≠ j → ∀ a b : Fin w,\n        Disjoint ((connector i hi).path a).vertices\n          ((connector j hj).path b).vertices\n\n/-- A strong path-of-sets system. -/\nstructure StrongSystem {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (ℓ w : ℕ) extends System G ℓ w where\n  left_well_linked :\n    ∀ i : Fin ℓ, NodeWellLinkedIn G (cluster i) (left i)\n  right_well_linked :\n    ∀ i : Fin ℓ, NodeWellLinkedIn G (cluster i) (right i)\n  interfaces_linked :\n    ∀ i : Fin ℓ, NodeLinkedIn G (cluster i) (left i) (right i)\n\n/-- A hairy path-of-sets system. -/\nstructure HairySystem {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (ℓ w : ℕ) where\n  base : StrongSystem G ℓ w\n  hairCluster : Fin ℓ → Finset V\n  hair_connected : ∀ i : Fin ℓ, IsCluster G (hairCluster i)\n  hair_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄, i ≠ j → Disjoint (hairCluster i) (hairCluster j)\n  hair_disjoint_base :\n    ∀ i j : Fin ℓ, Disjoint (hairCluster i) (base.cluster j)\n  baseEndpoint : Fin ℓ → Finset V\n  hairEndpoint : Fin ℓ → Finset V\n  baseEndpoint_subset :\n    ∀ i : Fin ℓ, baseEndpoint i ⊆ base.cluster i\n  hairEndpoint_subset :\n    ∀ i : Fin ℓ, hairEndpoint i ⊆ hairCluster i\n  baseEndpoint_card : ∀ i : Fin ℓ, (baseEndpoint i).card = w\n  hairEndpoint_card : ∀ i : Fin ℓ, (hairEndpoint i).card = w\n  baseEndpoint_avoids_interfaces :\n    ∀ i : Fin ℓ,\n      Disjoint (baseEndpoint i) (base.left i ∪ base.right i)\n  hairEndpoint_well_linked :\n    ∀ i : Fin ℓ,\n      NodeWellLinkedIn G (hairCluster i) (hairEndpoint i)\n  hairLinkage :\n    ∀ i : Fin ℓ,\n      VertexLinkage G (baseEndpoint i) (hairEndpoint i) w\n  hair_linkages_disjoint :\n    ∀ ⦃i j : Fin ℓ⦄, i ≠ j → ∀ a b : Fin w,\n      Disjoint ((hairLinkage i).path a).vertices\n        ((hairLinkage j).path b).vertices\n\n/-- The output of splitting one connected cluster into three disjoint\nconnected subclusters while retaining prescribed terminal subsets. -/\nstructure ThreeWayClusterSplit {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (C A B X : Finset V) (q : ℕ) where\n  firstCluster : Finset V\n  secondCluster : Finset V\n  thirdCluster : Finset V\n  first_subset : firstCluster ⊆ C\n  second_subset : secondCluster ⊆ C\n  third_subset : thirdCluster ⊆ C\n  first_connected : IsCluster G firstCluster\n  second_connected : IsCluster G secondCluster\n  third_connected : IsCluster G thirdCluster\n  first_second_disjoint : Disjoint firstCluster secondCluster\n  first_third_disjoint : Disjoint firstCluster thirdCluster\n  second_third_disjoint : Disjoint secondCluster thirdCluster\n  firstTerminals : Finset V\n  secondTerminals : Finset V\n  thirdTerminals : Finset V\n  firstTerminals_subset :\n    firstTerminals ⊆ A ∩ firstCluster\n  secondTerminals_subset :\n    secondTerminals ⊆ B ∩ secondCluster\n  thirdTerminals_subset :\n    thirdTerminals ⊆ X ∩ thirdCluster\n  first_card : firstTerminals.card = q\n  second_card : secondTerminals.card = q\n  third_card : thirdTerminals.card = q\n  first_well_linked :\n    NodeWellLinkedIn G firstCluster firstTerminals\n  second_well_linked :\n    NodeWellLinkedIn G secondCluster secondTerminals\n  third_well_linked :\n    NodeWellLinkedIn G thirdCluster thirdTerminals\n\nend Lax17.PathOfSets\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.Paths",
+      "path": "concepts/Lax17/Paths.lean",
+      "title": "Paths, linkages, and separators",
+      "type": "definition",
+      "description": "A path is a simple finite walk with named endpoints.  A vertex linkage is an\nindexed family of paths joining two terminal sets whose vertex sets are\npairwise disjoint; an edge linkage asks instead that their edge sets be\npairwise disjoint.  Vertex and edge separators are finite sets meeting every\npath between the terminal sets.\n\nAll endpoint conventions are oriented.  Reversing every path gives the\ncorresponding unoriented formulation.",
+      "imports": [],
+      "mathlibImports": [
+        "Mathlib.Combinatorics.SimpleGraph.Paths",
+        "Mathlib.Data.Finset.Sym"
+      ],
+      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Paths\nimport Mathlib.Data.Finset.Sym\n\n/-!\n---\ntitle: Paths, linkages, and separators\ntype: definition\n---\nA path is a simple finite walk with named endpoints.  A vertex linkage is an\nindexed family of paths joining two terminal sets whose vertex sets are\npairwise disjoint; an edge linkage asks instead that their edge sets be\npairwise disjoint.  Vertex and edge separators are finite sets meeting every\npath between the terminal sets.\n\nAll endpoint conventions are oriented.  Reversing every path gives the\ncorresponding unoriented formulation.\n-/\n\nnamespace Lax17.Paths\n\nuniverse u\n\n/-- A simple finite path in `G`, with its orientation recorded. -/\nstructure Path {V : Type u} (G : SimpleGraph V) where\n  source : V\n  target : V\n  walk : G.Walk source target\n  simple : walk.IsPath\n\nnamespace Path\n\n/-- The finite set of vertices used by a path. -/\nnoncomputable def vertices {V : Type u} [DecidableEq V] {G : SimpleGraph V}\n    (P : Path G) : Finset V :=\n  P.walk.support.toFinset\n\n/-- The finite set of edges used by a path. -/\nnoncomputable def edges {V : Type u} [DecidableEq V] {G : SimpleGraph V}\n    (P : Path G) : Finset (Sym2 V) :=\n  P.walk.edges.toFinset\n\n/-- `P` is oriented from `A` to `B`. -/\ndef Connects {V : Type u} [DecidableEq V] {G : SimpleGraph V}\n    (P : Path G) (A B : Finset V) : Prop :=\n  P.source ∈ A ∧ P.target ∈ B\n\n/-- Every vertex of `P` lies in `C`. -/\ndef StaysIn {V : Type u} [DecidableEq V] {G : SimpleGraph V}\n    (P : Path G) (C : Finset V) : Prop :=\n  P.vertices ⊆ C\n\n/-- The internal vertices of `P` avoid `X`. -/\ndef InternallyAvoids {V : Type u} [DecidableEq V] {G : SimpleGraph V}\n    (P : Path G) (X : Finset V) : Prop :=\n  ∀ v ∈ P.vertices, v ∈ X → v = P.source ∨ v = P.target\n\nend Path\n\n/-- Exactly `k` pairwise vertex-disjoint paths oriented from `A` to `B`. -/\nstructure VertexLinkage {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (A B : Finset V) (k : ℕ) where\n  path : Fin k → Path G\n  connects : ∀ i : Fin k, (path i).Connects A B\n  vertex_disjoint :\n    Pairwise fun i j => Disjoint (path i).vertices (path j).vertices\n\n/-- Exactly `k` pairwise edge-disjoint paths oriented from `A` to `B`. -/\nstructure EdgeLinkage {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (A B : Finset V) (k : ℕ) where\n  path : Fin k → Path G\n  connects : ∀ i : Fin k, (path i).Connects A B\n  edge_disjoint :\n    Pairwise fun i j => Disjoint (path i).edges (path j).edges\n\n/-- A vertex set meeting every oriented `A`-to-`B` path. -/\ndef IsVertexSeparator {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (A B X : Finset V) : Prop :=\n  ∀ P : Path G, P.Connects A B →\n    ∃ v ∈ P.vertices, v ∈ X\n\n/-- An edge set meeting every oriented `A`-to-`B` path. -/\ndef IsEdgeSeparator {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (A B : Finset V) (F : Finset (Sym2 V)) : Prop :=\n  ∀ P : Path G, P.Connects A B →\n    ∃ e ∈ P.edges, e ∈ F\n\nend Lax17.Paths\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.PolynomialGridMinor",
+      "path": "concepts/Lax17/PolynomialGridMinor.lean",
+      "title": "Polynomial grid-minor theorem with exponent ten",
+      "type": "theorem",
+      "description": "There are positive universal constants \\(c\\) and \\(d\\) such that, for every\ninteger \\(g\\geq 2\\), every finite simple graph of treewidth at least\n\\(c g^{10}(\\log_2 g)^d\\) contains the \\(g\\times g\\) square grid as a minor.\n\nTreewidth is the parameter defined by the `Lax17.Treewidth` concept. The\nexplicit exponent-ten statement is the weaker Section 4 consequence of\nChuzhoy and Tan's polynomial excluded-grid theorem.",
+      "imports": [
+        "Lax17.GridMinor",
+        "Lax17.Treewidth"
+      ],
+      "mathlibImports": [
+        "Mathlib.Data.Nat.Log"
+      ],
+      "sourceText": "import Mathlib.Data.Nat.Log\nimport Lax17.GridMinor\nimport Lax17.Treewidth\n\n/-!\n---\ntitle: Polynomial grid-minor theorem with exponent ten\ntype: theorem\n---\nThere are positive universal constants \\(c\\) and \\(d\\) such that, for every\ninteger \\(g\\geq 2\\), every finite simple graph of treewidth at least\n\\(c g^{10}(\\log_2 g)^d\\) contains the \\(g\\times g\\) square grid as a minor.\n\nTreewidth is the parameter defined by the `Lax17.Treewidth` concept. The\nexplicit exponent-ten statement is the weaker Section 4 consequence of\nChuzhoy and Tan's polynomial excluded-grid theorem.\n-/\n\nnamespace Lax17.PolynomialGridMinor\n\nuniverse u\n\n/-- The exponent-ten polynomial excluded-grid theorem. -/\naxiom polynomial_grid_minor :\n    ∃ c d : ℕ, 0 < c ∧ 0 < d ∧\n      ∀ {V : Type u} [Fintype V] [DecidableEq V]\n        (G : SimpleGraph V) {g : ℕ},\n          2 ≤ g →\n            c * g ^ 10 * (Nat.log 2 g) ^ d ≤\n                Lax17.Treewidth.treewidth G →\n              Lax17.GridMinor.ContainsGridMinor G g\n\nend Lax17.PolynomialGridMinor\n",
+      "statements": [
+        {
+          "id": "Lax17.PolynomialGridMinor.polynomial_grid_minor",
+          "signature": "polynomial_grid_minor : Exists fun c =>\n  Exists fun d =>\n    And (instLTNat.lt 0 c)\n      (And (instLTNat.lt 0 d)\n        (∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V) {g : Nat},\n          instLENat.le 2 g →\n            instLENat.le (instHMul.hMul (instHMul.hMul c (instHPow.hPow g 10)) (instHPow.hPow (Nat.log 2 g) d))\n                (Lax17.Treewidth.treewidth G) →\n              Lax17.GridMinor.ContainsGridMinor G g))",
+          "doc": "The exponent-ten polynomial excluded-grid theorem.",
+          "startLine": 23,
+          "endLine": 31
+        }
+      ]
+    },
+    {
+      "id": "Lax17.SinghLau",
+      "path": "concepts/Lax17/SinghLau.lean",
+      "title": "Singh--Lau bounded-degree spanning-tree theorem",
+      "type": "theorem",
+      "description": "A feasible bounded-degree spanning-tree point can be rounded with an\nadditive-one loss in the maximum degree.",
+      "imports": [
+        "Lax17.Degree",
+        "Lax17.SpanningTreeRounding"
+      ],
+      "mathlibImports": [
+        "Mathlib.Combinatorics.SimpleGraph.Acyclic"
+      ],
+      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Acyclic\nimport Lax17.Degree\nimport Lax17.SpanningTreeRounding\n\n/-!\n---\ntitle: Singh--Lau bounded-degree spanning-tree theorem\ntype: theorem\n---\nA feasible bounded-degree spanning-tree point can be rounded with an\nadditive-one loss in the maximum degree.\n-/\n\nnamespace Lax17.SinghLau\n\nuniverse u\n\n/-- Singh--Lau additive-one bounded-degree spanning-tree rounding. -/\naxiom singhLauBoundedDegreeSpanningTree :\n  ∀ {V : Type u} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V) (B : ℕ),\n      1 < Fintype.card V →\n        Lax17.SpanningTreeRounding.FeasiblePoint G B →\n          ∃ T : SimpleGraph V,\n            T ≤ G ∧ T.IsTree ∧ Lax17.Degree.MaximumAtMost T (B + 1)\n\nend Lax17.SinghLau\n",
+      "statements": [
+        {
+          "id": "Lax17.SinghLau.singhLauBoundedDegreeSpanningTree",
+          "signature": "singhLauBoundedDegreeSpanningTree : ∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V) (B : Nat),\n  instLTNat.lt 1 (Fintype.card V) →\n    ∀ (a : Lax17.SpanningTreeRounding.FeasiblePoint G B),\n      Exists fun T => And (SimpleGraph.instLE.le T G) (And T.IsTree (Lax17.Degree.MaximumAtMost T (instHAdd.hAdd B 1)))",
+          "doc": "Singh--Lau additive-one bounded-degree spanning-tree rounding.",
+          "startLine": 18,
+          "endLine": 25
+        }
+      ]
+    },
+    {
+      "id": "Lax17.SmallLinkedSubsets",
+      "path": "concepts/Lax17/SmallLinkedSubsets.lean",
+      "title": "Linking small terminal subsets",
+      "type": "theorem",
+      "description": "Disjoint equally large subsets of a node-well-linked set can be linked\ninside the same cluster.",
+      "imports": [
+        "Lax17.Linkedness"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Linkedness\n\n/-!\n---\ntitle: Linking small terminal subsets\ntype: theorem\n---\nDisjoint equally large subsets of a node-well-linked set can be linked\ninside the same cluster.\n-/\n\nnamespace Lax17.SmallLinkedSubsets\n\nuniverse u\n\n/-- Disjoint equally large subsets of a node-well-linked set are linked\ninside the same cluster. -/\naxiom smallLinkedSubsets :\n  ∀ {V : Type u} [DecidableEq V] (G : SimpleGraph V)\n    (C X A B : Finset V),\n      Lax17.Linkedness.NodeWellLinkedIn G C X →\n        A ⊆ X → B ⊆ X → Disjoint A B → A.card = B.card →\n          Lax17.Linkedness.NodeLinkedIn G C A B\n\nend Lax17.SmallLinkedSubsets\n",
+      "statements": [
+        {
+          "id": "Lax17.SmallLinkedSubsets.smallLinkedSubsets",
+          "signature": "smallLinkedSubsets : ∀ {V : Type u} [inst : DecidableEq V] (G : SimpleGraph V) (C X A B : Finset V),\n  Lax17.Linkedness.NodeWellLinkedIn G C X →\n    Finset.instHasSubset.Subset A X →\n      Finset.instHasSubset.Subset B X → Disjoint A B → Eq A.card B.card → Lax17.Linkedness.NodeLinkedIn G C A B",
+          "doc": "Disjoint equally large subsets of a node-well-linked set are linked\ninside the same cluster.",
+          "startLine": 16,
+          "endLine": 23
+        }
+      ]
+    },
+    {
+      "id": "Lax17.SpanningTreeRounding",
+      "path": "concepts/Lax17/SpanningTreeRounding.lean",
+      "title": "Bounded-degree spanning-tree relaxation",
+      "type": "definition",
+      "description": "A feasible bounded-degree spanning-tree point assigns nonnegative rational\nweights to the edges, has total weight \\(|V|-1\\), satisfies every forest\ninequality, and has fractional degree at most \\(B\\) at every vertex.  This is\nthe unweighted relaxation used by the Singh--Lau rounding theorem.",
+      "imports": [
+        "Lax17.Degree"
+      ],
+      "mathlibImports": [
+        "Mathlib.Data.Rat.Defs"
+      ],
+      "sourceText": "import Mathlib.Data.Rat.Defs\nimport Lax17.Degree\n\n/-!\n---\ntitle: Bounded-degree spanning-tree relaxation\ntype: definition\n---\nA feasible bounded-degree spanning-tree point assigns nonnegative rational\nweights to the edges, has total weight \\(|V|-1\\), satisfies every forest\ninequality, and has fractional degree at most \\(B\\) at every vertex.  This is\nthe unweighted relaxation used by the Singh--Lau rounding theorem.\n-/\n\nnamespace Lax17.SpanningTreeRounding\n\nuniverse u\n\nopen Finset\n\n/-- Both endpoints of an unordered pair lie in `S`. -/\ndef PairInside {V : Type u} [DecidableEq V]\n    (S : Finset V) : Sym2 V → Prop :=\n  Sym2.lift\n    ⟨fun x y => x ∈ S ∧ y ∈ S, by\n      intro x y\n      exact propext and_comm⟩\n\n/-- The edges from `edges` with both endpoints in `S`. -/\nnoncomputable def internalEdges {V : Type u} [DecidableEq V]\n    (edges : Finset (Sym2 V)) (S : Finset V) : Finset (Sym2 V) := by\n  classical\n  exact edges.filter (PairInside S)\n\n/-- The edges from `edges` incident with `v`. -/\nnoncomputable def incidentEdges {V : Type u} [DecidableEq V]\n    (edges : Finset (Sym2 V)) (v : V) : Finset (Sym2 V) := by\n  classical\n  exact edges.filter fun e => v ∈ e\n\n/-- A feasible point of the bounded-degree spanning-tree relaxation. -/\nstructure FeasiblePoint {V : Type u} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V) (B : ℕ) where\n  /-- A finite enumeration of the host edges. -/\n  edges : Finset (Sym2 V)\n  /-- The enumeration contains exactly the edges of `G`. -/\n  edges_spec : ∀ e : Sym2 V, e ∈ edges ↔ e ∈ G.edgeSet\n  weight : Sym2 V → ℚ\n  nonnegative : ∀ e : Sym2 V, e ∈ edges → 0 ≤ weight e\n  total :\n    edges.sum weight = (Fintype.card V - 1 : ℕ)\n  forest :\n    ∀ S : Finset V, S ≠ Finset.univ →\n      (internalEdges edges S).sum weight ≤ (S.card - 1 : ℕ)\n  degree :\n    ∀ v : V, (incidentEdges edges v).sum weight ≤ B\n\nend Lax17.SpanningTreeRounding\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.StrongPathExtraction",
+      "path": "concepts/Lax17/StrongPathExtraction.lean",
+      "title": "Strong path extraction",
+      "type": "theorem",
+      "description": "An ordered path in the meta-tree of a strong tree-of-sets system yields a\nstrong path-of-sets system on its internal clusters.",
+      "imports": [
+        "Lax17.PathOfSets",
+        "Lax17.TreeOfSets"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.PathOfSets\nimport Lax17.TreeOfSets\n\n/-!\n---\ntitle: Strong path extraction\ntype: theorem\n---\nAn ordered path in the meta-tree of a strong tree-of-sets system yields a\nstrong path-of-sets system on its internal clusters.\n-/\n\nnamespace Lax17.StrongPathExtraction\n\nuniverse u\n\n/-- An ordered meta-tree path yields a strong path-of-sets system on its\ninternal clusters. -/\naxiom strongPathExtraction :\n  ∀ {V : Type u} [DecidableEq V] {G : SimpleGraph V}\n    {m w ℓ : ℕ} (T : Lax17.TreeOfSets.StrongSystem G m w),\n      Lax17.TreeOfSets.HasMetaPath T (ℓ + 2) →\n        Nonempty (Lax17.PathOfSets.StrongSystem G ℓ w)\n\nend Lax17.StrongPathExtraction\n",
+      "statements": [
+        {
+          "id": "Lax17.StrongPathExtraction.strongPathExtraction",
+          "signature": "strongPathExtraction : ∀ {V : Type u} [inst : DecidableEq V] {G : SimpleGraph V} {m w ℓ : Nat} (T : Lax17.TreeOfSets.StrongSystem G m w),\n  Lax17.TreeOfSets.HasMetaPath T (instHAdd.hAdd ℓ 2) → Nonempty (Lax17.PathOfSets.StrongSystem G ℓ w)",
+          "doc": "An ordered meta-tree path yields a strong path-of-sets system on its\ninternal clusters.",
+          "startLine": 17,
+          "endLine": 23
+        }
+      ]
+    },
+    {
+      "id": "Lax17.StrongPathOfSetsContainsGrid",
+      "path": "concepts/Lax17/StrongPathOfSetsContainsGrid.lean",
+      "title": "A grid minor from a strong path-of-sets system",
+      "type": "theorem",
+      "description": "A sufficiently long and wide strong path-of-sets system contains a\nprescribed square grid minor.",
+      "imports": [
+        "Lax17.GridMinor",
+        "Lax17.PathOfSets"
+      ],
+      "mathlibImports": [
+        "Mathlib.Data.Nat.Log"
+      ],
+      "sourceText": "import Mathlib.Data.Nat.Log\nimport Lax17.GridMinor\nimport Lax17.PathOfSets\n\n/-!\n---\ntitle: A grid minor from a strong path-of-sets system\ntype: theorem\n---\nA sufficiently long and wide strong path-of-sets system contains a\nprescribed square grid minor.\n-/\n\nnamespace Lax17.StrongPathOfSetsContainsGrid\n\nuniverse u\n\n/-- A sufficiently long and wide strong path-of-sets system contains a\nprescribed square grid minor. -/\naxiom strongPathOfSetsContainsGrid :\n  ∃ c d : ℕ, 0 < c ∧ 0 < d ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) {ℓ w g : ℕ},\n        Nonempty (Lax17.PathOfSets.StrongSystem G ℓ w) →\n          2 ≤ g → c * g ≤ ℓ →\n            c * g ^ 2 * (Nat.log 2 g) ^ d ≤ w →\n              Lax17.GridMinor.ContainsGridMinor G g\n\nend Lax17.StrongPathOfSetsContainsGrid\n",
+      "statements": [
+        {
+          "id": "Lax17.StrongPathOfSetsContainsGrid.strongPathOfSetsContainsGrid",
+          "signature": "strongPathOfSetsContainsGrid : Exists fun c =>\n  Exists fun d =>\n    And (instLTNat.lt 0 c)\n      (And (instLTNat.lt 0 d)\n        (∀ {V : Type u} [Fintype V] [inst : DecidableEq V] (G : SimpleGraph V) {ℓ w g : Nat},\n          Nonempty (Lax17.PathOfSets.StrongSystem G ℓ w) →\n            instLENat.le 2 g →\n              instLENat.le (instHMul.hMul c g) ℓ →\n                instLENat.le (instHMul.hMul (instHMul.hMul c (instHPow.hPow g 2)) (instHPow.hPow (Nat.log 2 g) d)) w →\n                  Lax17.GridMinor.ContainsGridMinor G g))",
+          "doc": "A sufficiently long and wide strong path-of-sets system contains a\nprescribed square grid minor.",
+          "startLine": 18,
+          "endLine": 27
+        }
+      ]
+    },
+    {
+      "id": "Lax17.StrongPathOfSetsFromTreewidth",
+      "path": "concepts/Lax17/StrongPathOfSetsFromTreewidth.lean",
+      "title": "A strong path-of-sets system from treewidth",
+      "type": "theorem",
+      "description": "Sufficiently large treewidth produces a strong path-of-sets system of\nprescribed length and width.",
+      "imports": [
+        "Lax17.PathOfSets",
+        "Lax17.Treewidth"
+      ],
+      "mathlibImports": [
+        "Mathlib.Data.Nat.Log"
+      ],
+      "sourceText": "import Mathlib.Data.Nat.Log\nimport Lax17.PathOfSets\nimport Lax17.Treewidth\n\n/-!\n---\ntitle: A strong path-of-sets system from treewidth\ntype: theorem\n---\nSufficiently large treewidth produces a strong path-of-sets system of\nprescribed length and width.\n-/\n\nnamespace Lax17.StrongPathOfSetsFromTreewidth\n\nuniverse u\n\n/-- Sufficiently large treewidth produces a strong path-of-sets system of\nprescribed length and width. -/\naxiom strongPathOfSetsFromTreewidth :\n  ∃ c d : ℕ, 0 < c ∧ 0 < d ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) (ℓ w : ℕ),\n        2 ≤ ℓ → 2 ≤ w →\n          c * ℓ * w * (Nat.log 2 (ℓ * w)) ^ d ≤\n              Lax17.Treewidth.treewidth G →\n            Nonempty (Lax17.PathOfSets.StrongSystem G ℓ w)\n\nend Lax17.StrongPathOfSetsFromTreewidth\n",
+      "statements": [
+        {
+          "id": "Lax17.StrongPathOfSetsFromTreewidth.strongPathOfSetsFromTreewidth",
+          "signature": "strongPathOfSetsFromTreewidth : Exists fun c =>\n  Exists fun d =>\n    And (instLTNat.lt 0 c)\n      (And (instLTNat.lt 0 d)\n        (∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V) (ℓ w : Nat),\n          instLENat.le 2 ℓ →\n            instLENat.le 2 w →\n              instLENat.le\n                  (instHMul.hMul (instHMul.hMul (instHMul.hMul c ℓ) w)\n                    (instHPow.hPow (Nat.log 2 (instHMul.hMul ℓ w)) d))\n                  (Lax17.Treewidth.treewidth G) →\n                Nonempty (Lax17.PathOfSets.StrongSystem G ℓ w)))",
+          "doc": "Sufficiently large treewidth produces a strong path-of-sets system of\nprescribed length and width.",
+          "startLine": 18,
+          "endLine": 27
+        }
+      ]
+    },
+    {
+      "id": "Lax17.StrongTreeOfSetsConstruction",
+      "path": "concepts/Lax17/StrongTreeOfSetsConstruction.lean",
+      "title": "Strong tree-of-sets construction",
+      "type": "theorem",
+      "description": "A sufficiently large node-well-linked set supports a strong subcubic\ntree-of-sets system.",
+      "imports": [
+        "Lax17.TreeOfSets"
+      ],
+      "mathlibImports": [
+        "Mathlib.Data.Nat.Log"
+      ],
+      "sourceText": "import Mathlib.Data.Nat.Log\nimport Lax17.TreeOfSets\n\n/-!\n---\ntitle: Strong tree-of-sets construction\ntype: theorem\n---\nA sufficiently large node-well-linked set supports a strong subcubic\ntree-of-sets system.\n-/\n\nnamespace Lax17.StrongTreeOfSetsConstruction\n\nuniverse u\n\n/-- A sufficiently large node-well-linked set supports a strong subcubic\ntree-of-sets system. -/\naxiom strongTreeOfSetsConstruction :\n  ∃ c d : ℕ, 0 < c ∧ 0 < d ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) (X : Finset V) (m w : ℕ),\n        Lax17.Linkedness.NodeWellLinkedIn G Finset.univ X →\n          2 ≤ m → 2 ≤ w →\n            c * m * w * (Nat.log 2 (m * w)) ^ d ≤ X.card →\n              Nonempty (Lax17.TreeOfSets.StrongSystem G m w)\n\nend Lax17.StrongTreeOfSetsConstruction\n",
+      "statements": [
+        {
+          "id": "Lax17.StrongTreeOfSetsConstruction.strongTreeOfSetsConstruction",
+          "signature": "strongTreeOfSetsConstruction : Exists fun c =>\n  Exists fun d =>\n    And (instLTNat.lt 0 c)\n      (And (instLTNat.lt 0 d)\n        (∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V) (X : Finset V) (m w : Nat),\n          Lax17.Linkedness.NodeWellLinkedIn G Finset.univ X →\n            instLENat.le 2 m →\n              instLENat.le 2 w →\n                instLENat.le\n                    (instHMul.hMul (instHMul.hMul (instHMul.hMul c m) w)\n                      (instHPow.hPow (Nat.log 2 (instHMul.hMul m w)) d))\n                    X.card →\n                  Nonempty (Lax17.TreeOfSets.StrongSystem G m w)))",
+          "doc": "A sufficiently large node-well-linked set supports a strong subcubic\ntree-of-sets system.",
+          "startLine": 17,
+          "endLine": 26
+        }
+      ]
+    },
+    {
+      "id": "Lax17.TerminalConnectivity",
+      "path": "concepts/Lax17/TerminalConnectivity.lean",
+      "title": "Terminal element connectivity and split-off operations",
+      "type": "definition",
+      "description": "A finite edge-indexed graph is a loopless undirected multigraph whose parallel\nedge copies retain distinct names.  Terminal element connectivity counts a\nseparator made from nonterminal vertices and edge copies.  Deletion removes\none named edge; contraction identifies its endpoints and discards resulting\nloops; splitting off two edges at a centre replaces them by an edge between\ntheir other endpoints, discarding that edge when it would be a loop.\n\nThese definitions are the natural multigraph language for the\nHind--Oellermann and Mader reductions used in the grid-minor proof.",
+      "imports": [],
+      "mathlibImports": [
+        "Mathlib.Data.Finset.Sym",
+        "Mathlib.Data.Fintype.EquivFin",
+        "Mathlib.Tactic"
+      ],
+      "sourceText": "import Mathlib.Data.Finset.Sym\nimport Mathlib.Data.Fintype.EquivFin\nimport Mathlib.Tactic\n\n/-!\n---\ntitle: Terminal element connectivity and split-off operations\ntype: definition\n---\nA finite edge-indexed graph is a loopless undirected multigraph whose parallel\nedge copies retain distinct names.  Terminal element connectivity counts a\nseparator made from nonterminal vertices and edge copies.  Deletion removes\none named edge; contraction identifies its endpoints and discards resulting\nloops; splitting off two edges at a centre replaces them by an edge between\ntheir other endpoints, discarding that edge when it would be a loop.\n\nThese definitions are the natural multigraph language for the\nHind--Oellermann and Mader reductions used in the grid-minor proof.\n-/\n\nnamespace Lax17.TerminalConnectivity\n\nuniverse u v\n\n/-- A finite loopless undirected multigraph with named edge copies. -/\nstructure EdgeIndexedGraph (V : Type u) where\n  Edge : Type\n  [edgeFintype : Fintype Edge]\n  [edgeDecidableEq : DecidableEq Edge]\n  left : Edge → V\n  right : Edge → V\n  end_ne : ∀ e : Edge, left e ≠ right e\n\nnamespace EdgeIndexedGraph\n\ninstance {V : Type u} (H : EdgeIndexedGraph V) : Fintype H.Edge :=\n  H.edgeFintype\n\ninstance {V : Type u} (H : EdgeIndexedGraph V) : DecidableEq H.Edge :=\n  H.edgeDecidableEq\n\n/-- Named edge copies incident with `x`. -/\nnoncomputable def incidentEdges {V : Type u} [Fintype V] [DecidableEq V]\n    (H : EdgeIndexedGraph V) (x : V) : Finset H.Edge := by\n  classical\n  exact Finset.univ.filter fun e => H.left e = x ∨ H.right e = x\n\n/-- Degree, counting parallel copies separately. -/\nnoncomputable def degree {V : Type u} [Fintype V] [DecidableEq V]\n    (H : EdgeIndexedGraph V) (x : V) : ℕ :=\n  (H.incidentEdges x).card\n\n/-- A named edge has exactly one endpoint in `S`. -/\ndef Crosses {V : Type u} [DecidableEq V]\n    (H : EdgeIndexedGraph V) (S : Finset V) (e : H.Edge) : Prop :=\n  (H.left e ∈ S ∧ H.right e ∉ S) ∨\n    (H.right e ∈ S ∧ H.left e ∉ S)\n\n/-- The named edge boundary of `S`. -/\nnoncomputable def boundary {V : Type u} [Fintype V] [DecidableEq V]\n    (H : EdgeIndexedGraph V) (S : Finset V) : Finset H.Edge := by\n  classical\n  exact Finset.univ.filter (H.Crosses S)\n\n/-- Boundary edges whose endpoints survive deletion of `removed`. -/\nnoncomputable def availableBoundary\n    {V : Type u} [Fintype V] [DecidableEq V]\n    (H : EdgeIndexedGraph V) (removed S : Finset V) : Finset H.Edge := by\n  classical\n  exact (H.boundary S).filter fun e =>\n    H.left e ∉ removed ∧ H.right e ∉ removed\n\n/-- Every two distinct terminals need at least `k` nonterminal vertices and\nedge copies to separate them. -/\ndef TerminalElementConnectedAtLeast\n    {V : Type u} [Fintype V] [DecidableEq V]\n    (H : EdgeIndexedGraph V) (terminals : Finset V) (k : ℕ) : Prop :=\n  ∀ ⦃a : V⦄, a ∈ terminals →\n    ∀ ⦃b : V⦄, b ∈ terminals → a ≠ b →\n      ∀ removed side : Finset V,\n        Disjoint removed terminals →\n        a ∈ side → b ∉ side → Disjoint side removed →\n          k ≤ removed.card + (H.availableBoundary removed side).card\n\n/-- Delete one named edge copy. -/\ndef deleteEdge {V : Type u} (H : EdgeIndexedGraph V) (e₀ : H.Edge) :\n    EdgeIndexedGraph V where\n  Edge := {e : H.Edge // e ≠ e₀}\n  left e := H.left e.1\n  right e := H.right e.1\n  end_ne e := H.end_ne e.1\n\n/-- A concrete model of contracting `e₀`.  The vertex map has precisely the\ncontracted endpoint pair as its only nontrivial fibre, and the target edges\nare exactly the surviving non-loop edge copies. -/\nstructure IsContraction\n    {V : Type u} {W : Type v} [DecidableEq W]\n    (H : EdgeIndexedGraph V) (e₀ : H.Edge)\n    (K : EdgeIndexedGraph W) (mapVertex : V → W) where\n  vertex_surjective : Function.Surjective mapVertex\n  endpoints_identified :\n    mapVertex (H.left e₀) = mapVertex (H.right e₀)\n  fibres :\n    ∀ ⦃x y : V⦄, mapVertex x = mapVertex y →\n      x = y ∨\n        (x = H.left e₀ ∧ y = H.right e₀) ∨\n        (x = H.right e₀ ∧ y = H.left e₀)\n  edgeEquiv :\n    {e : H.Edge //\n      e ≠ e₀ ∧ mapVertex (H.left e) ≠ mapVertex (H.right e)} ≃ K.Edge\n  edge_endpoints :\n    ∀ e,\n      (K.left (edgeEquiv e) = mapVertex (H.left e.1) ∧\n        K.right (edgeEquiv e) = mapVertex (H.right e.1)) ∨\n      (K.left (edgeEquiv e) = mapVertex (H.right e.1) ∧\n        K.right (edgeEquiv e) = mapVertex (H.left e.1))\n\n/-- Image of the terminal set under a contraction map. -/\ndef terminalImage {V : Type u} {W : Type v} [DecidableEq W]\n    (mapVertex : V → W) (terminals : Finset V) : Finset W :=\n  terminals.image mapVertex\n\n/-- Two distinct named edges incident with `s`, with their other endpoints. -/\nstructure SplitPair {V : Type u} (H : EdgeIndexedGraph V) (s : V) where\n  first : H.Edge\n  second : H.Edge\n  edge_ne : first ≠ second\n  firstOther : V\n  secondOther : V\n  first_ends :\n    (H.left first = s ∧ H.right first = firstOther) ∨\n      (H.right first = s ∧ H.left first = firstOther)\n  second_ends :\n    (H.left second = s ∧ H.right second = secondOther) ∨\n      (H.right second = s ∧ H.left second = secondOther)\n\n/-- The old edge copies surviving a split-off. -/\nnoncomputable def splitSurvivingEdges\n    {V : Type u} {H : EdgeIndexedGraph V} {s : V}\n    (p : H.SplitPair s) : Finset H.Edge := by\n  classical\n  exact (Finset.univ.erase p.first).erase p.second\n\n/-- The singleton new-edge index, empty exactly when splitting would create a\nloop. -/\nnoncomputable def splitNewEdges\n    {V : Type u} [DecidableEq V] {H : EdgeIndexedGraph V} {s : V}\n    (p : H.SplitPair s) : Finset Unit :=\n  if p.firstOther = p.secondOther then ∅ else {()}\n\n/-- Edge names surviving or created by a split-off. -/\nnoncomputable def SplitEdge\n    {V : Type u} [DecidableEq V] {H : EdgeIndexedGraph V} {s : V}\n    (p : H.SplitPair s) : Type :=\n  Fin (splitSurvivingEdges p).card ⊕ Fin (splitNewEdges p).card\n\nnoncomputable instance splitEdgeFintype\n    {V : Type u} [DecidableEq V] {H : EdgeIndexedGraph V} {s : V}\n    (p : H.SplitPair s) : Fintype (SplitEdge p) := by\n  unfold SplitEdge\n  infer_instance\n\nnoncomputable instance splitEdgeDecidableEq\n    {V : Type u} [DecidableEq V] {H : EdgeIndexedGraph V} {s : V}\n    (p : H.SplitPair s) : DecidableEq (SplitEdge p) := by\n  unfold SplitEdge\n  infer_instance\n\n/-- The old named edge represented by a surviving split-edge index. -/\nnoncomputable def splitOldEdge\n    {V : Type u} [DecidableEq V] {H : EdgeIndexedGraph V} {s : V}\n    (p : H.SplitPair s) (i : Fin (splitSurvivingEdges p).card) : H.Edge :=\n  ((splitSurvivingEdges p).equivFin.symm i).1\n\n/-- The membership witness represented by a new split-edge index. -/\nnoncomputable def splitNewEdgeWitness\n    {V : Type u} [DecidableEq V] {H : EdgeIndexedGraph V} {s : V}\n    (p : H.SplitPair s) (i : Fin (splitNewEdges p).card) :\n      ((): Unit) ∈ splitNewEdges p :=\n  ((splitNewEdges p).equivFin.symm i).2\n\n/-- Split off a pair of edges at `s`, discarding a newly created loop. -/\nnoncomputable def splitOff {V : Type u} [DecidableEq V]\n    (H : EdgeIndexedGraph V) {s : V}\n    (p : H.SplitPair s) : EdgeIndexedGraph V where\n  Edge := SplitEdge p\n  left\n    | Sum.inl e => H.left (splitOldEdge p e)\n    | Sum.inr _ => p.firstOther\n  right\n    | Sum.inl e => H.right (splitOldEdge p e)\n    | Sum.inr _ => p.secondOther\n  end_ne\n    | Sum.inl e => H.end_ne (splitOldEdge p e)\n    | Sum.inr e => by\n        classical\n        intro h\n        have he := splitNewEdgeWitness p e\n        simp [splitNewEdges, h] at he\n\n/-- `u` and `v` cannot be separated by fewer than `k` edge copies. -/\ndef PairEdgeConnectedAtLeast\n    {V : Type u} [Fintype V] [DecidableEq V]\n    (H : EdgeIndexedGraph V) (u v : V) (k : ℕ) : Prop :=\n  ∀ S : Finset V, u ∈ S → v ∉ S → k ≤ (H.boundary S).card\n\n/-- Splitting `p` preserves every local edge-connectivity value away from its\ncentre. -/\ndef IsMaderAdmissible\n    {V : Type u} [Fintype V] [DecidableEq V]\n    (H : EdgeIndexedGraph V) {s : V} (p : H.SplitPair s) : Prop :=\n  ∀ u v : V, u ≠ s → v ≠ s → u ≠ v → ∀ k : ℕ,\n    H.PairEdgeConnectedAtLeast u v k ↔\n      (H.splitOff p).PairEdgeConnectedAtLeast u v k\n\n/-- A named edge is the whole boundary of some vertex set. -/\ndef IsNamedCutEdge {V : Type u} [Fintype V] [DecidableEq V]\n    (H : EdgeIndexedGraph V) (e : H.Edge) : Prop :=\n  ∃ S : Finset V, H.boundary S = {e}\n\n/-- No edge incident with `s` is a named cut edge. -/\ndef NoIncidentCutEdge {V : Type u} [Fintype V] [DecidableEq V]\n    (H : EdgeIndexedGraph V) (s : V) : Prop :=\n  ∀ e ∈ H.incidentEdges s, ¬ H.IsNamedCutEdge e\n\n/-- A simple path in an edge-indexed multigraph. -/\nstructure Path {V : Type u} [DecidableEq V]\n    (H : EdgeIndexedGraph V) (source target : V) where\n  length : ℕ\n  vertex : Fin (length + 1) → V\n  edge : Fin length → H.Edge\n  source_eq : vertex ⟨0, by omega⟩ = source\n  target_eq : vertex ⟨length, by omega⟩ = target\n  edge_ends :\n    ∀ i : Fin length,\n      (H.left (edge i) = vertex ⟨i.1, by omega⟩ ∧\n        H.right (edge i) = vertex ⟨i.1 + 1, by omega⟩) ∨\n      (H.right (edge i) = vertex ⟨i.1, by omega⟩ ∧\n        H.left (edge i) = vertex ⟨i.1 + 1, by omega⟩)\n  vertex_injective : Function.Injective vertex\n\nnamespace Path\n\n/-- The internal vertices of an edge-indexed path. -/\nnoncomputable def internalVertices\n    {V : Type u} [DecidableEq V] {H : EdgeIndexedGraph V}\n    {source target : V} (P : Path H source target) : Finset V := by\n  classical\n  exact (Finset.univ.image P.vertex).erase source |>.erase target\n\n/-- The named edge copies used by an edge-indexed path. -/\nnoncomputable def edgeSet\n    {V : Type u} [DecidableEq V] {H : EdgeIndexedGraph V}\n    {source target : V} (P : Path H source target) : Finset H.Edge := by\n  classical\n  exact Finset.univ.image P.edge\n\nend Path\n\n/-- `k` paths from `a` to `b` sharing neither internal vertices nor named\nedge copies. -/\nstructure ElementLinkage\n    {V : Type u} [DecidableEq V]\n    (H : EdgeIndexedGraph V) (a b : V) (k : ℕ) where\n  path : Fin k → Path H a b\n  internal_disjoint :\n    Pairwise fun i j =>\n      Disjoint (path i).internalVertices (path j).internalVertices\n  edge_disjoint :\n    Pairwise fun i j =>\n      Disjoint (path i).edgeSet (path j).edgeSet\n\nend EdgeIndexedGraph\n\nend Lax17.TerminalConnectivity\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.TerminalElementMenger",
+      "path": "concepts/Lax17/TerminalElementMenger.lean",
+      "title": "Terminal element-Menger theorem",
+      "type": "theorem",
+      "description": "For a named-edge multigraph, terminal element-connectivity is equivalent to\nthe existence of paths disjoint in both internal vertices and named edge\ncopies between every pair of terminals.",
+      "imports": [
+        "Lax17.TerminalConnectivity"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.TerminalConnectivity\n\n/-!\n---\ntitle: Terminal element-Menger theorem\ntype: theorem\n---\nFor a named-edge multigraph, terminal element-connectivity is equivalent to\nthe existence of paths disjoint in both internal vertices and named edge\ncopies between every pair of terminals.\n-/\n\nnamespace Lax17.TerminalElementMenger\n\nuniverse u\n\n/-- Terminal element-Menger for named-edge multigraphs. -/\naxiom terminalElementMenger :\n  ∀ {V : Type u} [Fintype V] [DecidableEq V]\n    (H : Lax17.TerminalConnectivity.EdgeIndexedGraph V)\n    (terminals : Finset V) (k : ℕ),\n      H.TerminalElementConnectedAtLeast terminals k ↔\n        ∀ ⦃a : V⦄, a ∈ terminals →\n          ∀ ⦃b : V⦄, b ∈ terminals → a ≠ b →\n            Nonempty (H.ElementLinkage a b k)\n\nend Lax17.TerminalElementMenger\n",
+      "statements": [
+        {
+          "id": "Lax17.TerminalElementMenger.terminalElementMenger",
+          "signature": "terminalElementMenger : ∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (H : Lax17.TerminalConnectivity.EdgeIndexedGraph V)\n  (terminals : Finset V) (k : Nat),\n  Iff (H.TerminalElementConnectedAtLeast terminals k)\n    (∀ ⦃a : V⦄,\n      SetLike.instMembership.mem terminals a →\n        ∀ ⦃b : V⦄, SetLike.instMembership.mem terminals b → Ne a b → Nonempty (H.ElementLinkage a b k))",
+          "doc": "Terminal element-Menger for named-edge multigraphs.",
+          "startLine": 17,
+          "endLine": 25
+        }
+      ]
+    },
+    {
+      "id": "Lax17.TreeOfSets",
+      "path": "concepts/Lax17/TreeOfSets.lean",
+      "title": "Strong tree-of-sets systems",
+      "type": "definition",
+      "description": "A tree-of-sets system replaces the linear order of a path-of-sets system by a\nsubcubic tree.  Its vertices index disjoint connected clusters, and each\ntree edge has a linkage between equal-size interfaces in its endpoint\nclusters.  A strong system makes every interface well-linked and every pair of\ninterfaces incident with one cluster mutually linked inside that cluster.",
+      "imports": [
+        "Lax17.Degree",
+        "Lax17.PathOfSets"
+      ],
+      "mathlibImports": [
+        "Mathlib.Combinatorics.SimpleGraph.Acyclic"
+      ],
+      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Acyclic\nimport Lax17.Degree\nimport Lax17.PathOfSets\n\n/-!\n---\ntitle: Strong tree-of-sets systems\ntype: definition\n---\nA tree-of-sets system replaces the linear order of a path-of-sets system by a\nsubcubic tree.  Its vertices index disjoint connected clusters, and each\ntree edge has a linkage between equal-size interfaces in its endpoint\nclusters.  A strong system makes every interface well-linked and every pair of\ninterfaces incident with one cluster mutually linked inside that cluster.\n-/\n\nnamespace Lax17.TreeOfSets\n\nuniverse u\n\nopen Lax17.Degree\nopen Lax17.Linkedness\nopen Lax17.PathOfSets\nopen Lax17.Paths\n\n/-- A subcubic tree-of-sets system with `m` clusters and width `w`. -/\nstructure System {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (m w : ℕ) where\n  clusterCount_pos : 0 < m\n  width_pos : 0 < w\n  metaTree : SimpleGraph (Fin m)\n  meta_isTree : metaTree.IsTree\n  meta_subcubic : MaximumAtMost metaTree 3\n  cluster : Fin m → Finset V\n  cluster_connected : ∀ i : Fin m, IsCluster G (cluster i)\n  cluster_disjoint :\n    ∀ ⦃i j : Fin m⦄, i ≠ j → Disjoint (cluster i) (cluster j)\n  interface :\n    (i j : Fin m) → metaTree.Adj i j → Finset V\n  interface_subset :\n    ∀ (i j : Fin m) (hij : metaTree.Adj i j),\n      interface i j hij ⊆ cluster i\n  interface_card :\n    ∀ (i j : Fin m) (hij : metaTree.Adj i j),\n      (interface i j hij).card = w\n  incident_interfaces_disjoint :\n    ∀ {i j k : Fin m} (hij : metaTree.Adj i j)\n      (hik : metaTree.Adj i k),\n        j ≠ k → Disjoint (interface i j hij) (interface i k hik)\n  connector :\n    ∀ (i j : Fin m) (hij : metaTree.Adj i j),\n      VertexLinkage G (interface i j hij)\n        (interface j i (metaTree.symm hij)) w\n  connector_avoids_clusters :\n    ∀ (i j : Fin m) (hij : metaTree.Adj i j)\n      (r : Fin m) (a : Fin w),\n        ((connector i j hij).path a).InternallyAvoids (cluster r)\n\n/-- A strong tree-of-sets system. -/\nstructure StrongSystem {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) (m w : ℕ) extends System G m w where\n  interface_well_linked :\n    ∀ (i j : Fin m) (hij : metaTree.Adj i j),\n      NodeWellLinkedIn G (cluster i) (interface i j hij)\n  incident_interfaces_linked :\n    ∀ {i j k : Fin m} (hij : metaTree.Adj i j)\n      (hik : metaTree.Adj i k),\n        j ≠ k →\n          NodeLinkedIn G (cluster i)\n            (interface i j hij) (interface i k hik)\n\n/-- The meta-tree contains an ordered simple path with `ℓ` vertices. -/\ndef HasMetaPath {V : Type u} [DecidableEq V]\n    {G : SimpleGraph V} {m w : ℕ}\n    (T : StrongSystem G m w) (ℓ : ℕ) : Prop :=\n  ∃ order : Fin ℓ → Fin m,\n    Function.Injective order ∧\n      ∀ (i : Fin ℓ) (hi : i.1 + 1 < ℓ),\n        T.metaTree.Adj (order i) (order ⟨i.1 + 1, hi⟩)\n\nend Lax17.TreeOfSets\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.Treewidth",
+      "path": "concepts/Lax17/Treewidth.lean",
+      "title": "Treewidth",
+      "type": "definition",
+      "description": "A tree decomposition of a finite simple graph consists of a finite tree and\na bag of graph vertices at every tree node. Every graph vertex occurs in a\nbag, the endpoints of every graph edge occur together in a bag, and the tree\nnodes whose bags contain any fixed graph vertex induce a connected subtree.\n\nThe width of a decomposition is its largest bag cardinality minus one, using\nnatural-number subtraction. The treewidth of a graph is the least width of\nany of its tree decompositions. The natural-number convention gives the empty\ngraph treewidth zero.",
+      "imports": [],
+      "mathlibImports": [
+        "Mathlib.Combinatorics.SimpleGraph.Acyclic"
+      ],
+      "sourceText": "import Mathlib.Combinatorics.SimpleGraph.Acyclic\n\n/-!\n---\ntitle: Treewidth\ntype: definition\n---\nA tree decomposition of a finite simple graph consists of a finite tree and\na bag of graph vertices at every tree node. Every graph vertex occurs in a\nbag, the endpoints of every graph edge occur together in a bag, and the tree\nnodes whose bags contain any fixed graph vertex induce a connected subtree.\n\nThe width of a decomposition is its largest bag cardinality minus one, using\nnatural-number subtraction. The treewidth of a graph is the least width of\nany of its tree decompositions. The natural-number convention gives the empty\ngraph treewidth zero.\n-/\n\nnamespace Lax17.Treewidth\n\nuniverse u\n\n/-- A finite tree decomposition of a simple graph. -/\nstructure TreeDecomposition {V : Type u} [DecidableEq V]\n    (G : SimpleGraph V) where\n  /-- The node type of the decomposition tree. -/\n  Node : Type\n  /-- The decomposition tree has finitely many nodes. -/\n  [nodeFintype : Fintype Node]\n  /-- Decomposition-tree nodes have decidable equality. -/\n  [nodeDecidableEq : DecidableEq Node]\n  /-- The tree on decomposition nodes. -/\n  tree : SimpleGraph Node\n  /-- The node graph is a tree. -/\n  isTree : tree.IsTree\n  /-- The bag assigned to each decomposition node. -/\n  bag : Node → Finset V\n  /-- Every graph vertex occurs in a bag. -/\n  vertex_mem_bag : ∀ v : V, ∃ i : Node, v ∈ bag i\n  /-- The endpoints of every graph edge occur together in a bag. -/\n  edge_mem_bag :\n    ∀ ⦃x y : V⦄, G.Adj x y → ∃ i : Node, x ∈ bag i ∧ y ∈ bag i\n  /-- Bags containing a fixed graph vertex induce a connected subtree. -/\n  bag_indices_connected :\n    ∀ v : V, (tree.induce {i : Node | v ∈ bag i}).Connected\n\nnamespace TreeDecomposition\n\n/-- The maximum bag cardinality minus one. -/\nnoncomputable def width {V : Type u} [DecidableEq V]\n    {G : SimpleGraph V} (D : TreeDecomposition G) : ℕ :=\n  letI : Fintype D.Node := D.nodeFintype\n  (Finset.univ.sup fun i : D.Node => (D.bag i).card) - 1\n\nend TreeDecomposition\n\n/-- `G` has a tree decomposition of width at most `k`. -/\ndef HasTreewidthAtMost {V : Type u} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V) (k : ℕ) : Prop :=\n  ∃ D : TreeDecomposition G, D.width ≤ k\n\n/-- The least width of a tree decomposition of `G`.\n\nThe fallback makes the definition total. For a finite graph it is unreachable,\nbecause the decomposition with one bag containing every vertex always exists.\n-/\nnoncomputable def treewidth {V : Type u} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V) : ℕ :=\n  by\n    classical\n    exact if h : ∃ k, HasTreewidthAtMost G k then Nat.find h else 0\n\nend Lax17.Treewidth\n",
+      "statements": []
+    },
+    {
+      "id": "Lax17.TreewidthMinorMonotonicity",
+      "path": "concepts/Lax17/TreewidthMinorMonotonicity.lean",
+      "title": "Treewidth monotonicity under graph minors",
+      "type": "theorem",
+      "description": "Taking a graph minor cannot increase treewidth.",
+      "imports": [
+        "Lax17.Minor",
+        "Lax17.Treewidth"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Minor\nimport Lax17.Treewidth\n\n/-!\n---\ntitle: Treewidth monotonicity under graph minors\ntype: theorem\n---\nTaking a graph minor cannot increase treewidth.\n-/\n\nnamespace Lax17.TreewidthMinorMonotonicity\n\nuniverse u\n\n/-- Taking a graph minor cannot increase treewidth. -/\naxiom treewidth_mono_minor :\n  ∀ {V W : Type u} [Fintype V] [DecidableEq V]\n    [Fintype W] [DecidableEq W]\n    (G : SimpleGraph V) (H : SimpleGraph W),\n      Lax17.Minor.IsMinor H G →\n        Lax17.Treewidth.treewidth H ≤ Lax17.Treewidth.treewidth G\n\nend Lax17.TreewidthMinorMonotonicity\n",
+      "statements": [
+        {
+          "id": "Lax17.TreewidthMinorMonotonicity.treewidth_mono_minor",
+          "signature": "treewidth_mono_minor : ∀ {V W : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] [inst_2 : Fintype W] [inst_3 : DecidableEq W]\n  (G : SimpleGraph V) (H : SimpleGraph W),\n  Lax17.Minor.IsMinor H G → instLENat.le (Lax17.Treewidth.treewidth H) (Lax17.Treewidth.treewidth G)",
+          "doc": "Taking a graph minor cannot increase treewidth.",
+          "startLine": 16,
+          "endLine": 22
+        }
+      ]
+    },
+    {
+      "id": "Lax17.TreewidthSparsifier",
+      "path": "concepts/Lax17/TreewidthSparsifier.lean",
+      "title": "Degree-three treewidth sparsifier",
+      "type": "theorem",
+      "description": "Large treewidth contains a degree-three minor of prescribed smaller\ntreewidth, with only a polylogarithmic loss.",
+      "imports": [
+        "Lax17.Degree",
+        "Lax17.Minor",
+        "Lax17.Treewidth"
+      ],
+      "mathlibImports": [
+        "Mathlib.Data.Nat.Log"
+      ],
+      "sourceText": "import Mathlib.Data.Nat.Log\nimport Lax17.Degree\nimport Lax17.Minor\nimport Lax17.Treewidth\n\n/-!\n---\ntitle: Degree-three treewidth sparsifier\ntype: theorem\n---\nLarge treewidth contains a degree-three minor of prescribed smaller\ntreewidth, with only a polylogarithmic loss.\n-/\n\nnamespace Lax17.TreewidthSparsifier\n\nuniverse u\n\n/-- Large treewidth has a degree-three minor of any prescribed smaller\ntreewidth, with only a polylogarithmic loss. -/\naxiom degreeThreeTreewidthSparsifier :\n  ∃ c d : ℕ, 0 < c ∧ 0 < d ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) {k : ℕ},\n        2 ≤ k →\n          c * k * (Nat.log 2 k) ^ d ≤ Lax17.Treewidth.treewidth G →\n            ∃ (W : Type u) (_ : Fintype W) (_ : DecidableEq W)\n              (H : SimpleGraph W),\n                Lax17.Minor.IsMinor H G ∧\n                  Lax17.Degree.MaximumAtMost H 3 ∧\n                    k ≤ Lax17.Treewidth.treewidth H\n\nend Lax17.TreewidthSparsifier\n",
+      "statements": [
+        {
+          "id": "Lax17.TreewidthSparsifier.degreeThreeTreewidthSparsifier",
+          "signature": "degreeThreeTreewidthSparsifier : Exists fun c =>\n  Exists fun d =>\n    And (instLTNat.lt 0 c)\n      (And (instLTNat.lt 0 d)\n        (∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V) {k : Nat},\n          instLENat.le 2 k →\n            instLENat.le (instHMul.hMul (instHMul.hMul c k) (instHPow.hPow (Nat.log 2 k) d))\n                (Lax17.Treewidth.treewidth G) →\n              Exists fun W =>\n                Exists fun x =>\n                  Exists fun x_1 =>\n                    Exists fun H =>\n                      And (Lax17.Minor.IsMinor H G)\n                        (And (Lax17.Degree.MaximumAtMost H 3) (instLENat.le k (Lax17.Treewidth.treewidth H)))))",
+          "doc": "Large treewidth has a degree-three minor of any prescribed smaller\ntreewidth, with only a polylogarithmic loss.",
+          "startLine": 19,
+          "endLine": 31
+        }
+      ]
+    },
+    {
+      "id": "Lax17.VertexMenger",
+      "path": "concepts/Lax17/VertexMenger.lean",
+      "title": "Vertex-Menger theorem",
+      "type": "theorem",
+      "description": "The vertex form of Menger's theorem gives an exact alternative between\n\\(k\\) vertex-disjoint terminal-to-terminal paths and a separator of size\nless than \\(k\\).",
+      "imports": [
+        "Lax17.Paths"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Paths\n\n/-!\n---\ntitle: Vertex-Menger theorem\ntype: theorem\n---\nThe vertex form of Menger's theorem gives an exact alternative between\n\\(k\\) vertex-disjoint terminal-to-terminal paths and a separator of size\nless than \\(k\\).\n-/\n\nnamespace Lax17.VertexMenger\n\nuniverse u\n\n/-- Finite vertex-Menger in packing-or-separator form. -/\naxiom vertexMenger :\n  ∀ {V : Type u} [Fintype V] [DecidableEq V]\n    (G : SimpleGraph V) (A B : Finset V) (k : ℕ),\n      Nonempty (Lax17.Paths.VertexLinkage G A B k) ∨\n        ∃ X : Finset V,\n          X.card < k ∧ Lax17.Paths.IsVertexSeparator G A B X\n\nend Lax17.VertexMenger\n",
+      "statements": [
+        {
+          "id": "Lax17.VertexMenger.vertexMenger",
+          "signature": "vertexMenger : ∀ {V : Type u} [Fintype V] [inst : DecidableEq V] (G : SimpleGraph V) (A B : Finset V) (k : Nat),\n  Or (Nonempty (Lax17.Paths.VertexLinkage G A B k))\n    (Exists fun X => And (instLTNat.lt X.card k) (Lax17.Paths.IsVertexSeparator G A B X))",
+          "doc": "Finite vertex-Menger in packing-or-separator form.",
+          "startLine": 17,
+          "endLine": 23
+        }
+      ]
+    },
+    {
+      "id": "Lax17.WellLinkednessBoosting",
+      "path": "concepts/Lax17/WellLinkednessBoosting.lean",
+      "title": "Well-linkedness boosting",
+      "type": "theorem",
+      "description": "In bounded degree, edge well-linkedness can be boosted to node\nwell-linkedness after losing only a constant-factor number of terminals.",
+      "imports": [
+        "Lax17.Degree",
+        "Lax17.Linkedness"
+      ],
+      "mathlibImports": [],
+      "sourceText": "import Lax17.Degree\nimport Lax17.Linkedness\n\n/-!\n---\ntitle: Well-linkedness boosting\ntype: theorem\n---\nIn bounded degree, edge well-linkedness can be boosted to node\nwell-linkedness after losing only a constant-factor number of terminals.\n-/\n\nnamespace Lax17.WellLinkednessBoosting\n\nuniverse u\n\n/-- In bounded degree, edge well-linkedness can be boosted to node\nwell-linkedness after losing only a constant-factor number of terminals. -/\naxiom wellLinkednessBoosting :\n  ∃ c : ℕ, 0 < c ∧\n    ∀ {V : Type u} [Fintype V] [DecidableEq V]\n      (G : SimpleGraph V) (X : Finset V) (Δ k : ℕ),\n        Lax17.Degree.MaximumAtMost G Δ →\n          Lax17.Linkedness.EdgeWellLinkedIn G Finset.univ X →\n            c * (Δ + 1) * k ≤ X.card →\n              ∃ Y : Finset V, Y ⊆ X ∧ k ≤ Y.card ∧\n                Lax17.Linkedness.NodeWellLinkedIn G Finset.univ Y\n\nend Lax17.WellLinkednessBoosting\n",
+      "statements": [
+        {
+          "id": "Lax17.WellLinkednessBoosting.wellLinkednessBoosting",
+          "signature": "wellLinkednessBoosting : Exists fun c =>\n  And (instLTNat.lt 0 c)\n    (∀ {V : Type u} [inst : Fintype V] [inst_1 : DecidableEq V] (G : SimpleGraph V) (X : Finset V) (Δ k : Nat),\n      Lax17.Degree.MaximumAtMost G Δ →\n        Lax17.Linkedness.EdgeWellLinkedIn G Finset.univ X →\n          instLENat.le (instHMul.hMul (instHMul.hMul c (instHAdd.hAdd Δ 1)) k) X.card →\n            Exists fun Y =>\n              And (Finset.instHasSubset.Subset Y X)\n                (And (instLENat.le k Y.card) (Lax17.Linkedness.NodeWellLinkedIn G Finset.univ Y)))",
+          "doc": "In bounded degree, edge well-linkedness can be boosted to node\nwell-linkedness after losing only a constant-factor number of terminals.",
+          "startLine": 17,
+          "endLine": 27
+        }
+      ]
+    }
+  ],
+  "proofs": [
+    {
+      "id": "Lax17Proofs.polynomial_grid_minor",
+      "path": "proofs/Lax17Proofs/Public.lean",
+      "conclusion": "Lax17.PolynomialGridMinor.polynomial_grid_minor",
+      "assumptions": [],
+      "description": "The direct exponent-ten polynomial grid-minor theorem, expressed with the\nsubmission's canonical grid, standard set-valued minor model, and native\ntreewidth definition."
+    }
+  ],
+  "captureId": "2d78c7261d6984f868668d4feab2a9cb.0"
+}
