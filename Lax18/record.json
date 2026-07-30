@@ -1,12 +1,17 @@
 {
   "specVersion": "1",
   "id": "Lax18",
-  "state": "init",
+  "state": "draft",
   "createdAt": "2026-07-30T13:40:02Z",
   "owners": [
     {
       "githubId": 39672278,
       "handle": "faghasemi"
     }
-  ]
+  ],
+  "source": {
+    "repository": "https://github.com/faghasemi/szemeredi-regularity-lemma-lax",
+    "commit": "35e33040b5f561131c764c4e0dad922eeecd2dc2",
+    "folder": "regularity-lemma"
+  }
 }
