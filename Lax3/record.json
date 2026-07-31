@@ -1,12 +1,17 @@
 {
   "specVersion": "1",
   "id": "Lax3",
-  "state": "init",
+  "state": "draft",
   "createdAt": "2026-07-24T05:38:17Z",
   "owners": [
     {
       "githubId": 2657497,
       "handle": "jan3er"
     }
-  ]
+  ],
+  "source": {
+    "repository": "https://github.com/lax-archive/lax-submissions",
+    "commit": "8ffd2b0652bc969e0d674b6f6e5f0444f57799f4",
+    "folder": "nowhere-dense-model-checking"
+  }
 }
